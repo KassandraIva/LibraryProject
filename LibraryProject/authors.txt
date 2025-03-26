@@ -1,0 +1,16 @@
+1|J.R.R.|Tolkien
+2|George|Orwell
+3|J.K.|Rowling
+4|Agatha|Christie
+5|Stephen|King
+6|Jane|Austen
+7|Mark|Twain
+8|Leo|Tolstoy
+9|Ernest|Hemingway
+10|Fyodor|Dostoevsky
+11|Charles|Dickens
+12|Oscar|Wilde
+13|Terry|Pratchett
+14|Neil|Gaiman
+15|Brandon|Sanderson
+16|Robert|Jordan

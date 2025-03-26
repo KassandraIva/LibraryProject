@@ -1,0 +1,56 @@
+# Visual Studio 2022
+.vs/
+.vscode/
+.idea/
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+*.ilk
+*.pdb
+*.ipch
+*.iobj
+*.log
+*.tlog
+*.lastbuildstate
+
+# ASP.NET-related files (если используется)
+appsettings*.json
+.env
+
+# Entity Framework migrations (если используется)
+Migrations/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# JetBrains Rider/IntelliJ
+.idea/
+*.iml
+
+# Node.js (если используется)
+node_modules/
+
+# Compiled TypeScript files (если используется)
+*.tsbuildinfo
+
+# Windows thumbnail cache
+Thumbs.db
+desktop.ini
