@@ -10,7 +10,7 @@ namespace LibraryProject.classes
     internal class Author
     {
         //private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), "authors.txt");
-        private static string filePath = "authors.txt";
+        private static string filePath = "../../../authors.txt";
         private static int counter = 0;
         public int Id { get; set; }
         public string FirstName { get; set; }
