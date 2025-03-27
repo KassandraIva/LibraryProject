@@ -11,6 +11,7 @@ namespace LibraryProject.classes
     internal class Book
     {
         private static string filePath = "../../../books.txt";
+
         public string Title { get; set; }
         public List<Author> Author { get; set; } = new List<Author>();
         public string Description { get; set; }
