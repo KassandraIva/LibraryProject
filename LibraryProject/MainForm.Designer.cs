@@ -35,6 +35,7 @@
             txtSearch = new TextBox();
             tabAllAuthors = new TabPage();
             dgvAllAuthors = new DataGridView();
+            tabPage1 = new TabPage();
             tabControl1.SuspendLayout();
             tabAllBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
@@ -46,6 +47,7 @@
             // 
             tabControl1.Controls.Add(tabAllBooks);
             tabControl1.Controls.Add(tabAllAuthors);
+            tabControl1.Controls.Add(tabPage1);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -109,6 +111,16 @@
             dgvAllAuthors.Size = new Size(974, 486);
             dgvAllAuthors.TabIndex = 0;
             // 
+            // tabPage1
+            // 
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(998, 519);
+            tabPage1.TabIndex = 2;
+            tabPage1.Text = "tabPage1";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -136,5 +148,6 @@
         private TextBox txtSearch;
         private Button btnSearch;
         private DataGridView dgvAllAuthors;
+        private TabPage tabPage1;
     }
 }
