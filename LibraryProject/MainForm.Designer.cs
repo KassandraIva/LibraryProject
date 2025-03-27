@@ -35,7 +35,8 @@
             txtSearch = new TextBox();
             tabAllAuthors = new TabPage();
             dgvAllAuthors = new DataGridView();
-            tabPage1 = new TabPage();
+            tabQuotes = new TabPage();
+            tabBorrowedLent = new TabPage();
             tabControl1.SuspendLayout();
             tabAllBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
@@ -47,7 +48,8 @@
             // 
             tabControl1.Controls.Add(tabAllBooks);
             tabControl1.Controls.Add(tabAllAuthors);
-            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabQuotes);
+            tabControl1.Controls.Add(tabBorrowedLent);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -111,15 +113,24 @@
             dgvAllAuthors.Size = new Size(974, 486);
             dgvAllAuthors.TabIndex = 0;
             // 
-            // tabPage1
+            // tabQuotes
             // 
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(998, 519);
-            tabPage1.TabIndex = 2;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
+            tabQuotes.Location = new Point(4, 24);
+            tabQuotes.Name = "tabQuotes";
+            tabQuotes.Padding = new Padding(3);
+            tabQuotes.Size = new Size(998, 519);
+            tabQuotes.TabIndex = 2;
+            tabQuotes.Text = "Quotes";
+            tabQuotes.UseVisualStyleBackColor = true;
+            // 
+            // tabBorrowedLent
+            // 
+            tabBorrowedLent.Location = new Point(4, 24);
+            tabBorrowedLent.Name = "tabBorrowedLent";
+            tabBorrowedLent.Size = new Size(998, 519);
+            tabBorrowedLent.TabIndex = 3;
+            tabBorrowedLent.Text = "Borrowed/Lent";
+            tabBorrowedLent.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -148,6 +159,7 @@
         private TextBox txtSearch;
         private Button btnSearch;
         private DataGridView dgvAllAuthors;
-        private TabPage tabPage1;
+        private TabPage tabQuotes;
+        private TabPage tabBorrowedLent;
     }
 }
