@@ -13,9 +13,6 @@ namespace LibraryProject.entities
         public int Rating { get; private set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-
-
-
         public Review(string text, int rating)
         {
             Text = text;
