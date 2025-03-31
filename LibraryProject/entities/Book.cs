@@ -75,7 +75,6 @@ namespace LibraryProject.classes
         public Book(int id, string title, List<Author> author, string description, BookStatus status, List<Category> categories, List<Genre> genre) : this(title, author, description, status, categories, genre)
         {
             Id = id;
-            Id = counter++;
         }
 
         private static void SetCounter(int countFrom)
