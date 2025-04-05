@@ -14,7 +14,7 @@ namespace LibraryProject.classes
         private static int counter = 0;
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<Author> Author { get; set; } = new List<Author>();
+        public List<Author> Authors { get; set; } = new List<Author>();
         public string Description { get; set; }
         public BookStatus Status { get; set; }
         public List<Category> Categories { get; set; } = new List<Category>();
@@ -24,7 +24,7 @@ namespace LibraryProject.classes
         public Book(string title, List<Author> author, string description)
         {
             Title = title;
-            Author = author;
+            Authors = author;
             Description = description;
 
             Id = counter++;
