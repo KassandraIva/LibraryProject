@@ -1,6 +1,7 @@
 using LibraryProject.classes;
 using LibraryProject.entities;
 using System.ComponentModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace LibraryProject
 {
@@ -8,7 +9,7 @@ namespace LibraryProject
     {
         List<Author> authorList = new List<Author>();
         List<Book> bookList = new List<Book>();
-        List<MiscItems> miscItems = new List<MiscItems>();
+        public List<MiscItems> miscItems = new List<MiscItems>();
 
         private Book selectedBook;
 
@@ -64,16 +65,16 @@ namespace LibraryProject
             dgvAllBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
-        private void DisplayMiscItems(List<MiscItems> miscItems)
+        public void DisplayMiscItems(List<MiscItems> miscItems)
         {
             dgvMiscItems.Columns.Clear();
-            dgvMiscItems.DataSource= new BindingList<MiscItems>(miscItems.ToList());
+            dgvMiscItems.DataSource = new BindingList<MiscItems>(miscItems.ToList());
 
-            dgvAllBooks.EnableHeadersVisualStyles = false;
-            dgvAllBooks.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
-            dgvAllBooks.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkBlue;
-            dgvAllBooks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvAllBooks.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+            dgvMiscItems.EnableHeadersVisualStyles = false;
+            dgvMiscItems.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+            dgvMiscItems.ColumnHeadersDefaultCellStyle.BackColor = Color.YellowGreen;
+            dgvMiscItems.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvMiscItems.AlternatingRowsDefaultCellStyle.BackColor = Color.LightYellow;
         }
 
         private void btnAddBook_Click(object sender, EventArgs e)
@@ -98,6 +99,13 @@ namespace LibraryProject
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void btnAddMisc_Click(object sender, EventArgs e)
+        {
+            Form miscItemForm = new AddMiscItems(this);
+
+            miscItemForm.ShowDialog();
         }
     }
 }

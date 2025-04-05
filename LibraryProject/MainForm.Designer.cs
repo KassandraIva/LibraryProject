@@ -40,6 +40,7 @@
             tabBorrowedLent = new TabPage();
             tabPage1 = new TabPage();
             dgvMiscItems = new DataGridView();
+            btnAddMisc = new Button();
             tabControl1.SuspendLayout();
             tabAllBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
@@ -162,6 +163,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(btnAddMisc);
             tabPage1.Controls.Add(dgvMiscItems);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
@@ -174,11 +176,21 @@
             // dgvMiscItems
             // 
             dgvMiscItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMiscItems.Location = new Point(25, 32);
+            dgvMiscItems.Location = new Point(30, 126);
             dgvMiscItems.Name = "dgvMiscItems";
             dgvMiscItems.RowHeadersWidth = 51;
-            dgvMiscItems.Size = new Size(1097, 621);
+            dgvMiscItems.Size = new Size(730, 448);
             dgvMiscItems.TabIndex = 0;
+            // 
+            // btnAddMisc
+            // 
+            btnAddMisc.Location = new Point(73, 59);
+            btnAddMisc.Name = "btnAddMisc";
+            btnAddMisc.Size = new Size(124, 34);
+            btnAddMisc.TabIndex = 1;
+            btnAddMisc.Text = "Add New Item";
+            btnAddMisc.UseVisualStyleBackColor = true;
+            btnAddMisc.Click += btnAddMisc_Click;
             // 
             // MainForm
             // 
@@ -215,5 +227,6 @@
         private Button btnAddBook;
         private TabPage tabPage1;
         private DataGridView dgvMiscItems;
+        private Button btnAddMisc;
     }
 }

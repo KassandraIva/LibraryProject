@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.entities
 {
-    internal class MiscItems
+        public class MiscItems
     {
         private static string filePath = "../../../MiscellaneousItems.txt";
-        private static int counter = 0;  
+        private static int counter = 1;  
         public int Id { get; set; }
         public string Name { get; set; }
         public string Creator{ get; set; }
         public string Genre { get; set; }
 
-        private MiscItems() 
+        public MiscItems() 
         { 
             this.Id = 0;
             this.Name = "";
@@ -24,18 +24,32 @@ namespace LibraryProject.entities
             this.Genre = "";
         }
 
-        public MiscItems(string Name, string Creator, string Genre)
+        public MiscItems(int id,string Name, string Creator, string Genre)
         {
-            this.Id = counter++;
+            this.Id = id;
             this.Name = Name;
             this.Creator = Creator;
             this.Genre = Genre;
         }
-        private static void SetCounter(int countFrom)
+
+        public MiscItems(string Name, string Creator, string Genre)
         {
-            counter = countFrom;
+            this.Name = Name;
+            this.Creator = Creator;
+            this.Genre = Genre;
         }
 
+        
+
+        public static void SetCounter(int countFrom)
+        {
+            counter = countFrom+1;
+        }
+
+        public static int GetNextId()
+        {
+            return counter++;
+        }
         public static List<MiscItems> LoadFromFile()
         {
             int maxId = 0;
@@ -54,7 +68,7 @@ namespace LibraryProject.entities
 
                     if (Convert.ToInt32(columns[0]) > maxId) maxId = Convert.ToInt32(columns[0]);
 
-                    MiscItems newItem = new MiscItems(columns[1], columns[2], columns[3]);
+                    MiscItems newItem = new MiscItems(Convert.ToInt32(columns[0]), columns[1], columns[2], columns[3]);
                     miscItems.Add(newItem);
                 }
 
@@ -81,5 +95,23 @@ namespace LibraryProject.entities
 
             return miscItems;
         }
+
+        public static void SaveToFile(MiscItems item)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    string line = $"{item.Id}|{item.Name}|{item.Creator}|{item.Genre}";
+                    writer.WriteLine(line);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
+
+
     }
 }
