@@ -30,7 +30,8 @@
         {
             tabControl1 = new TabControl();
             tabAllBooks = new TabPage();
-            btnSearch = new Button();
+            btnAddBook = new Button();
+            btnSearchBook = new Button();
             dgvAllBooks = new DataGridView();
             txtSearch = new TextBox();
             tabAllAuthors = new TabPage();
@@ -58,7 +59,8 @@
             // 
             // tabAllBooks
             // 
-            tabAllBooks.Controls.Add(btnSearch);
+            tabAllBooks.Controls.Add(btnAddBook);
+            tabAllBooks.Controls.Add(btnSearchBook);
             tabAllBooks.Controls.Add(dgvAllBooks);
             tabAllBooks.Controls.Add(txtSearch);
             tabAllBooks.Location = new Point(4, 24);
@@ -69,15 +71,24 @@
             tabAllBooks.Text = "All Books";
             tabAllBooks.UseVisualStyleBackColor = true;
             // 
-            // btnSearch
+            // btnAddBook
             // 
-            btnSearch.Location = new Point(701, 15);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(133, 23);
-            btnSearch.TabIndex = 2;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnSearch_Click;
+            btnAddBook.Location = new Point(859, 16);
+            btnAddBook.Name = "btnAddBook";
+            btnAddBook.Size = new Size(133, 23);
+            btnAddBook.TabIndex = 3;
+            btnAddBook.Text = "Add Book";
+            btnAddBook.UseVisualStyleBackColor = true;
+            btnAddBook.Click += btnAddBook_Click;
+            // 
+            // btnSearchBook
+            // 
+            btnSearchBook.Location = new Point(549, 16);
+            btnSearchBook.Name = "btnSearchBook";
+            btnSearchBook.Size = new Size(133, 23);
+            btnSearchBook.TabIndex = 2;
+            btnSearchBook.Text = "Search";
+            btnSearchBook.UseVisualStyleBackColor = true;
             // 
             // dgvAllBooks
             // 
@@ -89,7 +100,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(135, 15);
+            txtSearch.Location = new Point(6, 16);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(526, 23);
             txtSearch.TabIndex = 0;
@@ -157,9 +168,10 @@
         private TabPage tabAllAuthors;
         private DataGridView dgvAllBooks;
         private TextBox txtSearch;
-        private Button btnSearch;
+        private Button btnSearchBook;
         private DataGridView dgvAllAuthors;
         private TabPage tabQuotes;
         private TabPage tabBorrowedLent;
+        private Button btnAddBook;
     }
 }

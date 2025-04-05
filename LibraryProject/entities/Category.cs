@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.classes
 {
-    internal class Category
+    public class Category
     {
         private static int counter = 0;
         public int Id { get; set; }

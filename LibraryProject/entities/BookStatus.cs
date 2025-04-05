@@ -8,12 +8,12 @@ namespace LibraryProject.entities
 {
     public enum BookStatus
     {
-        UNKNOWN,
-        PLANNED,
-        READING,
-        ABANDONED,
-        READ,
-        ON_HOLD,
-        REREADING
+        Unknown,
+        Planned,
+        Reading,
+        Abandoned,
+        Read,
+        OnHold,
+        Rereading
     }
 }

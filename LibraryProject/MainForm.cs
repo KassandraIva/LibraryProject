@@ -8,6 +8,8 @@ namespace LibraryProject
         List<Author> authorList = new List<Author>();
         List<Book> bookList = new List<Book>();
 
+        private Book selectedBook;
+
         public MainForm()
         {
             InitializeComponent();
@@ -44,11 +46,42 @@ namespace LibraryProject
             dgvAllBooks.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkBlue;
             dgvAllBooks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvAllBooks.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
+
+            dgvAllBooks.Columns["Review"].Visible = false;
+            dgvAllBooks.Columns["Description"].Visible = false;
+
+            dgvAllBooks.Columns["AuthorNames"].HeaderText = "Authors";
+            dgvAllBooks.Columns["CategoryNames"].HeaderText = "Categories";
+            dgvAllBooks.Columns["GenreNames"].HeaderText = "Genres";
+
+            dgvAllBooks.Columns["Title"].DisplayIndex = 1;
+            dgvAllBooks.Columns["AuthorNames"].DisplayIndex = 2;
+
+            dgvAllBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnAddBook_Click(object sender, EventArgs e)
         {
+            var bookForm = new BookForm()
+            {
+                AddBook = true,
+                allAuthors = authorList
+            };
 
+            DialogResult result = bookForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    selectedBook = bookForm.Book;
+                    this.bookList.Add(selectedBook);
+                    DisplayBooks(bookList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

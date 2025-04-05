@@ -8,7 +8,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LibraryProject.classes
 {
-    internal class Book
+    public class Book
     {
         private static string filePath = "../../../books.txt";
         private static int counter = 0;
@@ -20,6 +20,10 @@ namespace LibraryProject.classes
         public List<Category> Categories { get; set; } = new List<Category>();
         public List<Genre> Genres { get; set; } = new List<Genre>();
         public Review Review { get; set; }
+
+        public string AuthorNames => string.Join(", ", Authors.Select(a => a.FirstName + " " + a.LastName));
+        public string CategoryNames => string.Join(", ", Categories.Select(c => c.Name));
+        public string GenreNames => string.Join(", ", Genres.Select(g => g.Name));
 
         public Book(string title, List<Author> author, string description)
         {
@@ -112,10 +116,9 @@ namespace LibraryProject.classes
                         }
                     }
 
-                    BookStatus status = BookStatus.UNKNOWN;
+                    BookStatus status = BookStatus.Unknown;
                     foreach (BookStatus s in Enum.GetValues(typeof(BookStatus)))
                     {
-                        // Если найдено совпадение с числовым значением
                         if ((int)s == Convert.ToInt32(columns[4]))
                         {
                             status = s;

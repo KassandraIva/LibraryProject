@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.classes
 {
-    internal class Author
+    public class Author
     {
         //private static string filePath = Path.Combine(Directory.GetCurrentDirectory(), "authors.txt");
         private static string filePath = "../../../authors.txt";
@@ -15,6 +15,7 @@ namespace LibraryProject.classes
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
 
         private Author(int id, string firstName, string lastName)
         {

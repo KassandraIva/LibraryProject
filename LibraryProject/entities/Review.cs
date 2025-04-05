@@ -7,7 +7,7 @@ using LibraryProject.classes;
 
 namespace LibraryProject.entities
 {
-    internal class Review
+    public class Review
     {
         public string Text { get; private set; }
         public int Rating { get; private set; }
