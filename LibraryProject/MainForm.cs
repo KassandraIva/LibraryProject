@@ -1,4 +1,5 @@
 using LibraryProject.classes;
+using LibraryProject.entities;
 using System.ComponentModel;
 
 namespace LibraryProject
@@ -7,6 +8,7 @@ namespace LibraryProject
     {
         List<Author> authorList = new List<Author>();
         List<Book> bookList = new List<Book>();
+        List<MiscItems> miscItems = new List<MiscItems>();
 
         private Book selectedBook;
 
@@ -16,12 +18,14 @@ namespace LibraryProject
 
             authorList = Author.LoadFromFile();
             bookList = Book.LoadFromFile(authorList);
+            miscItems = MiscItems.LoadFromFile();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             DisplayAuthors(authorList);
             DisplayBooks(bookList);
+            DisplayMiscItems(miscItems);
         }
 
         private void DisplayAuthors(List<Author> authors)
@@ -58,6 +62,18 @@ namespace LibraryProject
             dgvAllBooks.Columns["AuthorNames"].DisplayIndex = 2;
 
             dgvAllBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        private void DisplayMiscItems(List<MiscItems> miscItems)
+        {
+            dgvMiscItems.Columns.Clear();
+            dgvMiscItems.DataSource= new BindingList<MiscItems>(miscItems.ToList());
+
+            dgvAllBooks.EnableHeadersVisualStyles = false;
+            dgvAllBooks.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+            dgvAllBooks.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkBlue;
+            dgvAllBooks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvAllBooks.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
         }
 
         private void btnAddBook_Click(object sender, EventArgs e)
