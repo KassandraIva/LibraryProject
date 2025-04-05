@@ -97,6 +97,7 @@
             dgvAllBooks.Name = "dgvAllBooks";
             dgvAllBooks.Size = new Size(986, 469);
             dgvAllBooks.TabIndex = 1;
+            dgvAllBooks.CellClick += dgvAllBooks_CellClick;
             // 
             // txtSearch
             // 

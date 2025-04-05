@@ -72,9 +72,10 @@ namespace LibraryProject
         {
             lblBookId.Text = $"Id: {Book.Id}";
             txtTitle.Text = Book.Title;
-            lbxAuthors.DataSource = Book.Authors;
+            rtbDescription.Text = Book.Description;
             cbxStatus.SelectedItem = Book.Status;
-            //txtPrice.Text = Product.UnitPrice.ToString("N2");
+
+            selectedAuthors = Book.Authors;
         }
 
         private void lbxAllAuthors_MouseDown(object sender, MouseEventArgs e)
@@ -103,39 +104,116 @@ namespace LibraryProject
                 DisplaySelectedAuthors();
             }
         }
+        private bool Validation()
+        {
+            bool isValid = true;
+
+            if (txtTitle.Text == "")
+            {
+                MessageBox.Show("Title is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
+            }
+            else if (selectedAuthors.Count == 0)
+            {
+                MessageBox.Show("Author is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
+            }
+
+            return isValid;
+        }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            BookStatus status = BookStatus.Unknown;
-            foreach (BookStatus s in Enum.GetValues(typeof(BookStatus)))
+            if (Validation())
             {
-                if ((int)s == Convert.ToInt32(cbxStatus.SelectedItem))
+                BookStatus status = BookStatus.Unknown;
+                foreach (BookStatus s in Enum.GetValues(typeof(BookStatus)))
                 {
-                    status = s;
-                    break;
+                    if ((int)s == Convert.ToInt32(cbxStatus.SelectedItem))
+                    {
+                        status = s;
+                        break;
+                    }
                 }
-            }
 
-            if (AddBook)
-            {
-                this.Book = new Book(txtTitle.Text, selectedAuthors, rtbDescription.Text, status, new List<Category>(), new List<Genre>());
-            }
-            else
-            {
-                Book.Title = txtTitle.Text;
-                Book.Description = rtbDescription.Text;
-                Book.Status = status;
-                Book.Authors = selectedAuthors;
-                Book.Categories = selectedCategories;
-                Book.Genres = selectedGenres;
-            }
+                if (AddBook)
+                {
+                    this.Book = new Book(txtTitle.Text, selectedAuthors, rtbDescription.Text, status, new List<Category>(), new List<Genre>());
+                }
+                else
+                {
+                    Book.Title = txtTitle.Text;
+                    Book.Description = rtbDescription.Text;
+                    Book.Status = status;
+                    Book.Authors = selectedAuthors;
+                    Book.Categories = selectedCategories;
+                    Book.Genres = selectedGenres;
+                }
 
-            this.DialogResult = DialogResult.OK;
+                this.DialogResult = DialogResult.OK;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void DeleteAuthor()
+        {
+            Author selectedAuthor = (Author)lbxAuthors.SelectedItem;
+
+            if (selectedAuthor != null)
+            {
+                DialogResult result =
+                    MessageBox.Show($"Delete {selectedAuthor.FullName}?",
+                    "Confirm Delete", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    selectedAuthors.Remove(selectedAuthor);
+                    DisplaySelectedAuthors();
+                }
+            }
+        }
+
+        private void lbxAuthors_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DeleteAuthor();
+            }
+        }
+
+        private void btnAddNewAuthor_Click(object sender, EventArgs e)
+        {
+            var authorForm = new AuthorForm()
+            {
+                AddAuthor = true
+            };
+
+            DialogResult result = authorForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    allAuthors.Add(authorForm.Author);
+                    selectedAuthors.Add(authorForm.Author);
+
+                    DisplayAllAuthors();
+                    DisplaySelectedAuthors();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btnDeleteAuthor_Click(object sender, EventArgs e)
+        {
+            DeleteAuthor();
         }
     }
 }
