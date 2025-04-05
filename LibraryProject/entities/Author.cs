@@ -29,7 +29,7 @@ namespace LibraryProject.classes
             FirstName = firstName;
             LastName = lastName;
 
-            Id = counter++;
+            Id = ++counter;
         }
 
         private static void SetCounter(int countFrom)

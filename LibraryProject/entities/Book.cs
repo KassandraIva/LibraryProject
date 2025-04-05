@@ -25,55 +25,16 @@ namespace LibraryProject.classes
         public string CategoryNames => string.Join(", ", Categories.Select(c => c.Name));
         public string GenreNames => string.Join(", ", Genres.Select(g => g.Name));
 
-        public Book(string title, List<Author> author, string description)
+        public Book(string title, List<Author> authors, string description, BookStatus status, List<Category> categories, List<Genre> genre)
         {
             Title = title;
-            Authors = author;
+            Authors = authors;
             Description = description;
-
-            Id = counter++;
-        }
-
-        public Book(string title, List<Author> author, string description, List<Genre> genre) : this(title, author, description)
-        {
-            Genres = genre;
-            Id = counter++;
-        }
-
-        public Book(string title, List<Author> author, string description, BookStatus status) : this(title, author, description)
-        {
             Status = status;
-            Id = counter++;
-        }
-
-        public Book(string title, List<Author> author, string description, List<Category> categories) : this(title, author, description)
-        {
             Categories = categories;
-            Id = counter++;
-        }
-
-        public Book(string title, List<Author> author, string description, BookStatus status, List<Category> categories) : this(title, author, description, status)
-        {
-            Categories = categories;
-            Id = counter++;
-        }
-
-        public Book(string title, List<Author> author, string description, List<Category> categories, List<Genre> genre) : this(title, author, description, categories)
-        {
             Genres = genre;
-            Id = counter++;
-        }
 
-        public Book(string title, List<Author> author, string description, BookStatus status, List<Genre> genre) : this(title, author, description, status)
-        {
-            Genres = genre;
-            Id = counter++;
-        }
-
-        public Book(string title, List<Author> author, string description, BookStatus status, List<Category> categories, List<Genre> genre) : this(title, author, description, status, categories)
-        {
-            Genres = genre;
-            Id = counter++;
+            Id = ++counter;
         }
 
         public Book(int id, string title, List<Author> author, string description, BookStatus status, List<Category> categories, List<Genre> genre) : this(title, author, description, status, categories, genre)
