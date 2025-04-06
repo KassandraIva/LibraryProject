@@ -238,6 +238,7 @@ namespace LibraryProject
                     Book.Authors = selectedAuthors;
                     Book.Categories = selectedCategories;
                     Book.Genres = selectedGenres;
+
                 }
 
                 this.DialogResult = DialogResult.OK;

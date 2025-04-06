@@ -69,7 +69,6 @@ namespace LibraryProject.entities
 
                     quotes.Add(newQuote);
 
-                    // Track the maximum ID found
                     if (newQuote.id > maxId)
                     {
                         maxId = newQuote.id;
@@ -94,8 +93,6 @@ namespace LibraryProject.entities
             {
                 if (fs != null) fs.Close();
             }
-
-            // Set the counter to the max ID found in the file
             SetCounter(maxId);
 
             return quotes;

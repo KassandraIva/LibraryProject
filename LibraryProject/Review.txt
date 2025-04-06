@@ -1,0 +1,20 @@
+﻿1|1|Great book! Highly recommended.|5|2025-04-06
+2|2|Interesting but a bit slow in the middle.|3|2025-04-06
+3|3|A fantastic read with lots of twists.|4|2025-04-06
+4|4|Not my cup of tea. Found it too repetitive.|2|2025-03-25
+5|5|An insightful take on modern life and technology.|4|2025-04-02
+6|6|I loved the characters, but the plot was lacking.|3|2025-03-30
+7|7|Absolutely gripping! Couldn't put it down.|5|2025-03-15
+8|8|A good read, but the pacing was off in places.|3|2025-04-04
+9|9|A deep, philosophical journey. Highly thought-provoking.|5|2025-03-20
+10|10|The world-building was excellent, but the ending was too predictable.|3|2025-03-18
+11|11|A must-read for fantasy lovers. Beautifully written.|5|2025-04-05
+12|12|The storyline was too complex for me to follow at times.|2|2025-03-22
+13|13|A heartwarming story about friendship and resilience.|4|2025-04-01
+14|14|Boring and slow. Couldn’t connect with the characters.|1|2025-03-27
+15|15|Funny and lighthearted, perfect for a quick escape.|4|2025-03-21
+16|16|A detailed and comprehensive guide on productivity.|5|2025-03-29
+17|17|I enjoyed it, but the ending was a letdown.|3|2025-03-23
+18|18|An emotional rollercoaster from start to finish.|5|2025-04-02
+19|19|The writing style is unique, but it didn’t hold my attention.|2|2025-03-24
+20|20|A well-researched book that covers a fascinating topic.|4|2025-04-06

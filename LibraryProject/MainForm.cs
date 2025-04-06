@@ -1,6 +1,8 @@
 using LibraryProject.classes;
 using LibraryProject.entities;
+using System.Collections.Generic;
 using System.ComponentModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace LibraryProject
@@ -13,6 +15,7 @@ namespace LibraryProject
         public List<Book> bookList = new List<Book>();
         public List<MiscItems> miscItems = new List<MiscItems>();
         public List<Quotes> quoteList = new List<Quotes>();
+        public List<Review> reviewList = new List<Review>();
 
         private Book selectedBook;
         private MiscItems selectedItem;
@@ -28,6 +31,7 @@ namespace LibraryProject
             bookList = Book.LoadFromFile(authorList, categoryList, genreList);
             miscItems = MiscItems.LoadFromFile();
             quoteList = Quotes.LoadFromFile();
+            reviewList = Review.LoadFromFile();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -37,6 +41,7 @@ namespace LibraryProject
             DisplayMiscItems(miscItems);
             DisplayQuotes(quoteList);
             DisplayBorrowedBooks(bookList);
+            DisplayReviews(reviewList);
         }
 
         private void DisplayAuthors(List<Author> authors)
@@ -83,7 +88,6 @@ namespace LibraryProject
             dgvAllBooks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvAllBooks.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
 
-            dgvAllBooks.Columns["Review"].Visible = false;
             dgvAllBooks.Columns["Description"].Visible = false;
 
             dgvAllBooks.Columns["AuthorNames"].HeaderText = "Authors";
@@ -119,7 +123,7 @@ namespace LibraryProject
             dgvAllBooks.Columns[7].Width = 170;
             dgvAllBooks.Columns[8].Width = 70;
             dgvAllBooks.Columns[9].Width = 70;
-            //dgvAllBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
         }
 
         public void DisplayMiscItems(List<MiscItems> miscItems)
@@ -184,6 +188,29 @@ namespace LibraryProject
             dgvQuotes.Columns.Add(deleteColumn);
 
             dgvQuotes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        public void DisplayReviews(List<Review> reviews)
+        {
+            dgvReviews.Columns.Clear();
+
+            if (reviews != null && reviews.Count > 0)
+            {
+                dgvReviews.DataSource = new BindingList<Review>(reviews.ToList());
+
+                dgvReviews.EnableHeadersVisualStyles = false;
+                dgvReviews.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+                dgvReviews.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkRed;
+                dgvReviews.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                dgvReviews.AlternatingRowsDefaultCellStyle.BackColor = Color.LightPink;
+
+
+                dgvReviews.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            }
+            else
+            {
+                MessageBox.Show("No reviews to display.", "Empty List");
+            }
         }
 
         public void DisplayBorrowedBooks(List<Book> bookList)
@@ -598,6 +625,13 @@ namespace LibraryProject
                     DisplayBorrowedBooks(bookList);
                 }
             }
+        }
+
+        private void BtnAddReview_Click(object sender, EventArgs e)
+        {
+            Form reviews = new ReviewForm(this, selectedBook);
+
+            reviews.ShowDialog();
         }
     }
 }

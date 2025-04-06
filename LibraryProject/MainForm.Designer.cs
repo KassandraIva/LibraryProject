@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tabControl1 = new TabControl();
+            tabReviews = new TabControl();
             tabAllBooks = new TabPage();
             btnAddBook = new Button();
             btnSearchBook = new Button();
@@ -47,7 +47,10 @@
             tabPage1 = new TabPage();
             btnAddMisc = new Button();
             dgvMiscItems = new DataGridView();
-            tabControl1.SuspendLayout();
+            tabPage2 = new TabPage();
+            BtnAddReview = new Button();
+            dgvReviews = new DataGridView();
+            tabReviews.SuspendLayout();
             tabAllBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
             tabAllAuthors.SuspendLayout();
@@ -58,21 +61,24 @@
             ((System.ComponentModel.ISupportInitialize)dgvBorrowed).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).BeginInit();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvReviews).BeginInit();
             SuspendLayout();
             // 
-            // tabControl1
+            // tabReviews
             // 
-            tabControl1.Controls.Add(tabAllBooks);
-            tabControl1.Controls.Add(tabAllAuthors);
-            tabControl1.Controls.Add(tabQuotes);
-            tabControl1.Controls.Add(tabBorrowedLent);
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Location = new Point(14, 16);
-            tabControl1.Margin = new Padding(3, 4, 3, 4);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1150, 729);
-            tabControl1.TabIndex = 0;
+            tabReviews.Controls.Add(tabAllBooks);
+            tabReviews.Controls.Add(tabAllAuthors);
+            tabReviews.Controls.Add(tabQuotes);
+            tabReviews.Controls.Add(tabBorrowedLent);
+            tabReviews.Controls.Add(tabPage1);
+            tabReviews.Controls.Add(tabPage2);
+            tabReviews.Location = new Point(14, 16);
+            tabReviews.Margin = new Padding(3, 4, 3, 4);
+            tabReviews.Name = "tabReviews";
+            tabReviews.SelectedIndex = 0;
+            tabReviews.Size = new Size(1150, 729);
+            tabReviews.TabIndex = 0;
             // 
             // tabAllBooks
             // 
@@ -263,17 +269,48 @@
             dgvMiscItems.TabIndex = 0;
             dgvMiscItems.CellClick += dgvMiscItems_CellClick;
             // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(BtnAddReview);
+            tabPage2.Controls.Add(dgvReviews);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1142, 696);
+            tabPage2.TabIndex = 5;
+            tabPage2.Text = "Review";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // BtnAddReview
+            // 
+            BtnAddReview.Location = new Point(769, 55);
+            BtnAddReview.Name = "BtnAddReview";
+            BtnAddReview.Size = new Size(200, 31);
+            BtnAddReview.TabIndex = 1;
+            BtnAddReview.Text = "Add review";
+            BtnAddReview.UseVisualStyleBackColor = true;
+            BtnAddReview.Click += BtnAddReview_Click;
+            // 
+            // dgvReviews
+            // 
+            dgvReviews.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReviews.Location = new Point(35, 109);
+            dgvReviews.Name = "dgvReviews";
+            dgvReviews.RowHeadersWidth = 51;
+            dgvReviews.Size = new Size(1101, 546);
+            dgvReviews.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1177, 761);
-            Controls.Add(tabControl1);
+            Controls.Add(tabReviews);
             Margin = new Padding(3, 4, 3, 4);
             Name = "MainForm";
             Text = "Library";
             Load += MainForm_Load;
-            tabControl1.ResumeLayout(false);
+            tabReviews.ResumeLayout(false);
             tabAllBooks.ResumeLayout(false);
             tabAllBooks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).EndInit();
@@ -286,12 +323,14 @@
             ((System.ComponentModel.ISupportInitialize)dgvBorrowed).EndInit();
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).EndInit();
+            tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvReviews).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TabControl tabControl1;
+        private TabControl tabReviews;
         private TabPage tabAllBooks;
         private TabPage tabAllAuthors;
         private DataGridView dgvAllBooks;
@@ -310,5 +349,8 @@
         private DataGridView dgvQuotes;
         private DataGridView dgvBorrowed;
         private Button btnAddQuote;
+        private TabPage tabPage2;
+        private DataGridView dgvReviews;
+        private Button BtnAddReview;
     }
 }

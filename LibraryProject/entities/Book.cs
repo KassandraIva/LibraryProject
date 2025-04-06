@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibraryProject.entities;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LibraryProject.classes
 {
@@ -20,7 +21,6 @@ namespace LibraryProject.classes
         public List<Category> Categories { get; set; } = new List<Category>();
         public List<Genre> Genres { get; set; } = new List<Genre>();
         public Boolean IsBorrowed { get; set; }
-        public Review Review { get; set; }
 
         public string AuthorNames => string.Join(", ", Authors.Select(a => a.FirstName + " " + a.LastName));
         public string CategoryNames => string.Join(", ", Categories.Select(c => c.Name));
@@ -135,7 +135,9 @@ namespace LibraryProject.classes
                     }
 
                     Book book = new Book(Convert.ToInt32(columns[0]), columns[1], bookAuthors, columns[3], status, bookCategories, bookGenres, Convert.ToBoolean(columns[7]));
+
                     books.Add(book);
+
                 }
 
                 textIn.Close();

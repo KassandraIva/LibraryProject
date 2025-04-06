@@ -36,13 +36,10 @@ namespace LibraryProject
         {
             if (IsEditMode && ItemToEdit != null)
             {
-                // Set the existing quote details in the controls
                 rtbQuote.Text = ItemToEdit.text;
 
-                // Set the media type
                 cmbMedia.SelectedItem = ItemToEdit.media;
 
-                // Set the item name (Book or Miscellaneous)
                 if (ItemToEdit.media == "Book")
                 {
                     cmbItem.SelectedItem = mainForm.bookList.FirstOrDefault(b => b.Id == ItemToEdit.mediaID)?.Title;
@@ -58,7 +55,6 @@ namespace LibraryProject
         {
             cmbItem.Items.Clear();
 
-            // Depending on the media type, fill the second combo box with the relevant data
             if (cmbMedia.SelectedItem.ToString() == "Book")
             {
                 foreach (var book in mainForm.bookList)

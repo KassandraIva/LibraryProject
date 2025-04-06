@@ -38,7 +38,6 @@
             cbxStatus = new ComboBox();
             txtTitle = new TextBox();
             rtbDescription = new RichTextBox();
-            gbxReview = new GroupBox();
             lblCategories = new Label();
             lblGenres = new Label();
             lbxCategories = new ListBox();
@@ -58,45 +57,45 @@
             // lblBookId
             // 
             lblBookId.AutoSize = true;
-            lblBookId.Location = new Point(405, 18);
+            lblBookId.Location = new Point(463, 24);
             lblBookId.Name = "lblBookId";
-            lblBookId.Size = new Size(23, 15);
+            lblBookId.Size = new Size(29, 20);
             lblBookId.TabIndex = 0;
             lblBookId.Text = "Id: ";
             // 
             // lblBookTitle
             // 
             lblBookTitle.AutoSize = true;
-            lblBookTitle.Location = new Point(56, 49);
+            lblBookTitle.Location = new Point(64, 65);
             lblBookTitle.Name = "lblBookTitle";
-            lblBookTitle.Size = new Size(36, 15);
+            lblBookTitle.Size = new Size(45, 20);
             lblBookTitle.TabIndex = 1;
             lblBookTitle.Text = "Title: ";
             // 
             // lblBookAuthors
             // 
             lblBookAuthors.AutoSize = true;
-            lblBookAuthors.Location = new Point(37, 254);
+            lblBookAuthors.Location = new Point(42, 339);
             lblBookAuthors.Name = "lblBookAuthors";
-            lblBookAuthors.Size = new Size(55, 15);
+            lblBookAuthors.Size = new Size(67, 20);
             lblBookAuthors.TabIndex = 2;
             lblBookAuthors.Text = "Authors: ";
             // 
             // lblBookDescription
             // 
             lblBookDescription.AutoSize = true;
-            lblBookDescription.Location = new Point(19, 107);
+            lblBookDescription.Location = new Point(22, 143);
             lblBookDescription.Name = "lblBookDescription";
-            lblBookDescription.Size = new Size(73, 15);
+            lblBookDescription.Size = new Size(92, 20);
             lblBookDescription.TabIndex = 3;
             lblBookDescription.Text = "Description: ";
             // 
             // lblBookStatus
             // 
             lblBookStatus.AutoSize = true;
-            lblBookStatus.Location = new Point(47, 78);
+            lblBookStatus.Location = new Point(54, 104);
             lblBookStatus.Name = "lblBookStatus";
-            lblBookStatus.Size = new Size(45, 15);
+            lblBookStatus.Size = new Size(56, 20);
             lblBookStatus.TabIndex = 4;
             lblBookStatus.Text = "Status: ";
             // 
@@ -104,10 +103,10 @@
             // 
             lbxAuthors.AllowDrop = true;
             lbxAuthors.FormattingEnabled = true;
-            lbxAuthors.ItemHeight = 15;
-            lbxAuthors.Location = new Point(123, 254);
+            lbxAuthors.Location = new Point(141, 339);
+            lbxAuthors.Margin = new Padding(3, 4, 3, 4);
             lbxAuthors.Name = "lbxAuthors";
-            lbxAuthors.Size = new Size(251, 79);
+            lbxAuthors.Size = new Size(286, 104);
             lbxAuthors.TabIndex = 5;
             lbxAuthors.DragDrop += lbxAuthors_DragDrop;
             lbxAuthors.DragEnter += lbxAuthors_DragEnter;
@@ -117,60 +116,54 @@
             // 
             lbxAllAuthors.AllowDrop = true;
             lbxAllAuthors.FormattingEnabled = true;
-            lbxAllAuthors.ItemHeight = 15;
-            lbxAllAuthors.Location = new Point(527, 254);
+            lbxAllAuthors.Location = new Point(602, 339);
+            lbxAllAuthors.Margin = new Padding(3, 4, 3, 4);
             lbxAllAuthors.Name = "lbxAllAuthors";
-            lbxAllAuthors.Size = new Size(251, 79);
+            lbxAllAuthors.Size = new Size(286, 104);
             lbxAllAuthors.TabIndex = 8;
             lbxAllAuthors.MouseDown += lbxAllAuthors_MouseDown;
             // 
             // cbxStatus
             // 
             cbxStatus.FormattingEnabled = true;
-            cbxStatus.Location = new Point(123, 75);
+            cbxStatus.Location = new Point(141, 100);
+            cbxStatus.Margin = new Padding(3, 4, 3, 4);
             cbxStatus.Name = "cbxStatus";
-            cbxStatus.Size = new Size(251, 23);
+            cbxStatus.Size = new Size(286, 28);
             cbxStatus.TabIndex = 9;
             // 
             // txtTitle
             // 
-            txtTitle.Location = new Point(123, 46);
+            txtTitle.Location = new Point(141, 61);
+            txtTitle.Margin = new Padding(3, 4, 3, 4);
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(251, 23);
+            txtTitle.Size = new Size(286, 27);
             txtTitle.TabIndex = 10;
             // 
             // rtbDescription
             // 
-            rtbDescription.Location = new Point(123, 104);
+            rtbDescription.Location = new Point(141, 139);
+            rtbDescription.Margin = new Padding(3, 4, 3, 4);
             rtbDescription.Name = "rtbDescription";
-            rtbDescription.Size = new Size(251, 144);
+            rtbDescription.Size = new Size(286, 191);
             rtbDescription.TabIndex = 11;
             rtbDescription.Text = "";
-            // 
-            // gbxReview
-            // 
-            gbxReview.Location = new Point(405, 46);
-            gbxReview.Name = "gbxReview";
-            gbxReview.Size = new Size(373, 202);
-            gbxReview.TabIndex = 12;
-            gbxReview.TabStop = false;
-            gbxReview.Text = "Review";
             // 
             // lblCategories
             // 
             lblCategories.AutoSize = true;
-            lblCategories.Location = new Point(23, 339);
+            lblCategories.Location = new Point(26, 452);
             lblCategories.Name = "lblCategories";
-            lblCategories.Size = new Size(69, 15);
+            lblCategories.Size = new Size(87, 20);
             lblCategories.TabIndex = 13;
             lblCategories.Text = "Categories: ";
             // 
             // lblGenres
             // 
             lblGenres.AutoSize = true;
-            lblGenres.Location = new Point(43, 424);
+            lblGenres.Location = new Point(49, 565);
             lblGenres.Name = "lblGenres";
-            lblGenres.Size = new Size(49, 15);
+            lblGenres.Size = new Size(61, 20);
             lblGenres.TabIndex = 14;
             lblGenres.Text = "Genres: ";
             // 
@@ -178,10 +171,10 @@
             // 
             lbxCategories.AllowDrop = true;
             lbxCategories.FormattingEnabled = true;
-            lbxCategories.ItemHeight = 15;
-            lbxCategories.Location = new Point(123, 339);
+            lbxCategories.Location = new Point(141, 452);
+            lbxCategories.Margin = new Padding(3, 4, 3, 4);
             lbxCategories.Name = "lbxCategories";
-            lbxCategories.Size = new Size(251, 79);
+            lbxCategories.Size = new Size(286, 104);
             lbxCategories.TabIndex = 15;
             lbxCategories.DragDrop += lbxCategories_DragDrop;
             lbxCategories.DragEnter += lbxCategories_DragEnter;
@@ -191,10 +184,10 @@
             // 
             lbxAllCategories.AllowDrop = true;
             lbxAllCategories.FormattingEnabled = true;
-            lbxAllCategories.ItemHeight = 15;
-            lbxAllCategories.Location = new Point(527, 339);
+            lbxAllCategories.Location = new Point(602, 452);
+            lbxAllCategories.Margin = new Padding(3, 4, 3, 4);
             lbxAllCategories.Name = "lbxAllCategories";
-            lbxAllCategories.Size = new Size(251, 79);
+            lbxAllCategories.Size = new Size(286, 104);
             lbxAllCategories.TabIndex = 16;
             lbxAllCategories.MouseDown += lbxAllCategories_MouseDown;
             // 
@@ -202,10 +195,10 @@
             // 
             lbxGenres.AllowDrop = true;
             lbxGenres.FormattingEnabled = true;
-            lbxGenres.ItemHeight = 15;
-            lbxGenres.Location = new Point(123, 424);
+            lbxGenres.Location = new Point(141, 565);
+            lbxGenres.Margin = new Padding(3, 4, 3, 4);
             lbxGenres.Name = "lbxGenres";
-            lbxGenres.Size = new Size(251, 79);
+            lbxGenres.Size = new Size(286, 104);
             lbxGenres.TabIndex = 17;
             lbxGenres.DragDrop += lbxGenres_DragDrop;
             lbxGenres.DragEnter += lbxGenres_DragEnter;
@@ -215,18 +208,19 @@
             // 
             lbxAllGenres.AllowDrop = true;
             lbxAllGenres.FormattingEnabled = true;
-            lbxAllGenres.ItemHeight = 15;
-            lbxAllGenres.Location = new Point(527, 424);
+            lbxAllGenres.Location = new Point(602, 565);
+            lbxAllGenres.Margin = new Padding(3, 4, 3, 4);
             lbxAllGenres.Name = "lbxAllGenres";
-            lbxAllGenres.Size = new Size(251, 79);
+            lbxAllGenres.Size = new Size(286, 104);
             lbxAllGenres.TabIndex = 18;
             lbxAllGenres.MouseDown += lbxAllGenres_MouseDown;
             // 
             // btnAccept
             // 
-            btnAccept.Location = new Point(531, 528);
+            btnAccept.Location = new Point(607, 704);
+            btnAccept.Margin = new Padding(3, 4, 3, 4);
             btnAccept.Name = "btnAccept";
-            btnAccept.Size = new Size(106, 23);
+            btnAccept.Size = new Size(121, 31);
             btnAccept.TabIndex = 19;
             btnAccept.Text = "Accept";
             btnAccept.UseVisualStyleBackColor = true;
@@ -234,9 +228,10 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(677, 528);
+            btnCancel.Location = new Point(774, 704);
+            btnCancel.Margin = new Padding(3, 4, 3, 4);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(101, 23);
+            btnCancel.Size = new Size(115, 31);
             btnCancel.TabIndex = 20;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -244,9 +239,10 @@
             // 
             // btnAddNewAuthor
             // 
-            btnAddNewAuthor.Location = new Point(380, 269);
+            btnAddNewAuthor.Location = new Point(434, 359);
+            btnAddNewAuthor.Margin = new Padding(3, 4, 3, 4);
             btnAddNewAuthor.Name = "btnAddNewAuthor";
-            btnAddNewAuthor.Size = new Size(141, 23);
+            btnAddNewAuthor.Size = new Size(161, 31);
             btnAddNewAuthor.TabIndex = 21;
             btnAddNewAuthor.Text = "Add New Author";
             btnAddNewAuthor.UseVisualStyleBackColor = true;
@@ -254,9 +250,10 @@
             // 
             // btnDeleteAuthor
             // 
-            btnDeleteAuthor.Location = new Point(380, 298);
+            btnDeleteAuthor.Location = new Point(434, 397);
+            btnDeleteAuthor.Margin = new Padding(3, 4, 3, 4);
             btnDeleteAuthor.Name = "btnDeleteAuthor";
-            btnDeleteAuthor.Size = new Size(141, 23);
+            btnDeleteAuthor.Size = new Size(161, 31);
             btnDeleteAuthor.TabIndex = 22;
             btnDeleteAuthor.Text = "Delete Author";
             btnDeleteAuthor.UseVisualStyleBackColor = true;
@@ -264,9 +261,10 @@
             // 
             // btnAddNewCategory
             // 
-            btnAddNewCategory.Location = new Point(380, 351);
+            btnAddNewCategory.Location = new Point(434, 468);
+            btnAddNewCategory.Margin = new Padding(3, 4, 3, 4);
             btnAddNewCategory.Name = "btnAddNewCategory";
-            btnAddNewCategory.Size = new Size(141, 23);
+            btnAddNewCategory.Size = new Size(161, 31);
             btnAddNewCategory.TabIndex = 23;
             btnAddNewCategory.Text = "Add New Category";
             btnAddNewCategory.UseVisualStyleBackColor = true;
@@ -274,9 +272,10 @@
             // 
             // btnDeleteCategory
             // 
-            btnDeleteCategory.Location = new Point(380, 380);
+            btnDeleteCategory.Location = new Point(434, 507);
+            btnDeleteCategory.Margin = new Padding(3, 4, 3, 4);
             btnDeleteCategory.Name = "btnDeleteCategory";
-            btnDeleteCategory.Size = new Size(141, 23);
+            btnDeleteCategory.Size = new Size(161, 31);
             btnDeleteCategory.TabIndex = 24;
             btnDeleteCategory.Text = "Delete Category";
             btnDeleteCategory.UseVisualStyleBackColor = true;
@@ -284,9 +283,10 @@
             // 
             // btnAddNewGenre
             // 
-            btnAddNewGenre.Location = new Point(380, 434);
+            btnAddNewGenre.Location = new Point(434, 579);
+            btnAddNewGenre.Margin = new Padding(3, 4, 3, 4);
             btnAddNewGenre.Name = "btnAddNewGenre";
-            btnAddNewGenre.Size = new Size(141, 23);
+            btnAddNewGenre.Size = new Size(161, 31);
             btnAddNewGenre.TabIndex = 25;
             btnAddNewGenre.Text = "Add New Genre";
             btnAddNewGenre.UseVisualStyleBackColor = true;
@@ -294,9 +294,10 @@
             // 
             // btnDeleteGenre
             // 
-            btnDeleteGenre.Location = new Point(380, 463);
+            btnDeleteGenre.Location = new Point(434, 617);
+            btnDeleteGenre.Margin = new Padding(3, 4, 3, 4);
             btnDeleteGenre.Name = "btnDeleteGenre";
-            btnDeleteGenre.Size = new Size(141, 23);
+            btnDeleteGenre.Size = new Size(161, 31);
             btnDeleteGenre.TabIndex = 26;
             btnDeleteGenre.Text = "Delete Genre";
             btnDeleteGenre.UseVisualStyleBackColor = true;
@@ -304,9 +305,9 @@
             // 
             // BookForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 577);
+            ClientSize = new Size(914, 769);
             Controls.Add(btnDeleteGenre);
             Controls.Add(btnAddNewGenre);
             Controls.Add(btnDeleteCategory);
@@ -321,7 +322,6 @@
             Controls.Add(lbxCategories);
             Controls.Add(lblGenres);
             Controls.Add(lblCategories);
-            Controls.Add(gbxReview);
             Controls.Add(rtbDescription);
             Controls.Add(txtTitle);
             Controls.Add(cbxStatus);
@@ -332,6 +332,7 @@
             Controls.Add(lblBookAuthors);
             Controls.Add(lblBookTitle);
             Controls.Add(lblBookId);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "BookForm";
             Text = "BookForm";
             Load += BookForm_Load;
@@ -351,7 +352,6 @@
         private ComboBox cbxStatus;
         private TextBox txtTitle;
         private RichTextBox rtbDescription;
-        private GroupBox gbxReview;
         private Label lblCategories;
         private Label lblGenres;
         private ListBox lbxCategories;
