@@ -123,6 +123,7 @@
             Controls.Add(lblName);
             Name = "AddMiscItems";
             Text = "AddMiscItems";
+            Load += AddMiscItems_Load;
             ResumeLayout(false);
             PerformLayout();
         }

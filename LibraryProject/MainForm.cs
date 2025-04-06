@@ -12,6 +12,7 @@ namespace LibraryProject
         public List<MiscItems> miscItems = new List<MiscItems>();
 
         private Book selectedBook;
+        private MiscItems selectedItem;
 
         public MainForm()
         {
@@ -93,6 +94,26 @@ namespace LibraryProject
             dgvMiscItems.ColumnHeadersDefaultCellStyle.BackColor = Color.YellowGreen;
             dgvMiscItems.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvMiscItems.AlternatingRowsDefaultCellStyle.BackColor = Color.LightYellow;
+
+            var editColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Edit"
+            };
+            editColumn.Name = "EditColumn";
+            dgvMiscItems.Columns.Add(editColumn);
+
+            var deleteColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete"
+            };
+            deleteColumn.Name = "DeleteColumn";
+            dgvMiscItems.Columns.Add(deleteColumn);
+
+            dgvMiscItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void btnAddBook_Click(object sender, EventArgs e)
@@ -127,6 +148,14 @@ namespace LibraryProject
             }
             return null;
         }
+        private MiscItems GetItem(int miscId)
+        {
+            foreach (MiscItems mi in miscItems)
+            {
+                if (mi.Id == miscId) return mi;
+            }
+            return null;
+        }
 
         private void EditBook(int indexOfOld)
         {
@@ -151,6 +180,30 @@ namespace LibraryProject
                 }
             }
         }
+        private void EditItem(int indexOfOld)
+        {
+            MiscItems selectedItem = miscItems[indexOfOld];
+
+            var miscItemForm = new AddMiscItems(this)
+            {
+                IsEditMode = true,
+                ItemToEdit = selectedItem
+            };
+
+            DialogResult result = miscItemForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    DisplayMiscItems(miscItems);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
 
         private void DeleteBook()
         {
@@ -166,6 +219,29 @@ namespace LibraryProject
                     if (bookList.Remove(selectedBook))
                     {
                         DisplayBooks(bookList);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void DeleteItem()
+        {
+            DialogResult result =
+                MessageBox.Show($"Delete {selectedItem.Name}?",
+                "Confirm Delete", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (miscItems.Remove(selectedItem))
+                    {
+                        DisplayMiscItems(miscItems);
                     }
                 }
                 catch (Exception ex)
@@ -202,6 +278,28 @@ namespace LibraryProject
             Form miscItemForm = new AddMiscItems(this);
 
             miscItemForm.ShowDialog();
+        }
+
+        private void dgvMiscItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvMiscItems.Columns[e.ColumnIndex].Name;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int miscItemId = int.Parse(dgvMiscItems.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                selectedItem = GetItem(miscItemId);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditItem(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteItem();
+            }
         }
     }
 }
