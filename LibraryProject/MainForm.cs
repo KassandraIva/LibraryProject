@@ -10,7 +10,7 @@ namespace LibraryProject
         List<Author> authorList = new List<Author>();
         List<Category> categoryList = new List<Category>();
         List<Genre> genreList = new List<Genre>();
-        List<Book> bookList = new List<Book>();
+        public List<Book> bookList = new List<Book>();
         public List<MiscItems> miscItems = new List<MiscItems>();
         public List<Quotes> quoteList = new List<Quotes>();
 
@@ -36,6 +36,7 @@ namespace LibraryProject
             DisplayBooks(bookList);
             DisplayMiscItems(miscItems);
             DisplayQuotes(quoteList);
+            DisplayBorrowedBooks(bookList);
         }
 
         private void DisplayAuthors(List<Author> authors)
@@ -98,6 +99,7 @@ namespace LibraryProject
                 HeaderText = "",
                 Text = "Edit"
             };
+            editColumn.HeaderText = "EditColumn";
             dgvAllBooks.Columns.Add(editColumn);
 
             var deleteColumn = new DataGridViewButtonColumn()
@@ -106,6 +108,7 @@ namespace LibraryProject
                 HeaderText = "",
                 Text = "Delete"
             };
+            deleteColumn.HeaderText = "DeleteColumn";
             dgvAllBooks.Columns.Add(deleteColumn);
 
             dgvAllBooks.Columns[0].Width = 30;
@@ -181,6 +184,39 @@ namespace LibraryProject
             dgvQuotes.Columns.Add(deleteColumn);
 
             dgvQuotes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        public void DisplayBorrowedBooks(List<Book> bookList)
+        {
+            dgvBorrowed.Columns.Clear();
+            dgvBorrowed.AutoGenerateColumns = false;
+
+            dgvBorrowed.Columns.Add("Title", "Title");
+            dgvBorrowed.Columns.Add("AuthorNames", "Authors");
+            dgvBorrowed.Columns.Add("Status", "Status");
+
+            DataGridViewCheckBoxColumn borrowedCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            borrowedCheckBoxColumn.Name = "IsBorrowed";
+            borrowedCheckBoxColumn.HeaderText = "Borrowed";
+            borrowedCheckBoxColumn.Width = 80;
+            dgvBorrowed.Columns.Add(borrowedCheckBoxColumn);
+
+            var borrowedBooks = bookList.Where(book => book.IsBorrowed).ToList();
+
+            foreach (Book book in borrowedBooks)
+            {
+                int rowIndex = dgvBorrowed.Rows.Add(book.Title, book.AuthorNames, book.Status.ToString(), book.IsBorrowed);
+
+                dgvBorrowed.Rows[rowIndex].Cells["IsBorrowed"].Value = book.IsBorrowed;
+            }
+
+            dgvBorrowed.EnableHeadersVisualStyles = false;
+            dgvBorrowed.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+            dgvBorrowed.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkOrange;
+            dgvBorrowed.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvBorrowed.AlternatingRowsDefaultCellStyle.BackColor = Color.Tan;
+
+            dgvBorrowed.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void btnAddBook_Click(object sender, EventArgs e)
@@ -387,21 +423,21 @@ namespace LibraryProject
         }
         private void dgvAllBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //MessageBox.Show(e.ColumnIndex.ToString());
-            const int EditIndex = 8;
-            const int DeleteIndex = 9;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-            if (e.ColumnIndex == EditIndex || e.ColumnIndex == DeleteIndex)
+            string columnName = dgvAllBooks.Columns[e.ColumnIndex].Name;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
             {
-                int bookId = int.Parse(dgvAllBooks.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
+                int bookId = int.Parse(dgvQuotes.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
                 selectedBook = GetBook(bookId);
             }
 
-            if (e.ColumnIndex == EditIndex)
+            if (columnName == "EditColumn")
             {
                 EditBook(e.RowIndex);
             }
-            else if (e.ColumnIndex == DeleteIndex)
+            else if (columnName == "DeleteColumn")
             {
                 DeleteBook();
             }
@@ -531,7 +567,7 @@ namespace LibraryProject
             if (columnName == "EditColumn" || columnName == "DeleteColumn")
             {
                 int quoteId = int.Parse(dgvQuotes.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
-                selectedQuote= GetQuote(quoteId);
+                selectedQuote = GetQuote(quoteId);
             }
 
             if (columnName == "EditColumn")
@@ -541,6 +577,26 @@ namespace LibraryProject
             else if (columnName == "DeleteColumn")
             {
                 DeleteQuote();
+            }
+        }
+
+        private void dgvAllBooks_CellValueChanged_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            if (dgvAllBooks.Columns[e.ColumnIndex].Name == "IsBorrowed")
+            {
+                int bookId = int.Parse(dgvAllBooks.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                bool isBorrowed = (bool)dgvAllBooks.Rows[e.RowIndex].Cells["IsBorrowed"].Value;
+
+                Book book = bookList.FirstOrDefault(b => b.Id == bookId);
+                if (book != null)
+                {
+                    book.IsBorrowed = isBorrowed;
+
+                    DisplayBorrowedBooks(bookList);
+                }
             }
         }
     }

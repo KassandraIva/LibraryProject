@@ -35,18 +35,18 @@
             dgvAllBooks = new DataGridView();
             txtSearch = new TextBox();
             tabAllAuthors = new TabPage();
+            btnSearchAuthor = new Button();
+            textBox1 = new TextBox();
+            btnAddAuthor = new Button();
             dgvAllAuthors = new DataGridView();
             tabQuotes = new TabPage();
             btnAddQuote = new Button();
             dgvQuotes = new DataGridView();
             tabBorrowedLent = new TabPage();
-            dataGridView1 = new DataGridView();
+            dgvBorrowed = new DataGridView();
             tabPage1 = new TabPage();
             btnAddMisc = new Button();
             dgvMiscItems = new DataGridView();
-            btnAddAuthor = new Button();
-            textBox1 = new TextBox();
-            btnSearchAuthor = new Button();
             tabControl1.SuspendLayout();
             tabAllBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
@@ -55,7 +55,7 @@
             tabQuotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvQuotes).BeginInit();
             tabBorrowedLent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBorrowed).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).BeginInit();
             SuspendLayout();
@@ -84,7 +84,7 @@
             tabAllBooks.Margin = new Padding(3, 4, 3, 4);
             tabAllBooks.Name = "tabAllBooks";
             tabAllBooks.Padding = new Padding(3);
-            tabAllBooks.Size = new Size(998, 519);
+            tabAllBooks.Size = new Size(1142, 696);
             tabAllBooks.TabIndex = 0;
             tabAllBooks.Text = "All Books";
             tabAllBooks.UseVisualStyleBackColor = true;
@@ -119,6 +119,7 @@
             dgvAllBooks.TabIndex = 1;
             dgvAllBooks.CellClick += dgvAllBooks_CellClick;
             dgvAllBooks.CellPainting += dgvAllBooks_CellPainting;
+            dgvAllBooks.CellValueChanged += dgvAllBooks_CellValueChanged_1;
             // 
             // txtSearch
             // 
@@ -137,10 +138,35 @@
             tabAllAuthors.Margin = new Padding(3, 4, 3, 4);
             tabAllAuthors.Name = "tabAllAuthors";
             tabAllAuthors.Padding = new Padding(3);
-            tabAllAuthors.Size = new Size(998, 519);
+            tabAllAuthors.Size = new Size(1142, 696);
             tabAllAuthors.TabIndex = 1;
             tabAllAuthors.Text = "All Authors";
             tabAllAuthors.UseVisualStyleBackColor = true;
+            // 
+            // btnSearchAuthor
+            // 
+            btnSearchAuthor.Location = new Point(538, 15);
+            btnSearchAuthor.Name = "btnSearchAuthor";
+            btnSearchAuthor.Size = new Size(134, 23);
+            btnSearchAuthor.TabIndex = 3;
+            btnSearchAuthor.Text = "Search";
+            btnSearchAuthor.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(6, 15);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(526, 27);
+            textBox1.TabIndex = 2;
+            // 
+            // btnAddAuthor
+            // 
+            btnAddAuthor.Location = new Point(858, 15);
+            btnAddAuthor.Name = "btnAddAuthor";
+            btnAddAuthor.Size = new Size(134, 23);
+            btnAddAuthor.TabIndex = 1;
+            btnAddAuthor.Text = "Add Author";
+            btnAddAuthor.UseVisualStyleBackColor = true;
             // 
             // dgvAllAuthors
             // 
@@ -187,7 +213,7 @@
             // 
             // tabBorrowedLent
             // 
-            tabBorrowedLent.Controls.Add(dataGridView1);
+            tabBorrowedLent.Controls.Add(dgvBorrowed);
             tabBorrowedLent.Location = new Point(4, 29);
             tabBorrowedLent.Margin = new Padding(3, 4, 3, 4);
             tabBorrowedLent.Name = "tabBorrowedLent";
@@ -196,14 +222,14 @@
             tabBorrowedLent.Text = "Borrowed/Lent";
             tabBorrowedLent.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvBorrowed
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(25, 76);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(756, 360);
-            dataGridView1.TabIndex = 0;
+            dgvBorrowed.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBorrowed.Location = new Point(25, 47);
+            dgvBorrowed.Name = "dgvBorrowed";
+            dgvBorrowed.RowHeadersWidth = 51;
+            dgvBorrowed.Size = new Size(696, 611);
+            dgvBorrowed.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -237,31 +263,6 @@
             dgvMiscItems.TabIndex = 0;
             dgvMiscItems.CellClick += dgvMiscItems_CellClick;
             // 
-            // btnAddAuthor
-            // 
-            btnAddAuthor.Location = new Point(858, 15);
-            btnAddAuthor.Name = "btnAddAuthor";
-            btnAddAuthor.Size = new Size(134, 23);
-            btnAddAuthor.TabIndex = 1;
-            btnAddAuthor.Text = "Add Author";
-            btnAddAuthor.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(6, 15);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(526, 23);
-            textBox1.TabIndex = 2;
-            // 
-            // btnSearchAuthor
-            // 
-            btnSearchAuthor.Location = new Point(538, 15);
-            btnSearchAuthor.Name = "btnSearchAuthor";
-            btnSearchAuthor.Size = new Size(134, 23);
-            btnSearchAuthor.TabIndex = 3;
-            btnSearchAuthor.Text = "Search";
-            btnSearchAuthor.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -282,7 +283,7 @@
             tabQuotes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvQuotes).EndInit();
             tabBorrowedLent.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBorrowed).EndInit();
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).EndInit();
             ResumeLayout(false);
@@ -307,7 +308,7 @@
         private Button btnSearchAuthor;
         private TextBox textBox1;
         private DataGridView dgvQuotes;
-        private DataGridView dataGridView1;
+        private DataGridView dgvBorrowed;
         private Button btnAddQuote;
     }
 }

@@ -1,35 +1,35 @@
-1|The Shining|5||3|4|9
-2|Deep Work|28|How to focus in a distracted world, by Cal Newport.|4|3|13,14
-3|Crime and Punishment|10||1|13|7,11
-4|Eat, Pray, Love|22|A journey of self-discovery across three countries.|4|9,14|10,5
-5|Project Hail Mary|18|A lone astronaut must save Earth.|5|6|2,8
-6|The Wheel of Time: A Memory of Light|15,16|The final book in *The Wheel of Time* series, completed by Brandon Sanderson after Robert Jordan’s passing.|5|11|1,8
-7|Sapiens|29|A brief history of humankind by Yuval Noah Harari.|6|6,8|6,11
-8|The Old Man and the Sea|9||5||7
-9|War and Peace|8||0||6,7
-10|The Hobbit|1|A fantasy novel about Bilbo Baggins' adventure with dwarves and a dragon.|3||1,8
-11|Harry Potter and the Philosopher's Stone|3||1|10|1,8
-12|Thinking, Fast and Slow|30|Behavioral economics and human thinking patterns.|6||12,11
-13|Great Expectations|11||2|9,13|6,7
-14|Refactoring|33|Improving the design of existing code.|7|7,3|14
-15|The Adventures of Tom Sawyer|7||4|11|7,8
-16|The Lord of the Rings|1||2|10|1,8
-17|Harry Potter and the Chamber of Secrets|3||1|10|1,8
-18|Educated|19|A memoir about growing up in a strict family and pursuing education.|4||10,14
-19|The Subtle Art of Not Giving a F*ck|23|Counterintuitive approach to living a good life.|4|5|13
-20|Good Omens|13,14|A comedic fantasy novel about an angel and a demon trying to prevent the apocalypse.|4|5|1,15
-21|Atomic Habits|20|A self-help book about building better habits.|3||13
-22|Pride and Prejudice|6||2|12|5,7
-23|1984|2|A dystopian novel about a totalitarian regime that controls everything.|4||2,11
-24|Murder on the Orient Express|4||2||3
-25|You Don’t Know JS|32|In-depth JavaScript book series.|7|7|14
-26|The Pragmatic Programmer|25|Tips and philosophies for better software development.|7|7,14|14
-27|American Gods|14|A dark fantasy novel exploring mythology in modern America.|4|10|1,11
-28|The Art of Learning|31|Josh Waitzkin on mastering performance and skills.|5|1,14|13,14
-29|The Picture of Dorian Gray|12||3|4|7,11
-30|The Life-Changing Magic of Tidying Up|21|Organizing and decluttering guide by Marie Kondo.|2|3|13
-31|The Self-Taught Programmer|27|Roadmap for learning to code without a CS degree.|7|7,1|14
-32|Clean Code|24|A handbook of agile software craftsmanship by Robert C. Martin.|7|7|14
-33|A Brief History of Time|26|Stephen Hawking's explanation of cosmology.|6|6,13|6
-34|Animal Farm|2||5||6,11
-35|The Midnight Library|17|A woman explores alternate lives she could have lived.|1|13,14|7,12
+1|The Shining|5||3|4|9|false
+2|Deep Work|28|How to focus in a distracted world, by Cal Newport.|4|3|13,14|true
+3|Crime and Punishment|10||1|13|7,11|false
+4|Eat, Pray, Love|22|A journey of self-discovery across three countries.|4|9,14|10,5|false
+5|Project Hail Mary|18|A lone astronaut must save Earth.|5|6|2,8|true
+6|The Wheel of Time: A Memory of Light|15,16|The final book in *The Wheel of Time* series, completed by Brandon Sanderson after Robert Jordan’s passing.|5|11|1,8|false
+7|Sapiens|29|A brief history of humankind by Yuval Noah Harari.|6|6,8|6,11|true
+8|The Old Man and the Sea|9||5||7|false
+9|War and Peace|8||0||6,7|false
+10|The Hobbit|1|A fantasy novel about Bilbo Baggins' adventure with dwarves and a dragon.|3||1,8|true
+11|Harry Potter and the Philosopher's Stone|3||1|10|1,8|true
+12|Thinking, Fast and Slow|30|Behavioral economics and human thinking patterns.|6||12,11|false
+13|Great Expectations|11||2|9,13|6,7|false
+14|Refactoring|33|Improving the design of existing code.|7|7,3|14|false
+15|The Adventures of Tom Sawyer|7||4|11|7,8|false
+16|The Lord of the Rings|1||2|10|1,8|true
+17|Harry Potter and the Chamber of Secrets|3||1|10|1,8|false
+18|Educated|19|A memoir about growing up in a strict family and pursuing education.|4||10,14|false
+19|The Subtle Art of Not Giving a F*ck|23|Counterintuitive approach to living a good life.|4|5|13|false
+20|Good Omens|13,14|A comedic fantasy novel about an angel and a demon trying to prevent the apocalypse.|4|5|1,15|true
+21|Atomic Habits|20|A self-help book about building better habits.|3||13|true
+22|Pride and Prejudice|6||2|12|5,7|false
+23|1984|2|A dystopian novel about a totalitarian regime that controls everything.|4||2,11|false
+24|Murder on the Orient Express|4||2||3|false
+25|You Don’t Know JS|32|In-depth JavaScript book series.|7|7|14|false
+26|The Pragmatic Programmer|25|Tips and philosophies for better software development.|7|7,14|14|false
+27|American Gods|14|A dark fantasy novel exploring mythology in modern America.|4|10|1,11|false
+28|The Art of Learning|31|Josh Waitzkin on mastering performance and skills.|5|1,14|13,14|false
+29|The Picture of Dorian Gray|12||3|4|7,11|false
+30|The Life-Changing Magic of Tidying Up|21|Organizing and decluttering guide by Marie Kondo.|2|3|13|false
+31|The Self-Taught Programmer|27|Roadmap for learning to code without a CS degree.|7|7,1|14|false
+32|Clean Code|24|A handbook of agile software craftsmanship by Robert C. Martin.|7|7|14|true
+33|A Brief History of Time|26|Stephen Hawking's explanation of cosmology.|6|6,13|6|false
+34|Animal Farm|2||5||6,11|false
+35|The Midnight Library|17|A woman explores alternate lives she could have lived.|1|13,14|7,12|false
