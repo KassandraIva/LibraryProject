@@ -26,6 +26,7 @@ namespace LibraryProject.entities
             this.Text = text;
             this.Rating = rating;
             this.CreatedAt = createdAt;
+
         }
 
         public static void SetCounter(int countFrom)
