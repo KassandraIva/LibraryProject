@@ -15,33 +15,59 @@ namespace LibraryProject
     public partial class AddMiscItems : Form
     {
         private MainForm mainForm;
+        public bool IsEditMode { get; set; } = false;
+        public MiscItems ItemToEdit { get; set; }
+
         public AddMiscItems(MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;
         }
 
+        private void AddMiscItems_Load(object sender, EventArgs e)
+        {
+            if (IsEditMode && ItemToEdit != null)
+            {
+                txtName.Text = ItemToEdit.Name;
+                txtCreator.Text = ItemToEdit.Creator;
+                cmbType.SelectedItem = ItemToEdit.Genre;
+            }
+        }
+
         private void btnAddNewItem_Click(object sender, EventArgs e)
         {
-            int id = MiscItems.GetNextId(); // Get a unique ID
+            int id = MiscItems.GetNextId();
 
-            // Check if a genre is selected in the ComboBox
             string genre = cmbType.SelectedItem?.ToString();
 
             if (string.IsNullOrEmpty(genre))
             {
                 MessageBox.Show("Please select a genre.");
-                return; // Exit the method if no genre is selected
+                return;
             }
 
-            MiscItems newItem = new MiscItems(txtName.Text, txtCreator.Text, genre);
-            newItem.Id = id;
+            if (IsEditMode && ItemToEdit != null)
+            {
+                ItemToEdit.Name = txtName.Text;
+                ItemToEdit.Creator = txtCreator.Text;
+                ItemToEdit.Genre = genre;
 
-            MiscItems.SaveToFile(newItem);
-            mainForm.miscItems.Add(newItem);
-            mainForm.DisplayMiscItems(mainForm.miscItems);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
 
-            this.Close();
+            else
+            {
+                MiscItems newItem = new MiscItems(txtName.Text, txtCreator.Text, genre);
+                newItem.Id = id;
+
+                MiscItems.SaveToFile(newItem);
+                mainForm.miscItems.Add(newItem);
+                mainForm.DisplayMiscItems(mainForm.miscItems);
+
+                this.Close();
+            }
+
         }
 
 

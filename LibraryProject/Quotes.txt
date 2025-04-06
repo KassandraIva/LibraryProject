@@ -1,0 +1,18 @@
+﻿1|1|"In a hole in the ground there lived a hobbit."|Book
+2|2|"Even the smallest person can change the course of the future."|Book
+3|3|"Big Brother is watching you."|Book
+4|4|"All animals are equal, but some animals are more equal than others."|Book
+5|5|"It does not do to dwell on dreams and forget to live."|Book
+6|6|"When in doubt, go to the library."|Book
+7|7|"The impossible could not have happened, therefore the impossible must be possible in spite of appearances."|Book
+8|8|"All work and no play makes Jack a dull boy."|Book
+9|9|"You must allow me to tell you how ardently I admire and love you."|Book
+10|10|"The less there is to justify a traditional custom, the harder it is to get rid of it."|Book
+11|11|"If everyone fought for their own convictions there would be no war."|Book
+12|12|"But man is not made for defeat. A man can be destroyed but not defeated."|Book
+13|13|"Pain and suffering are always inevitable for a large intelligence and a deep heart."|Book
+14|14|"Ask no questions, and you'll be told no lies."|Book
+15|15|"The only way to get rid of a temptation is to yield to it."|Book
+16|16|"God does not play dice with the universe... but sometimes, angels and demons do."|Book
+17|17|"Duty is heavier than a mountain, death lighter than a feather."|Book
+18|18|"Every hour wounds. The last one kills."|Book

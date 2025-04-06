@@ -12,8 +12,11 @@ namespace LibraryProject
         List<Genre> genreList = new List<Genre>();
         List<Book> bookList = new List<Book>();
         public List<MiscItems> miscItems = new List<MiscItems>();
+        public List<Quotes> quoteList = new List<Quotes>();
 
         private Book selectedBook;
+        private MiscItems selectedItem;
+        private Quotes selectedQuote;
 
         public MainForm()
         {
@@ -24,6 +27,7 @@ namespace LibraryProject
             genreList = Genre.LoadFromFile();
             bookList = Book.LoadFromFile(authorList, categoryList, genreList);
             miscItems = MiscItems.LoadFromFile();
+            quoteList = Quotes.LoadFromFile();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -31,6 +35,7 @@ namespace LibraryProject
             DisplayAuthors(authorList);
             DisplayBooks(bookList);
             DisplayMiscItems(miscItems);
+            DisplayQuotes(quoteList);
         }
 
         private void DisplayAuthors(List<Author> authors)
@@ -124,6 +129,58 @@ namespace LibraryProject
             dgvMiscItems.ColumnHeadersDefaultCellStyle.BackColor = Color.YellowGreen;
             dgvMiscItems.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvMiscItems.AlternatingRowsDefaultCellStyle.BackColor = Color.LightYellow;
+
+            var editColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Edit"
+            };
+            editColumn.Name = "EditColumn";
+            dgvMiscItems.Columns.Add(editColumn);
+
+            var deleteColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete"
+            };
+            deleteColumn.Name = "DeleteColumn";
+            dgvMiscItems.Columns.Add(deleteColumn);
+
+            dgvMiscItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+        public void DisplayQuotes(List<Quotes> quoteList)
+        {
+            dgvQuotes.Columns.Clear();
+            dgvQuotes.DataSource = new BindingList<Quotes>(quoteList.ToList());
+
+            dgvQuotes.EnableHeadersVisualStyles = false;
+            dgvQuotes.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+            dgvQuotes.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkRed;
+            dgvQuotes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvQuotes.AlternatingRowsDefaultCellStyle.BackColor = Color.LightPink;
+
+            var editColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Edit"
+            };
+            editColumn.Name = "EditColumn";
+            dgvQuotes.Columns.Add(editColumn);
+
+            var deleteColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete"
+            };
+            deleteColumn.Name = "DeleteColumn";
+            dgvQuotes.Columns.Add(deleteColumn);
+
+            dgvQuotes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void btnAddBook_Click(object sender, EventArgs e)
@@ -161,6 +218,23 @@ namespace LibraryProject
             return null;
         }
 
+        private MiscItems GetItem(int miscId)
+        {
+            foreach (MiscItems mi in miscItems)
+            {
+                if (mi.Id == miscId) return mi;
+            }
+            return null;
+        }
+        private Quotes GetQuote(int quoteId)
+        {
+            foreach (Quotes q in quoteList)
+            {
+                if (q.id == quoteId) return q;
+            }
+            return null;
+        }
+
         private void EditBook(int indexOfOld)
         {
             var bookForm = new BookForm()
@@ -179,6 +253,56 @@ namespace LibraryProject
                 {
                     this.bookList[indexOfOld] = selectedBook;
                     DisplayBooks(bookList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void EditItem(int index)
+        {
+            MiscItems selectedItem = miscItems[index];
+
+            var miscItemForm = new AddMiscItems(this)
+            {
+                IsEditMode = true,
+                ItemToEdit = selectedItem
+            };
+
+            DialogResult result = miscItemForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    DisplayMiscItems(miscItems);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void EditQuote(int index)
+        {
+            Quotes selectedQuote = quoteList[index];
+
+            var quotesForm = new QuotesForm(this, selectedBook, selectedItem)
+            {
+                IsEditMode = true,
+                ItemToEdit = selectedQuote
+            };
+
+            DialogResult result = quotesForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    DisplayMiscItems(miscItems);
                 }
                 catch (Exception ex)
                 {
@@ -210,6 +334,57 @@ namespace LibraryProject
             }
         }
 
+        private void DeleteItem()
+        {
+            DialogResult result =
+                MessageBox.Show($"Delete {selectedItem.Name}?",
+                "Confirm Delete", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (miscItems.Remove(selectedItem))
+                    {
+                        DisplayMiscItems(miscItems);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        private void DeleteQuote()
+        {
+            if (selectedQuote == null)
+            {
+                MessageBox.Show("No quote selected.");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show($"Delete quote with ID {selectedQuote.id}?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (quoteList.Remove(selectedQuote))
+                    {
+                        DisplayQuotes(quoteList);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: Quote could not be deleted.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
+        }
         private void dgvAllBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //MessageBox.Show(e.ColumnIndex.ToString());
@@ -316,6 +491,57 @@ namespace LibraryProject
             Form miscItemForm = new AddMiscItems(this);
 
             miscItemForm.ShowDialog();
+        }
+
+        private void dgvMiscItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvMiscItems.Columns[e.ColumnIndex].Name;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int quoteId = int.Parse(dgvQuotes.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                selectedQuote = GetQuote(quoteId);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditItem(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteItem();
+            }
+        }
+
+        private void btnAddQuote_Click(object sender, EventArgs e)
+        {
+            Form quotes = new QuotesForm(this, selectedBook, selectedItem);
+
+            quotes.ShowDialog();
+        }
+
+        private void dgvQuotes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvQuotes.Columns[e.ColumnIndex].Name;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int quoteId = int.Parse(dgvQuotes.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                selectedQuote= GetQuote(quoteId);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditQuote(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteQuote();
+            }
         }
     }
 }
