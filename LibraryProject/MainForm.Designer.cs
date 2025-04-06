@@ -37,7 +37,10 @@
             tabAllAuthors = new TabPage();
             dgvAllAuthors = new DataGridView();
             tabQuotes = new TabPage();
+            btnAddQuote = new Button();
+            dgvQuotes = new DataGridView();
             tabBorrowedLent = new TabPage();
+            dataGridView1 = new DataGridView();
             tabPage1 = new TabPage();
             btnAddMisc = new Button();
             dgvMiscItems = new DataGridView();
@@ -46,6 +49,10 @@
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
             tabAllAuthors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).BeginInit();
+            tabQuotes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvQuotes).BeginInit();
+            tabBorrowedLent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).BeginInit();
             SuspendLayout();
@@ -143,6 +150,8 @@
             // 
             // tabQuotes
             // 
+            tabQuotes.Controls.Add(btnAddQuote);
+            tabQuotes.Controls.Add(dgvQuotes);
             tabQuotes.Location = new Point(4, 29);
             tabQuotes.Margin = new Padding(3, 4, 3, 4);
             tabQuotes.Name = "tabQuotes";
@@ -152,8 +161,29 @@
             tabQuotes.Text = "Quotes";
             tabQuotes.UseVisualStyleBackColor = true;
             // 
+            // btnAddQuote
+            // 
+            btnAddQuote.Location = new Point(1002, 31);
+            btnAddQuote.Name = "btnAddQuote";
+            btnAddQuote.Size = new Size(94, 29);
+            btnAddQuote.TabIndex = 1;
+            btnAddQuote.Text = "Add Quote";
+            btnAddQuote.UseVisualStyleBackColor = true;
+            btnAddQuote.Click += btnAddQuote_Click;
+            // 
+            // dgvQuotes
+            // 
+            dgvQuotes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvQuotes.Location = new Point(6, 79);
+            dgvQuotes.Name = "dgvQuotes";
+            dgvQuotes.RowHeadersWidth = 51;
+            dgvQuotes.Size = new Size(1118, 582);
+            dgvQuotes.TabIndex = 0;
+            dgvQuotes.CellClick += dgvQuotes_CellClick;
+            // 
             // tabBorrowedLent
             // 
+            tabBorrowedLent.Controls.Add(dataGridView1);
             tabBorrowedLent.Location = new Point(4, 29);
             tabBorrowedLent.Margin = new Padding(3, 4, 3, 4);
             tabBorrowedLent.Name = "tabBorrowedLent";
@@ -161,6 +191,15 @@
             tabBorrowedLent.TabIndex = 3;
             tabBorrowedLent.Text = "Borrowed/Lent";
             tabBorrowedLent.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(25, 76);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(756, 360);
+            dataGridView1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -176,7 +215,7 @@
             // 
             // btnAddMisc
             // 
-            btnAddMisc.Location = new Point(810, 134);
+            btnAddMisc.Location = new Point(959, 35);
             btnAddMisc.Name = "btnAddMisc";
             btnAddMisc.Size = new Size(123, 35);
             btnAddMisc.TabIndex = 1;
@@ -187,10 +226,10 @@
             // dgvMiscItems
             // 
             dgvMiscItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMiscItems.Location = new Point(30, 125);
+            dgvMiscItems.Location = new Point(20, 103);
             dgvMiscItems.Name = "dgvMiscItems";
             dgvMiscItems.RowHeadersWidth = 51;
-            dgvMiscItems.Size = new Size(730, 448);
+            dgvMiscItems.Size = new Size(1085, 559);
             dgvMiscItems.TabIndex = 0;
             dgvMiscItems.CellClick += dgvMiscItems_CellClick;
             // 
@@ -210,6 +249,10 @@
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).EndInit();
             tabAllAuthors.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).EndInit();
+            tabQuotes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvQuotes).EndInit();
+            tabBorrowedLent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).EndInit();
             ResumeLayout(false);
@@ -230,5 +273,8 @@
         private TabPage tabPage1;
         private DataGridView dgvMiscItems;
         private Button btnAddMisc;
+        private DataGridView dgvQuotes;
+        private DataGridView dataGridView1;
+        private Button btnAddQuote;
     }
 }
