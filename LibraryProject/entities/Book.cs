@@ -47,7 +47,7 @@ namespace LibraryProject.classes
             counter = countFrom;
         }
 
-        public static List<Book> LoadFromFile(List<Author> authors)
+        public static List<Book> LoadFromFile(List<Author> authors, List<Category> categories, List<Genre> genres)
         {
             int maxId = 0;
             List<Book> books = new List<Book>();
@@ -68,12 +68,45 @@ namespace LibraryProject.classes
                     string[] authorIds = columns[2].Split(',');
 
                     List<Author> bookAuthors = new List<Author>();
-                    foreach (string authorId in authorIds)
+                    if (authorIds[0].Length > 0)
                     {
-                        Author author = authors.Find(a => a.Id == Convert.ToInt32(authorId));
-                        if (author != null)
+                        foreach (string authorId in authorIds)
                         {
-                            bookAuthors.Add(author);
+                            Author author = authors.Find(a => a.Id == Convert.ToInt32(authorId));
+                            if (author != null)
+                            {
+                                bookAuthors.Add(author);
+                            }
+                        }
+                    }
+
+                    string[] categoryIds = columns[5].Split(',');
+
+                    List<Category> bookCategories = new List<Category>();
+                    if (categoryIds[0].Length > 0)
+                    {
+                        foreach (string categoryId in categoryIds)
+                        {
+                            Category category = categories.Find(c => c.Id == Convert.ToInt32(categoryId));
+                            if (category != null)
+                            {
+                                bookCategories.Add(category);
+                            }
+                        }
+                    }
+
+                    string[] genreIds = columns[6].Split(',');
+
+                    List<Genre> bookGenres = new List<Genre>();
+                    if (genreIds[0].Length > 0)
+                    {
+                        foreach (string genreId in genreIds)
+                        {
+                            Genre genre = genres.Find(g => g.Id == Convert.ToInt32(genreId));
+                            if (genre != null)
+                            {
+                                bookGenres.Add(genre);
+                            }
                         }
                     }
 
@@ -87,7 +120,7 @@ namespace LibraryProject.classes
                         }
                     }
 
-                    Book book = new Book(Convert.ToInt32(columns[0]), columns[1], bookAuthors, columns[3], status, new List<Category>(), new List<Genre>());
+                    Book book = new Book(Convert.ToInt32(columns[0]), columns[1], bookAuthors, columns[3], status, bookCategories, bookGenres);
                     books.Add(book);
                 }
 

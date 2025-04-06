@@ -1,0 +1,15 @@
+1|Fantasy|#9370DB
+2|Science Fiction|#20B2AA
+3|Mystery|#8B008B
+4|Thriller|#DC143C
+5|Romance|#FF69B4
+6|Historical Fiction|#CD853F
+7|Classic|#708090
+8|Adventure|#FF8C00
+9|Horror|#800000
+10|Biography|#A0522D
+11|Philosophy|#556B2F
+12|Psychology|#D8BFD8
+13|Self-Help|#00CED1
+14|Education|#1E90FF
+15|Humor|#FFD700

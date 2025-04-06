@@ -41,6 +41,9 @@
             tabPage1 = new TabPage();
             btnAddMisc = new Button();
             dgvMiscItems = new DataGridView();
+            btnAddAuthor = new Button();
+            textBox1 = new TextBox();
+            btnSearchAuthor = new Button();
             tabControl1.SuspendLayout();
             tabAllBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
@@ -71,7 +74,7 @@
             tabAllBooks.Controls.Add(txtSearch);
             tabAllBooks.Location = new Point(4, 24);
             tabAllBooks.Name = "tabAllBooks";
-            tabAllBooks.Padding = new Padding(3, 3, 3, 3);
+            tabAllBooks.Padding = new Padding(3);
             tabAllBooks.Size = new Size(998, 519);
             tabAllBooks.TabIndex = 0;
             tabAllBooks.Text = "All Books";
@@ -79,7 +82,7 @@
             // 
             // btnAddBook
             // 
-            btnAddBook.Location = new Point(859, 16);
+            btnAddBook.Location = new Point(859, 15);
             btnAddBook.Name = "btnAddBook";
             btnAddBook.Size = new Size(133, 23);
             btnAddBook.TabIndex = 3;
@@ -89,7 +92,7 @@
             // 
             // btnSearchBook
             // 
-            btnSearchBook.Location = new Point(549, 16);
+            btnSearchBook.Location = new Point(538, 15);
             btnSearchBook.Name = "btnSearchBook";
             btnSearchBook.Size = new Size(133, 23);
             btnSearchBook.TabIndex = 2;
@@ -105,20 +108,24 @@
             dgvAllBooks.Size = new Size(986, 469);
             dgvAllBooks.TabIndex = 1;
             dgvAllBooks.CellClick += dgvAllBooks_CellClick;
+            dgvAllBooks.CellPainting += dgvAllBooks_CellPainting;
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(6, 16);
+            txtSearch.Location = new Point(6, 15);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(526, 23);
             txtSearch.TabIndex = 0;
             // 
             // tabAllAuthors
             // 
+            tabAllAuthors.Controls.Add(btnSearchAuthor);
+            tabAllAuthors.Controls.Add(textBox1);
+            tabAllAuthors.Controls.Add(btnAddAuthor);
             tabAllAuthors.Controls.Add(dgvAllAuthors);
             tabAllAuthors.Location = new Point(4, 24);
             tabAllAuthors.Name = "tabAllAuthors";
-            tabAllAuthors.Padding = new Padding(3, 3, 3, 3);
+            tabAllAuthors.Padding = new Padding(3);
             tabAllAuthors.Size = new Size(998, 519);
             tabAllAuthors.TabIndex = 1;
             tabAllAuthors.Text = "All Authors";
@@ -137,7 +144,7 @@
             // 
             tabQuotes.Location = new Point(4, 24);
             tabQuotes.Name = "tabQuotes";
-            tabQuotes.Padding = new Padding(3, 3, 3, 3);
+            tabQuotes.Padding = new Padding(3);
             tabQuotes.Size = new Size(998, 519);
             tabQuotes.TabIndex = 2;
             tabQuotes.Text = "Quotes";
@@ -186,6 +193,31 @@
             dgvMiscItems.Size = new Size(639, 336);
             dgvMiscItems.TabIndex = 0;
             // 
+            // btnAddAuthor
+            // 
+            btnAddAuthor.Location = new Point(858, 15);
+            btnAddAuthor.Name = "btnAddAuthor";
+            btnAddAuthor.Size = new Size(134, 23);
+            btnAddAuthor.TabIndex = 1;
+            btnAddAuthor.Text = "Add Author";
+            btnAddAuthor.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(6, 15);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(526, 23);
+            textBox1.TabIndex = 2;
+            // 
+            // btnSearchAuthor
+            // 
+            btnSearchAuthor.Location = new Point(538, 15);
+            btnSearchAuthor.Name = "btnSearchAuthor";
+            btnSearchAuthor.Size = new Size(134, 23);
+            btnSearchAuthor.TabIndex = 3;
+            btnSearchAuthor.Text = "Search";
+            btnSearchAuthor.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -200,6 +232,7 @@
             tabAllBooks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).EndInit();
             tabAllAuthors.ResumeLayout(false);
+            tabAllAuthors.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).EndInit();
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).EndInit();
@@ -221,5 +254,8 @@
         private TabPage tabPage1;
         private DataGridView dgvMiscItems;
         private Button btnAddMisc;
+        private Button btnAddAuthor;
+        private Button btnSearchAuthor;
+        private TextBox textBox1;
     }
 }

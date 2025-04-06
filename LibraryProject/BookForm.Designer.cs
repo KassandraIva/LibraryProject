@@ -176,39 +176,51 @@
             // 
             // lbxCategories
             // 
+            lbxCategories.AllowDrop = true;
             lbxCategories.FormattingEnabled = true;
             lbxCategories.ItemHeight = 15;
             lbxCategories.Location = new Point(123, 339);
             lbxCategories.Name = "lbxCategories";
             lbxCategories.Size = new Size(251, 79);
             lbxCategories.TabIndex = 15;
+            lbxCategories.DragDrop += lbxCategories_DragDrop;
+            lbxCategories.DragEnter += lbxCategories_DragEnter;
+            lbxCategories.KeyDown += lbxCategories_KeyDown;
             // 
             // lbxAllCategories
             // 
+            lbxAllCategories.AllowDrop = true;
             lbxAllCategories.FormattingEnabled = true;
             lbxAllCategories.ItemHeight = 15;
             lbxAllCategories.Location = new Point(527, 339);
             lbxAllCategories.Name = "lbxAllCategories";
             lbxAllCategories.Size = new Size(251, 79);
             lbxAllCategories.TabIndex = 16;
+            lbxAllCategories.MouseDown += lbxAllCategories_MouseDown;
             // 
             // lbxGenres
             // 
+            lbxGenres.AllowDrop = true;
             lbxGenres.FormattingEnabled = true;
             lbxGenres.ItemHeight = 15;
             lbxGenres.Location = new Point(123, 424);
             lbxGenres.Name = "lbxGenres";
             lbxGenres.Size = new Size(251, 79);
             lbxGenres.TabIndex = 17;
+            lbxGenres.DragDrop += lbxGenres_DragDrop;
+            lbxGenres.DragEnter += lbxGenres_DragEnter;
+            lbxGenres.KeyDown += lbxGenres_KeyDown;
             // 
             // lbxAllGenres
             // 
+            lbxAllGenres.AllowDrop = true;
             lbxAllGenres.FormattingEnabled = true;
             lbxAllGenres.ItemHeight = 15;
             lbxAllGenres.Location = new Point(527, 424);
             lbxAllGenres.Name = "lbxAllGenres";
             lbxAllGenres.Size = new Size(251, 79);
             lbxAllGenres.TabIndex = 18;
+            lbxAllGenres.MouseDown += lbxAllGenres_MouseDown;
             // 
             // btnAccept
             // 
@@ -258,6 +270,7 @@
             btnAddNewCategory.TabIndex = 23;
             btnAddNewCategory.Text = "Add New Category";
             btnAddNewCategory.UseVisualStyleBackColor = true;
+            btnAddNewCategory.Click += btnAddNewCategory_Click;
             // 
             // btnDeleteCategory
             // 
@@ -267,6 +280,7 @@
             btnDeleteCategory.TabIndex = 24;
             btnDeleteCategory.Text = "Delete Category";
             btnDeleteCategory.UseVisualStyleBackColor = true;
+            btnDeleteCategory.Click += btnDeleteCategory_Click;
             // 
             // btnAddNewGenre
             // 
@@ -276,6 +290,7 @@
             btnAddNewGenre.TabIndex = 25;
             btnAddNewGenre.Text = "Add New Genre";
             btnAddNewGenre.UseVisualStyleBackColor = true;
+            btnAddNewGenre.Click += btnAddNewGenre_Click;
             // 
             // btnDeleteGenre
             // 
@@ -285,6 +300,7 @@
             btnDeleteGenre.TabIndex = 26;
             btnDeleteGenre.Text = "Delete Genre";
             btnDeleteGenre.UseVisualStyleBackColor = true;
+            btnDeleteGenre.Click += btnDeleteGenre_Click;
             // 
             // BookForm
             // 

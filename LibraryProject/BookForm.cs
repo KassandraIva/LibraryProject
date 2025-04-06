@@ -16,7 +16,6 @@ namespace LibraryProject
 {
     public partial class BookForm : Form
     {
-
         public Book Book { get; set; }
         public bool AddBook { get; set; }
 
@@ -52,6 +51,12 @@ namespace LibraryProject
 
             DisplayAllAuthors();
             DisplaySelectedAuthors();
+
+            DisplayAllCategories();
+            DisplaySelectedCategories();
+
+            DisplayAllGenres();
+            DisplaySelectedGenres();
         }
 
         private void DisplayAllAuthors()
@@ -68,6 +73,34 @@ namespace LibraryProject
             lbxAuthors.DisplayMember = "FullName";
         }
 
+        private void DisplayAllCategories()
+        {
+            lbxAllCategories.DataSource = null;
+            lbxAllCategories.DataSource = allCategories;
+            lbxAllCategories.DisplayMember = "Name";
+        }
+
+        private void DisplaySelectedCategories()
+        {
+            lbxCategories.DataSource = null;
+            lbxCategories.DataSource = selectedCategories;
+            lbxCategories.DisplayMember = "Name";
+        }
+
+        private void DisplayAllGenres()
+        {
+            lbxAllGenres.DataSource = null;
+            lbxAllGenres.DataSource = allGenres;
+            lbxAllGenres.DisplayMember = "Name";
+        }
+
+        private void DisplaySelectedGenres()
+        {
+            lbxGenres.DataSource = null;
+            lbxGenres.DataSource = selectedGenres;
+            lbxGenres.DisplayMember = "Name";
+        }
+
         private void DisplayBook()
         {
             lblBookId.Text = $"Id: {Book.Id}";
@@ -76,6 +109,8 @@ namespace LibraryProject
             cbxStatus.SelectedItem = Book.Status;
 
             selectedAuthors = Book.Authors;
+            selectedCategories = Book.Categories;
+            selectedGenres = Book.Genres;
         }
 
         private void lbxAllAuthors_MouseDown(object sender, MouseEventArgs e)
@@ -104,6 +139,61 @@ namespace LibraryProject
                 DisplaySelectedAuthors();
             }
         }
+
+        private void lbxAllCategories_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lbxAllCategories.SelectedItem != null)
+            {
+                lbxAllCategories.DoDragDrop(lbxAllCategories.SelectedItem, DragDropEffects.Move);
+            }
+        }
+
+        private void lbxCategories_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(Category)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
+        private void lbxCategories_DragDrop(object sender, DragEventArgs e)
+        {
+            Category droppedCategory = (Category)e.Data.GetData(typeof(Category));
+
+            if (!selectedCategories.Any(c => c.Id == droppedCategory.Id))
+            {
+                selectedCategories.Add(droppedCategory);
+                DisplaySelectedCategories();
+            }
+        }
+
+        private void lbxAllGenres_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lbxAllGenres.SelectedItem != null)
+            {
+                lbxAllGenres.DoDragDrop(lbxAllGenres.SelectedItem, DragDropEffects.Move);
+            }
+        }
+
+        private void lbxGenres_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(Genre)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
+        private void lbxGenres_DragDrop(object sender, DragEventArgs e)
+        {
+            Genre droppedGenre = (Genre)e.Data.GetData(typeof(Genre));
+
+            if (!selectedGenres.Any(g => g.Id == droppedGenre.Id))
+            {
+                selectedGenres.Add(droppedGenre);
+                DisplaySelectedGenres();
+            }
+        }
+
         private bool Validation()
         {
             bool isValid = true;
@@ -138,7 +228,7 @@ namespace LibraryProject
 
                 if (AddBook)
                 {
-                    this.Book = new Book(txtTitle.Text, selectedAuthors, rtbDescription.Text, status, new List<Category>(), new List<Genre>());
+                    this.Book = new Book(txtTitle.Text, selectedAuthors, rtbDescription.Text, status, selectedCategories, selectedGenres);
                 }
                 else
                 {
@@ -178,11 +268,65 @@ namespace LibraryProject
             }
         }
 
+        private void DeleteCategory()
+        {
+            Category selectedCategory = (Category)lbxCategories.SelectedItem;
+
+            if (selectedCategory != null)
+            {
+                DialogResult result =
+                    MessageBox.Show($"Delete {selectedCategory.Name}?",
+                    "Confirm Delete", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    selectedCategories.Remove(selectedCategory);
+                    DisplaySelectedCategories();
+                }
+            }
+        }
+
+        private void DeleteGenre()
+        {
+            Genre selectedGenre = (Genre)lbxGenres.SelectedItem;
+
+            if (selectedGenre != null)
+            {
+                DialogResult result =
+                    MessageBox.Show($"Delete {selectedGenre.Name}?",
+                    "Confirm Delete", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    selectedGenres.Remove(selectedGenre);
+                    DisplaySelectedGenres();
+                }
+            }
+        }
+
         private void lbxAuthors_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
                 DeleteAuthor();
+            }
+        }
+
+        private void lbxCategories_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DeleteCategory();
+            }
+        }
+
+        private void lbxGenres_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DeleteGenre();
             }
         }
 
@@ -214,6 +358,66 @@ namespace LibraryProject
         private void btnDeleteAuthor_Click(object sender, EventArgs e)
         {
             DeleteAuthor();
+        }
+
+        private void btnAddNewCategory_Click(object sender, EventArgs e)
+        {
+            var categoryForm = new CategoryForm()
+            {
+                AddCategory = true
+            };
+
+            DialogResult result = categoryForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    allCategories.Add(categoryForm.Category);
+                    selectedCategories.Add(categoryForm.Category);
+
+                    DisplayAllCategories();
+                    DisplaySelectedCategories();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btnDeleteCategory_Click(object sender, EventArgs e)
+        {
+            DeleteCategory();
+        }
+
+        private void btnAddNewGenre_Click(object sender, EventArgs e)
+        {
+            var genreForm = new GenreForm()
+            {
+                AddGenre = true
+            };
+
+            DialogResult result = genreForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    allGenres.Add(genreForm.Genre);
+                    selectedGenres.Add(genreForm.Genre);
+
+                    DisplayAllGenres();
+                    DisplaySelectedGenres();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btnDeleteGenre_Click(object sender, EventArgs e)
+        {
+            DeleteGenre();
         }
     }
 }

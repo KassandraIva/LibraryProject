@@ -14,3 +14,20 @@
 14|Neil|Gaiman
 15|Brandon|Sanderson
 16|Robert|Jordan
+17|Matt|Haig
+18|Andy|Weir
+19|Tara|Westover
+20|James|Clear
+21|Marie|Kondo
+22|Elizabeth|Gilbert
+23|Mark|Manson
+24|Robert C.|Martin
+25|Andrew|Hunt
+26|Stephen|Hawking
+27|Cory|Althoff
+28|Cal|Newport
+29|Yuval Noah|Harari
+30|Daniel|Kahneman
+31|Josh|Waitzkin
+32|Kyle|Simpson
+33|Martin|Fowler

@@ -1,0 +1,15 @@
+1|Learning|#1E90FF|Everything related to learning, studying, and skill-building|5
+2|Creativity|#DA70D6|Art, writing, design, and imagination|4
+3|Productivity|#4682B4|Focus, habits, systems, getting things done|4
+4|Mental|#D8BFD8|Mental Disorders|3
+5|Inspiration|#FF8C00|Motivational, life-changing, meaningful books|3
+6|Science & Tech|#20B2AA|Science, technology, logic, facts|5
+7|Programming|#32CD32|Coding, dev life, comp sci, algorithms|5
+8|Philosophy|#8B4513|Deep thoughts, existence, human nature|2
+9|Life Stories|#CD853F|Memoirs, biographies, real human journeys|3
+10|Fantasy Worlds|#9370DB|Magic, worldbuilding, mythology, imagination|3
+11|Adventure|#FF6347|Exciting journeys, exploration, danger|3
+12|Relationships|#F4A460|Love, family, friendship, human connection|2
+13|Reflection|#B0C4DE|Slow books that make you think deeply|2
+14|Personal Growth|#00CED1|Books that help you become better|4
+15|Spirituality|#6B8E23|Purpose, values, meaning, soul-searching|1

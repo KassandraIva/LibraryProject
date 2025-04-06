@@ -8,6 +8,8 @@ namespace LibraryProject
     public partial class MainForm : Form
     {
         List<Author> authorList = new List<Author>();
+        List<Category> categoryList = new List<Category>();
+        List<Genre> genreList = new List<Genre>();
         List<Book> bookList = new List<Book>();
         public List<MiscItems> miscItems = new List<MiscItems>();
 
@@ -18,7 +20,9 @@ namespace LibraryProject
             InitializeComponent();
 
             authorList = Author.LoadFromFile();
-            bookList = Book.LoadFromFile(authorList);
+            categoryList = Category.LoadFromFile();
+            genreList = Genre.LoadFromFile();
+            bookList = Book.LoadFromFile(authorList, categoryList, genreList);
             miscItems = MiscItems.LoadFromFile();
         }
 
@@ -41,6 +45,25 @@ namespace LibraryProject
             dgvAllAuthors.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGreen;
 
             dgvAllAuthors.Columns["FullName"].Visible = false;
+
+            var editColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Edit"
+            };
+            dgvAllAuthors.Columns.Add(editColumn);
+
+            var deleteColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete"
+            };
+            dgvAllAuthors.Columns.Add(deleteColumn);
+
+            dgvAllAuthors.Columns[1].Width = 200;
+            dgvAllAuthors.Columns[2].Width = 200;
         }
 
         private void DisplayBooks(List<Book> books)
@@ -80,7 +103,15 @@ namespace LibraryProject
             };
             dgvAllBooks.Columns.Add(deleteColumn);
 
-            dgvAllBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvAllBooks.Columns[0].Width = 30;
+            dgvAllBooks.Columns[1].Width = 225;
+            dgvAllBooks.Columns[3].Width = 70;
+            dgvAllBooks.Columns[5].Width = 110;
+            dgvAllBooks.Columns[6].Width = 170;
+            dgvAllBooks.Columns[7].Width = 170;
+            dgvAllBooks.Columns[8].Width = 70;
+            dgvAllBooks.Columns[9].Width = 70;
+            //dgvAllBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         public void DisplayMiscItems(List<MiscItems> miscItems)
@@ -100,7 +131,9 @@ namespace LibraryProject
             var bookForm = new BookForm()
             {
                 AddBook = true,
-                allAuthors = authorList
+                allAuthors = authorList,
+                allCategories = categoryList,
+                allGenres = genreList
             };
 
             DialogResult result = bookForm.ShowDialog();
@@ -134,7 +167,9 @@ namespace LibraryProject
             {
                 AddBook = false,
                 Book = selectedBook,
-                allAuthors = authorList
+                allAuthors = authorList,
+                allCategories = categoryList,
+                allGenres = genreList
             };
             DialogResult result = bookForm.ShowDialog();
 
@@ -194,6 +229,85 @@ namespace LibraryProject
             else if (e.ColumnIndex == DeleteIndex)
             {
                 DeleteBook();
+            }
+        }
+
+        public static Color GetTextColorForBackground(Color bgColor)
+        {
+            double luminance = 0.299 * bgColor.R + 0.587 * bgColor.G + 0.114 * bgColor.B;
+            return luminance > 160 ? Color.Black : Color.White;
+        }
+
+        private void dgvAllBooks_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvAllBooks.Columns[e.ColumnIndex].Name == "CategoryNames")
+            {
+                e.Handled = true;
+                e.PaintBackground(e.ClipBounds, true);
+
+                var book = dgvAllBooks.Rows[e.RowIndex].DataBoundItem as Book;
+                if (book == null) return;
+
+                int x = e.CellBounds.Left + 5;
+                int y = e.CellBounds.Top + 5;
+                int padding = 4;
+
+                foreach (var category in book.Categories)
+                {
+                    string text = category.Name;
+                    Size textSize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                    Rectangle rect = new Rectangle(x, y, textSize.Width + 10, textSize.Height + 3);
+
+                    using (Brush b = new SolidBrush(ColorTranslator.FromHtml(category.Color)))
+                    {
+                        e.Graphics.FillRectangle(b, rect);
+                    }
+
+                    Color textColor = GetTextColorForBackground(ColorTranslator.FromHtml(category.Color));
+                    using (Brush textBrush = new SolidBrush(textColor))
+                    {
+                        e.Graphics.DrawString(text, e.CellStyle.Font, textBrush, x + 5, y);
+                    }
+
+                    x += rect.Width + padding;
+                }
+
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.Focus);
+            }
+
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dgvAllBooks.Columns[e.ColumnIndex].Name == "GenreNames")
+            {
+                e.Handled = true;
+                e.PaintBackground(e.ClipBounds, true);
+
+                var book = dgvAllBooks.Rows[e.RowIndex].DataBoundItem as Book;
+                if (book == null) return;
+
+                int x = e.CellBounds.Left + 5;
+                int y = e.CellBounds.Top + 5;
+                int padding = 4;
+
+                foreach (var genre in book.Genres)
+                {
+                    string text = genre.Name;
+                    Size textSize = TextRenderer.MeasureText(text, e.CellStyle.Font);
+                    Rectangle rect = new Rectangle(x, y, textSize.Width + 10, textSize.Height + 3);
+
+                    using (Brush b = new SolidBrush(ColorTranslator.FromHtml(genre.Color)))
+                    {
+                        e.Graphics.FillRectangle(b, rect);
+                    }
+
+                    Color textColor = GetTextColorForBackground(ColorTranslator.FromHtml(genre.Color));
+                    using (Brush textBrush = new SolidBrush(textColor))
+                    {
+                        e.Graphics.DrawString(text, e.CellStyle.Font, textBrush, x + 5, y);
+                    }
+
+                    x += rect.Width + padding;
+                }
+
+                e.Paint(e.ClipBounds, DataGridViewPaintParts.Focus);
             }
         }
 
