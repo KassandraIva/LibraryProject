@@ -112,19 +112,19 @@
             Controls.Add(lblFirstName);
             Name = "AuthorForm";
             Text = "AuthorForm";
-            Load += AuthorForm_Load;
+            //Load += AuthorForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label lblFirstName;
-        private Label lblLastName;
-        private TextBox txtFirstName;
-        private TextBox txtLastName;
-        private Button btnAccept;
-        private Button btnCancel;
-        private Label lblId;
+        protected Label lblFirstName;
+        protected Label lblLastName;
+        protected TextBox txtFirstName;
+        protected TextBox txtLastName;
+        protected Button btnAccept;
+        protected Button btnCancel;
+        protected Label lblId;
     }
 }
