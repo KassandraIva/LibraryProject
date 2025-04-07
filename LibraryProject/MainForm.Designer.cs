@@ -44,17 +44,21 @@
             btnSearchBook = new Button();
             dgvAllBooks = new DataGridView();
             txtSearch = new TextBox();
-            tabAllAuthors = new TabPage();
+            //tabAllAuthors = new TabPage();
             btnSearchAuthor = new Button();
             textBox1 = new TextBox();
             btnAddAuthor = new Button();
-            dgvAllAuthors = new DataGridView();
-            tabQuotes = new TabPage();
+            //dgvAllAuthors = new DataGridView();
+            //tabQuotes = new TabPage();
             btnAddQuote = new Button();
             dgvQuotes = new DataGridView();
-            tabBorrowedLent = new TabPage();
+            dgvGenres = new DataGridView();
+            dgvCategories = new DataGridView();
+            //tabBorrowedLent = new TabPage();
+            tabCategoriesGenres = new TabPage();
             dgvBorrowed = new DataGridView();
             tabPage1 = new TabPage();
+            tabControl1 = new TabControl();
             btnAddMisc = new Button();
             dgvMiscItems = new DataGridView();
             tabPage2 = new TabPage();
@@ -62,6 +66,7 @@
             dgvReviews = new DataGridView();
             tabReviews.SuspendLayout();
             tabAllBooks.SuspendLayout();
+            tabCategoriesGenres.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
             tabAllAuthors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).BeginInit();
@@ -71,13 +76,14 @@
             ((System.ComponentModel.ISupportInitialize)dgvBorrowed).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).BeginInit();
-            tabAllAuthors.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).BeginInit();
-            tabAllBooks.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
+            //tabAllAuthors.SuspendLayout();
+            //((System.ComponentModel.ISupportInitialize)dgvAllAuthors).BeginInit();
+            //tabAllBooks.SuspendLayout();
+            //((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tabControl1).BeginInit();
             tabControl1.SuspendLayout();
-            tabCategoriesGenres.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvGenres).BeginInit();
+            tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReviews).BeginInit();
@@ -131,36 +137,36 @@
             // 
             // tabBorrowedLent
             // 
-            tabBorrowedLent.Location = new Point(4, 24);
-            tabBorrowedLent.Name = "tabBorrowedLent";
-            tabBorrowedLent.Size = new Size(998, 519);
-            tabBorrowedLent.TabIndex = 3;
-            tabBorrowedLent.Text = "Borrowed/Lent";
-            tabBorrowedLent.UseVisualStyleBackColor = true;
+            //tabBorrowedLent.Location = new Point(4, 24);
+            //tabBorrowedLent.Name = "tabBorrowedLent";
+            //tabBorrowedLent.Size = new Size(998, 519);
+            //tabBorrowedLent.TabIndex = 3;
+            //tabBorrowedLent.Text = "Borrowed/Lent";
+            //tabBorrowedLent.UseVisualStyleBackColor = true;
             // 
             // tabQuotes
             // 
-            tabQuotes.Location = new Point(4, 24);
-            tabQuotes.Name = "tabQuotes";
-            tabQuotes.Padding = new Padding(3);
-            tabQuotes.Size = new Size(998, 519);
-            tabQuotes.TabIndex = 2;
-            tabQuotes.Text = "Quotes";
-            tabQuotes.UseVisualStyleBackColor = true;
+            //tabQuotes.Location = new Point(4, 24);
+            //tabQuotes.Name = "tabQuotes";
+            //tabQuotes.Padding = new Padding(3);
+            //tabQuotes.Size = new Size(998, 519);
+            //tabQuotes.TabIndex = 2;
+            //tabQuotes.Text = "Quotes";
+            //tabQuotes.UseVisualStyleBackColor = true;
             // 
             // tabAllAuthors
             // 
-            tabAllAuthors.Controls.Add(btnSearchAuthor);
-            tabAllAuthors.Controls.Add(textBox1);
-            tabAllAuthors.Controls.Add(btnAddAuthor);
-            tabAllAuthors.Controls.Add(dgvAllAuthors);
-            tabAllAuthors.Location = new Point(4, 24);
-            tabAllAuthors.Name = "tabAllAuthors";
-            tabAllAuthors.Padding = new Padding(3);
-            tabAllAuthors.Size = new Size(998, 519);
-            tabAllAuthors.TabIndex = 1;
-            tabAllAuthors.Text = "All Authors";
-            tabAllAuthors.UseVisualStyleBackColor = true;
+            //tabAllAuthors.Controls.Add(btnSearchAuthor);
+            //tabAllAuthors.Controls.Add(textBox1);
+            //tabAllAuthors.Controls.Add(btnAddAuthor);
+            //tabAllAuthors.Controls.Add(dgvAllAuthors);
+            //tabAllAuthors.Location = new Point(4, 24);
+            //tabAllAuthors.Name = "tabAllAuthors";
+            //tabAllAuthors.Padding = new Padding(3);
+            //tabAllAuthors.Size = new Size(998, 519);
+            //tabAllAuthors.TabIndex = 1;
+            //tabAllAuthors.Text = "All Authors";
+            //tabAllAuthors.UseVisualStyleBackColor = true;
             // 
             // btnSearchAuthor
             // 
@@ -215,13 +221,13 @@
             // 
             // btnAddBook
             // 
-            btnAddBook.Location = new Point(859, 15);
-            btnAddBook.Name = "btnAddBook";
-            btnAddBook.Size = new Size(152, 31);
-            btnAddBook.TabIndex = 3;
-            btnAddBook.Text = "Add Book";
-            btnAddBook.UseVisualStyleBackColor = true;
-            btnAddBook.Click += btnAddBook_Click;
+            //btnAddBook.Location = new Point(859, 15);
+            //btnAddBook.Name = "btnAddBook";
+            //btnAddBook.Size = new Size(152, 31);
+            //btnAddBook.TabIndex = 3;
+            //btnAddBook.Text = "Add Book";
+            //btnAddBook.UseVisualStyleBackColor = true;
+            //btnAddBook.Click += btnAddBook_Click;
             // 
             // btnSearchBook
             // 
@@ -305,13 +311,13 @@
             // 
             // dgvAllAuthors
             // 
-            dgvAllAuthors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAllAuthors.Location = new Point(7, 59);
-            dgvAllAuthors.Margin = new Padding(3, 4, 3, 4);
-            dgvAllAuthors.Name = "dgvAllAuthors";
-            dgvAllAuthors.RowHeadersWidth = 51;
-            dgvAllAuthors.Size = new Size(1127, 625);
-            dgvAllAuthors.TabIndex = 0;
+            //dgvAllAuthors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            //dgvAllAuthors.Location = new Point(7, 59);
+            //dgvAllAuthors.Margin = new Padding(3, 4, 3, 4);
+            //dgvAllAuthors.Name = "dgvAllAuthors";
+            //dgvAllAuthors.RowHeadersWidth = 51;
+            //dgvAllAuthors.Size = new Size(1127, 625);
+            //dgvAllAuthors.TabIndex = 0;
             // 
             // tabQuotes
             // 
@@ -497,6 +503,8 @@
             Text = "Library";
             Load += MainForm_Load;
             tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.dgvAllBooks).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.dgvAllAuthors).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).EndInit();
             tabAllAuthors.ResumeLayout(false);
             tabAllAuthors.PerformLayout();
@@ -504,7 +512,7 @@
             tabReviews.ResumeLayout(false);
             tabAllBooks.ResumeLayout(false);
             tabAllBooks.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAllBooks).EndInit();
+            
             tabControl1.ResumeLayout(false);
             tabCategoriesGenres.ResumeLayout(false);
             tabCategoriesGenres.PerformLayout();
@@ -512,7 +520,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvCategories).EndInit();
             tabAllAuthors.ResumeLayout(false);
             tabAllAuthors.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).EndInit();
+            
             tabQuotes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvQuotes).EndInit();
             tabBorrowedLent.ResumeLayout(false);
@@ -521,6 +529,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).EndInit();
             tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvReviews).EndInit();
+            //((System.ComponentModel.ISupportInitialize)tabControl1).EndInit();
             ResumeLayout(false);
         }
 
@@ -539,9 +548,9 @@
         private TabPage tabPage1;
         private Button btnAddMisc;
         private DataGridView dgvMiscItems;
-        private TabPage tabBorrowedLent;
-        private TabPage tabQuotes;
-        private TabPage tabAllAuthors;
+        //private TabPage tabBorrowedLent;
+        //private TabPage tabQuotes;
+        //private TabPage tabAllAuthors;
         private Button btnSearchAuthor;
         private TextBox textBox1;
         private DataGridView dgvQuotes;
@@ -551,12 +560,12 @@
         private DataGridView dgvReviews;
         private Button BtnAddReview;
         private Button btnAddAuthor;
-        private DataGridView dgvAllAuthors;
-        private TabPage tabAllBooks;
-        private Button btnAddBook;
-        private Button btnSearchBook;
-        private DataGridView dgvAllBooks;
-        private TextBox txtSearch;
+        //private DataGridView dgvAllAuthors;
+        //private TabPage tabAllBooks;
+        //private Button btnAddBook;
+        //private Button btnSearchBook;
+        //private DataGridView dgvAllBooks;
+        //private TextBox txtSearch;
         private TabControl tabControl1;
         private TabPage tabCategoriesGenres;
         private Button btnAddGenres;

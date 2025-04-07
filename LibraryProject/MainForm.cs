@@ -709,21 +709,20 @@ namespace LibraryProject
             {
                 int bookId = int.Parse(dgvAllBooks.Rows[e.RowIndex].Cells[0].Value.ToString().Trim());
                 selectedBook = GetItem(bookId, bookList);
-                int bookId = int.Parse(dgvQuotes.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
-                selectedBook = GetBook(bookId);
+                //int bookId = int.Parse(dgvQuotes.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                //selectedBook = GetBook(bookId);
             }
 
-                if (e.ColumnIndex == EditIndex)
-                {
-                    EditBook(e.RowIndex);
-                }
-                else if (e.ColumnIndex == DeleteIndex)
-                {
-                    DeleteBook();
-                }
-
-                DisplayBooks(bookList);
+            if (e.ColumnIndex == EditIndex)
+            {
+                EditBook(e.RowIndex);
             }
+            else if (e.ColumnIndex == DeleteIndex)
+            {
+                DeleteBook();
+            }
+
+            DisplayBooks(bookList);
         }
 
         private void dgvAllAuthors_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -792,14 +791,6 @@ namespace LibraryProject
                 }
 
                 DisplayGenres(genreList);
-            }
-            if (columnName == "EditColumn")
-            {
-                EditBook(e.RowIndex);
-            }
-            else if (columnName == "DeleteColumn")
-            {
-                DeleteBook();
             }
         }
 
