@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             btnAddMisc = new Button();
             dgvMiscItems = new DataGridView();
@@ -45,25 +46,28 @@
             dgvAllBooks = new DataGridView();
             txtSearch = new TextBox();
             //tabAllAuthors = new TabPage();
-            btnSearchAuthor = new Button();
-            textBox1 = new TextBox();
-            btnAddAuthor = new Button();
+            //btnSearchAuthor = new Button();
+            //textBox1 = new TextBox();
+            //btnAddAuthor = new Button();
             //dgvAllAuthors = new DataGridView();
             //tabQuotes = new TabPage();
             btnAddQuote = new Button();
             dgvQuotes = new DataGridView();
             dgvGenres = new DataGridView();
+            btnAddGenres = new Button();
+            btnAddCategory = new Button();
             dgvCategories = new DataGridView();
             //tabBorrowedLent = new TabPage();
             tabCategoriesGenres = new TabPage();
             dgvBorrowed = new DataGridView();
-            tabPage1 = new TabPage();
-            tabControl1 = new TabControl();
-            btnAddMisc = new Button();
-            dgvMiscItems = new DataGridView();
+            //tabPage1 = new TabPage();
+            //tabControl1 = new TabControl();
+            //btnAddMisc = new Button();
+            //dgvMiscItems = new DataGridView();
             tabPage2 = new TabPage();
             BtnAddReview = new Button();
             dgvReviews = new DataGridView();
+            tabControl1.SuspendLayout();
             tabReviews.SuspendLayout();
             tabAllBooks.SuspendLayout();
             tabCategoriesGenres.SuspendLayout();
@@ -80,8 +84,8 @@
             //((System.ComponentModel.ISupportInitialize)dgvAllAuthors).BeginInit();
             //tabAllBooks.SuspendLayout();
             //((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)tabControl1).BeginInit();
-            tabControl1.SuspendLayout();
+            //((System.ComponentModel.ISupportInitialize)tabControl1).BeginInit();
+            //tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvGenres).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
@@ -386,8 +390,7 @@
             dgvBorrowed.TabIndex = 0;
             // 
             // tabPage1
-            // btnAddGenres
-            // 
+            //
             tabPage1.Controls.Add(btnAddMisc);
             tabPage1.Controls.Add(dgvMiscItems);
             tabPage1.Location = new Point(4, 29);
@@ -397,6 +400,9 @@
             tabPage1.TabIndex = 4;
             tabPage1.Text = "Misc. Items";
             tabPage1.UseVisualStyleBackColor = true;
+            //
+            // btnAddGenres
+            // 
             btnAddGenres.Location = new Point(849, 12);
             btnAddGenres.Name = "btnAddGenres";
             btnAddGenres.Size = new Size(146, 23);
@@ -424,6 +430,7 @@
             // 
             // lblGenres
             // 
+            lblGenres = new Label();
             lblGenres.AutoSize = true;
             lblGenres.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             lblGenres.Location = new Point(529, 16);
@@ -451,6 +458,7 @@
             tabPage2.TabIndex = 5;
             tabPage2.Text = "Review";
             tabPage2.UseVisualStyleBackColor = true;
+            lblCategories = new Label();
             lblCategories.AutoSize = true;
             lblCategories.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             lblCategories.Location = new Point(3, 16);

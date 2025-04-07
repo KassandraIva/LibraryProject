@@ -193,15 +193,15 @@ namespace LibraryProject
             dgvAllBooks.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvAllBooks.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
 
-            dgvAllBooks.Columns["Description"].Visible = false;
-            dgvAllBooks.Columns["DisplayName"].Visible = false;
+            //dgvAllBooks.Columns["Description"].Visible = false;
+            //dgvAllBooks.Columns["DisplayName"].Visible = false;
 
-            dgvAllBooks.Columns["AuthorNames"].HeaderText = "Authors";
-            dgvAllBooks.Columns["CategoryNames"].HeaderText = "Categories";
-            dgvAllBooks.Columns["GenreNames"].HeaderText = "Genres";
+            //dgvAllBooks.Columns["AuthorNames"].HeaderText = "Authors";
+            //dgvAllBooks.Columns["CategoryNames"].HeaderText = "Categories";
+            //dgvAllBooks.Columns["GenreNames"].HeaderText = "Genres";
 
-            dgvAllBooks.Columns["Title"].DisplayIndex = 1;
-            dgvAllBooks.Columns["AuthorNames"].DisplayIndex = 2;
+            //dgvAllBooks.Columns["Title"].DisplayIndex = 1;
+            //dgvAllBooks.Columns["AuthorNames"].DisplayIndex = 2;
 
             var editColumn = new DataGridViewButtonColumn()
             {
@@ -221,14 +221,14 @@ namespace LibraryProject
             deleteColumn.HeaderText = "DeleteColumn";
             dgvAllBooks.Columns.Add(deleteColumn);
 
-            dgvAllBooks.Columns[0].Width = 30;
-            dgvAllBooks.Columns[1].Width = 225;
-            dgvAllBooks.Columns[3].Width = 70;
-            dgvAllBooks.Columns[5].Width = 110;
-            dgvAllBooks.Columns[7].Width = 170;
-            dgvAllBooks.Columns[8].Width = 170;
-            dgvAllBooks.Columns[9].Width = 70;
-            dgvAllBooks.Columns[10].Width = 70;
+            //dgvAllBooks.Columns[0].Width = 30;
+            //dgvAllBooks.Columns[1].Width = 225;
+            //dgvAllBooks.Columns[3].Width = 70;
+            //dgvAllBooks.Columns[5].Width = 110;
+            //dgvAllBooks.Columns[7].Width = 170;
+            //dgvAllBooks.Columns[8].Width = 170;
+            //dgvAllBooks.Columns[9].Width = 70;
+            //dgvAllBooks.Columns[10].Width = 70;
             //dgvAllBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
