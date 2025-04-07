@@ -14,10 +14,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LibraryProject
 {
-    public partial class BookForm : Form
+    public partial class BookForm : EntityForm<Book>
     {
-        public Book Book { get; set; }
-        public bool AddBook { get; set; }
+        protected override Label LblId => lblBookId;
+        protected override System.Windows.Forms.Button BtnCancel => btnCancel;
+        protected override System.Windows.Forms.Button BtnAccept => btnAccept;
 
         public List<Author> allAuthors;
         private List<Author> selectedAuthors = new List<Author>();
@@ -37,164 +38,46 @@ namespace LibraryProject
         {
             cbxStatus.DataSource = Enum.GetValues(typeof(BookStatus));
 
-            if (AddBook)
+            if (!IsNew)
             {
-                this.Text = "Add Book";
-                lblBookId.Visible = false;
+                DisplayEntity();
             }
-            else
-            {
-                this.Text = "Edit Book";
-                lblBookId.Visible = true;
-                this.DisplayBook();
-            }
-
-            DisplayAllAuthors();
-            DisplaySelectedAuthors();
-
-            DisplayAllCategories();
-            DisplaySelectedCategories();
-
-            DisplayAllGenres();
-            DisplaySelectedGenres();
+            
+            DisplayAllListBox();
         }
 
-        private void DisplayAllAuthors()
+        private void DisplayListBox<T>(ListBox listBox, List<T> dataSource, string displayMember)
         {
-            lbxAllAuthors.DataSource = null;
-            lbxAllAuthors.DataSource = allAuthors;
-            lbxAllAuthors.DisplayMember = "FullName";
+            listBox.DataSource = null;
+            listBox.DataSource = dataSource;
+            listBox.DisplayMember = displayMember;
         }
 
-        private void DisplaySelectedAuthors()
+        private void DisplayAllListBox()
         {
-            lbxAuthors.DataSource = null;
-            lbxAuthors.DataSource = selectedAuthors;
-            lbxAuthors.DisplayMember = "FullName";
+            DisplayListBox(lbxAllAuthors, allAuthors, "DisplayName");
+            DisplayListBox(lbxAuthors, selectedAuthors, "DisplayName");
+
+            DisplayListBox(lbxAllCategories, allCategories, "Name");
+            DisplayListBox(lbxCategories, selectedCategories, "Name");
+
+            DisplayListBox(lbxAllGenres, allGenres, "Name");
+            DisplayListBox(lbxGenres, selectedGenres, "Name");
         }
 
-        private void DisplayAllCategories()
+        protected override void DisplayEntity()
         {
-            lbxAllCategories.DataSource = null;
-            lbxAllCategories.DataSource = allCategories;
-            lbxAllCategories.DisplayMember = "Name";
+            lblBookId.Text = $"Id: {Entity.Id}";
+            txtTitle.Text = Entity.Title;
+            rtbDescription.Text = Entity.Description;
+            cbxStatus.SelectedItem = Entity.Status;
+
+            selectedAuthors = Entity.Authors;
+            selectedCategories = Entity.Categories;
+            selectedGenres = Entity.Genres;
         }
 
-        private void DisplaySelectedCategories()
-        {
-            lbxCategories.DataSource = null;
-            lbxCategories.DataSource = selectedCategories;
-            lbxCategories.DisplayMember = "Name";
-        }
-
-        private void DisplayAllGenres()
-        {
-            lbxAllGenres.DataSource = null;
-            lbxAllGenres.DataSource = allGenres;
-            lbxAllGenres.DisplayMember = "Name";
-        }
-
-        private void DisplaySelectedGenres()
-        {
-            lbxGenres.DataSource = null;
-            lbxGenres.DataSource = selectedGenres;
-            lbxGenres.DisplayMember = "Name";
-        }
-
-        private void DisplayBook()
-        {
-            lblBookId.Text = $"Id: {Book.Id}";
-            txtTitle.Text = Book.Title;
-            rtbDescription.Text = Book.Description;
-            cbxStatus.SelectedItem = Book.Status;
-
-            selectedAuthors = Book.Authors;
-            selectedCategories = Book.Categories;
-            selectedGenres = Book.Genres;
-        }
-
-        private void lbxAllAuthors_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (lbxAllAuthors.SelectedItem != null)
-            {
-                lbxAllAuthors.DoDragDrop(lbxAllAuthors.SelectedItem, DragDropEffects.Move);
-            }
-        }
-
-        private void lbxAuthors_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(Author)))
-            {
-                e.Effect = DragDropEffects.Move;
-            }
-        }
-
-        private void lbxAuthors_DragDrop(object sender, DragEventArgs e)
-        {
-            Author droppedAuthor = (Author)e.Data.GetData(typeof(Author));
-
-            if (!selectedAuthors.Any(a => a.Id == droppedAuthor.Id))
-            {
-                selectedAuthors.Add(droppedAuthor);
-                DisplaySelectedAuthors();
-            }
-        }
-
-        private void lbxAllCategories_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (lbxAllCategories.SelectedItem != null)
-            {
-                lbxAllCategories.DoDragDrop(lbxAllCategories.SelectedItem, DragDropEffects.Move);
-            }
-        }
-
-        private void lbxCategories_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(Category)))
-            {
-                e.Effect = DragDropEffects.Move;
-            }
-        }
-
-        private void lbxCategories_DragDrop(object sender, DragEventArgs e)
-        {
-            Category droppedCategory = (Category)e.Data.GetData(typeof(Category));
-
-            if (!selectedCategories.Any(c => c.Id == droppedCategory.Id))
-            {
-                selectedCategories.Add(droppedCategory);
-                DisplaySelectedCategories();
-            }
-        }
-
-        private void lbxAllGenres_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (lbxAllGenres.SelectedItem != null)
-            {
-                lbxAllGenres.DoDragDrop(lbxAllGenres.SelectedItem, DragDropEffects.Move);
-            }
-        }
-
-        private void lbxGenres_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(Genre)))
-            {
-                e.Effect = DragDropEffects.Move;
-            }
-        }
-
-        private void lbxGenres_DragDrop(object sender, DragEventArgs e)
-        {
-            Genre droppedGenre = (Genre)e.Data.GetData(typeof(Genre));
-
-            if (!selectedGenres.Any(g => g.Id == droppedGenre.Id))
-            {
-                selectedGenres.Add(droppedGenre);
-                DisplaySelectedGenres();
-            }
-        }
-
-        private bool Validation()
+        protected override bool Validation()
         {
             bool isValid = true;
 
@@ -212,129 +95,90 @@ namespace LibraryProject
             return isValid;
         }
 
-        private void btnAccept_Click(object sender, EventArgs e)
+        protected override void UpdateEntity()
         {
-            if (Validation())
+            var status = (BookStatus)cbxStatus.SelectedItem;
+
+            if (IsNew)
             {
-                BookStatus status = BookStatus.Unknown;
-                foreach (BookStatus s in Enum.GetValues(typeof(BookStatus)))
-                {
-                    if ((int)s == Convert.ToInt32(cbxStatus.SelectedItem))
-                    {
-                        status = s;
-                        break;
-                    }
-                }
-
-                if (AddBook)
-                {
-                    this.Book = new Book(txtTitle.Text, selectedAuthors, rtbDescription.Text, status, selectedCategories, selectedGenres);
-                }
-                else
-                {
-                    Book.Title = txtTitle.Text;
-                    Book.Description = rtbDescription.Text;
-                    Book.Status = status;
-                    Book.Authors = selectedAuthors;
-                    Book.Categories = selectedCategories;
-                    Book.Genres = selectedGenres;
-                }
-
-                this.DialogResult = DialogResult.OK;
+                Entity = new Book(txtTitle.Text, selectedAuthors, rtbDescription.Text, status, selectedCategories, selectedGenres);
+            }
+            else
+            {
+                Entity.Title = txtTitle.Text;
+                Entity.Description = rtbDescription.Text;
+                Entity.Status = status;
+                Entity.Authors = selectedAuthors;
+                Entity.Categories = selectedCategories;
+                Entity.Genres = selectedGenres;
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void ListBox_MouseDown<T>(object sender, MouseEventArgs e)
         {
-            this.Close();
+            ListBox listBox = sender as ListBox;
+            if (listBox.SelectedItem != null)
+            {
+                listBox.DoDragDrop(listBox.SelectedItem, DragDropEffects.Move);
+            }
         }
 
-        private void DeleteAuthor()
+        private void ListBox_DragEnter<T>(object sender, DragEventArgs e)
         {
-            Author selectedAuthor = (Author)lbxAuthors.SelectedItem;
+            if (e.Data.GetDataPresent(typeof(T)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
 
-            if (selectedAuthor != null)
+        private void ListBox_DragDrop<T>(object sender, DragEventArgs e, List<T> dataSource, string displayMember) where T : DataModel<T>
+        {
+            T droppedItem = (T)e.Data.GetData(typeof(T));
+
+            if (!dataSource.Any(a => a.Id == droppedItem.Id))
+            {
+                dataSource.Add(droppedItem);
+                DisplayListBox((ListBox)sender, dataSource, displayMember);
+            }
+        }
+
+        private void DeleteSelectedItem<T>(ListBox listBox, List<T> dataSource, string displayMember) where T : DataModel<T>
+        {
+            T selectedItem = (T)listBox.SelectedItem;
+
+            if (selectedItem != null)
             {
                 DialogResult result =
-                    MessageBox.Show($"Delete {selectedAuthor.FullName}?",
+                    MessageBox.Show($"Delete {selectedItem.DisplayName}?",
                     "Confirm Delete", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    selectedAuthors.Remove(selectedAuthor);
-                    DisplaySelectedAuthors();
+                    dataSource.Remove(selectedItem);
+                    DisplayListBox(listBox, dataSource, displayMember);
                 }
             }
         }
 
-        private void DeleteCategory()
-        {
-            Category selectedCategory = (Category)lbxCategories.SelectedItem;
-
-            if (selectedCategory != null)
-            {
-                DialogResult result =
-                    MessageBox.Show($"Delete {selectedCategory.Name}?",
-                    "Confirm Delete", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    selectedCategories.Remove(selectedCategory);
-                    DisplaySelectedCategories();
-                }
-            }
-        }
-
-        private void DeleteGenre()
-        {
-            Genre selectedGenre = (Genre)lbxGenres.SelectedItem;
-
-            if (selectedGenre != null)
-            {
-                DialogResult result =
-                    MessageBox.Show($"Delete {selectedGenre.Name}?",
-                    "Confirm Delete", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    selectedGenres.Remove(selectedGenre);
-                    DisplaySelectedGenres();
-                }
-            }
-        }
-
-        private void lbxAuthors_KeyDown(object sender, KeyEventArgs e)
+        private void ListBox_KeyDown<T>(object sender, KeyEventArgs e, List<T> dataSource, string displayMember) where T : DataModel<T>
         {
             if (e.KeyCode == Keys.Delete)
             {
-                DeleteAuthor();
+                DeleteSelectedItem((ListBox)sender, dataSource, displayMember);
             }
         }
 
-        private void lbxCategories_KeyDown(object sender, KeyEventArgs e)
+        private void btnDelete_Click<T>(ListBox listBox, List<T> list, string displayMember) where T : DataModel<T>
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                DeleteCategory();
-            }
-        }
-
-        private void lbxGenres_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                DeleteGenre();
-            }
+            DeleteSelectedItem(listBox, list, displayMember);
         }
 
         private void btnAddNewAuthor_Click(object sender, EventArgs e)
         {
             var authorForm = new AuthorForm()
             {
-                AddAuthor = true
+                IsNew = true
             };
 
             DialogResult result = authorForm.ShowDialog();
@@ -342,11 +186,11 @@ namespace LibraryProject
             {
                 try
                 {
-                    allAuthors.Add(authorForm.Author);
-                    selectedAuthors.Add(authorForm.Author);
+                    allAuthors.Add(authorForm.Entity);
+                    selectedAuthors.Add(authorForm.Entity);
 
-                    DisplayAllAuthors();
-                    DisplaySelectedAuthors();
+                    DisplayListBox(lbxAllAuthors, allAuthors, "DisplayName");
+                    DisplayListBox(lbxAuthors, selectedAuthors, "DisplayName");
                 }
                 catch (Exception ex)
                 {
@@ -355,16 +199,11 @@ namespace LibraryProject
             }
         }
 
-        private void btnDeleteAuthor_Click(object sender, EventArgs e)
-        {
-            DeleteAuthor();
-        }
-
         private void btnAddNewCategory_Click(object sender, EventArgs e)
         {
             var categoryForm = new CategoryForm()
             {
-                AddCategory = true
+                IsNew = true
             };
 
             DialogResult result = categoryForm.ShowDialog();
@@ -372,11 +211,11 @@ namespace LibraryProject
             {
                 try
                 {
-                    allCategories.Add(categoryForm.Category);
-                    selectedCategories.Add(categoryForm.Category);
+                    allCategories.Add(categoryForm.Entity);
+                    selectedCategories.Add(categoryForm.Entity);
 
-                    DisplayAllCategories();
-                    DisplaySelectedCategories();
+                    DisplayListBox(lbxAllCategories, allCategories, "Name");
+                    DisplayListBox(lbxCategories, selectedCategories, "Name");
                 }
                 catch (Exception ex)
                 {
@@ -385,16 +224,11 @@ namespace LibraryProject
             }
         }
 
-        private void btnDeleteCategory_Click(object sender, EventArgs e)
-        {
-            DeleteCategory();
-        }
-
         private void btnAddNewGenre_Click(object sender, EventArgs e)
         {
             var genreForm = new GenreForm()
             {
-                AddGenre = true
+                IsNew = true
             };
 
             DialogResult result = genreForm.ShowDialog();
@@ -402,22 +236,17 @@ namespace LibraryProject
             {
                 try
                 {
-                    allGenres.Add(genreForm.Genre);
-                    selectedGenres.Add(genreForm.Genre);
+                    allGenres.Add(genreForm.Entity);
+                    selectedGenres.Add(genreForm.Entity);
 
-                    DisplayAllGenres();
-                    DisplaySelectedGenres();
+                    DisplayListBox(lbxAllGenres, allGenres, "Name");
+                    DisplayListBox(lbxGenres, selectedGenres, "Name");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
-        }
-
-        private void btnDeleteGenre_Click(object sender, EventArgs e)
-        {
-            DeleteGenre();
         }
     }
 }

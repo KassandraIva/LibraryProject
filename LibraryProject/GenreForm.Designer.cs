@@ -31,12 +31,18 @@
             lblId = new Label();
             lblName = new Label();
             txtName = new TextBox();
+            btnCancel = new Button();
+            btnAccept = new Button();
+            btnPickColor = new Button();
+            txtColor = new TextBox();
+            lblColor = new Label();
+            colorDialog1 = new ColorDialog();
             SuspendLayout();
             // 
             // lblId
             // 
             lblId.AutoSize = true;
-            lblId.Location = new Point(111, 20);
+            lblId.Location = new Point(80, 9);
             lblId.Name = "lblId";
             lblId.Size = new Size(23, 15);
             lblId.TabIndex = 0;
@@ -45,7 +51,7 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(43, 46);
+            lblName.Location = new Point(25, 43);
             lblName.Name = "lblName";
             lblName.Size = new Size(45, 15);
             lblName.TabIndex = 1;
@@ -53,16 +59,65 @@
             // 
             // txtName
             // 
-            txtName.Location = new Point(94, 43);
+            txtName.Location = new Point(80, 40);
             txtName.Name = "txtName";
-            txtName.Size = new Size(186, 23);
+            txtName.Size = new Size(201, 23);
             txtName.TabIndex = 2;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new Point(206, 111);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(75, 23);
+            btnCancel.TabIndex = 3;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnAccept
+            // 
+            btnAccept.Location = new Point(125, 111);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new Size(75, 23);
+            btnAccept.TabIndex = 4;
+            btnAccept.Text = "Accept";
+            btnAccept.UseVisualStyleBackColor = true;
+            // 
+            // btnPickColor
+            // 
+            btnPickColor.Location = new Point(206, 69);
+            btnPickColor.Name = "btnPickColor";
+            btnPickColor.Size = new Size(75, 23);
+            btnPickColor.TabIndex = 5;
+            btnPickColor.Text = "Pick Color";
+            btnPickColor.UseVisualStyleBackColor = true;
+            btnPickColor.Click += btnPickColor_Click;
+            // 
+            // txtColor
+            // 
+            txtColor.Location = new Point(80, 70);
+            txtColor.Name = "txtColor";
+            txtColor.Size = new Size(120, 23);
+            txtColor.TabIndex = 6;
+            // 
+            // lblColor
+            // 
+            lblColor.AutoSize = true;
+            lblColor.Location = new Point(28, 73);
+            lblColor.Name = "lblColor";
+            lblColor.Size = new Size(42, 15);
+            lblColor.TabIndex = 7;
+            lblColor.Text = "Color: ";
             // 
             // GenreForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(338, 213);
+            ClientSize = new Size(317, 158);
+            Controls.Add(lblColor);
+            Controls.Add(txtColor);
+            Controls.Add(btnPickColor);
+            Controls.Add(btnAccept);
+            Controls.Add(btnCancel);
             Controls.Add(txtName);
             Controls.Add(lblName);
             Controls.Add(lblId);
@@ -74,8 +129,14 @@
 
         #endregion
 
-        private Label lblId;
-        private Label lblName;
-        private TextBox txtName;
+        protected Label lblId;
+        protected Label lblName;
+        protected TextBox txtName;
+        protected Button btnCancel;
+        protected Button btnAccept;
+        protected Button btnPickColor;
+        protected TextBox txtColor;
+        protected Label lblColor;
+        protected ColorDialog colorDialog1;
     }
 }

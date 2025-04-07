@@ -1,4 +1,6 @@
-﻿namespace LibraryProject
+﻿using LibraryProject.classes;
+
+namespace LibraryProject
 {
     partial class BookForm
     {
@@ -109,9 +111,9 @@
             lbxAuthors.Name = "lbxAuthors";
             lbxAuthors.Size = new Size(251, 79);
             lbxAuthors.TabIndex = 5;
-            lbxAuthors.DragDrop += lbxAuthors_DragDrop;
-            lbxAuthors.DragEnter += lbxAuthors_DragEnter;
-            lbxAuthors.KeyDown += lbxAuthors_KeyDown;
+            lbxAuthors.DragDrop += (s, e) => ListBox_DragDrop(s, e, selectedAuthors, "DisplayName");
+            lbxAuthors.DragEnter += (s, e) => ListBox_DragEnter<Author>(s, e);
+            lbxAuthors.KeyDown += (s, e) => ListBox_KeyDown(s, e, selectedAuthors, "DisplayName");
             // 
             // lbxAllAuthors
             // 
@@ -122,7 +124,7 @@
             lbxAllAuthors.Name = "lbxAllAuthors";
             lbxAllAuthors.Size = new Size(251, 79);
             lbxAllAuthors.TabIndex = 8;
-            lbxAllAuthors.MouseDown += lbxAllAuthors_MouseDown;
+            lbxAllAuthors.MouseDown += (s, e) => ListBox_MouseDown<Author>(s, e);
             // 
             // cbxStatus
             // 
@@ -183,9 +185,9 @@
             lbxCategories.Name = "lbxCategories";
             lbxCategories.Size = new Size(251, 79);
             lbxCategories.TabIndex = 15;
-            lbxCategories.DragDrop += lbxCategories_DragDrop;
-            lbxCategories.DragEnter += lbxCategories_DragEnter;
-            lbxCategories.KeyDown += lbxCategories_KeyDown;
+            lbxCategories.DragDrop += (s, e) => ListBox_DragDrop(s, e, selectedCategories, "Name");
+            lbxCategories.DragEnter += (s, e) => ListBox_DragEnter<Category>(s, e);
+            lbxCategories.KeyDown += (s, e) => ListBox_KeyDown(s, e, selectedCategories, "Name");
             // 
             // lbxAllCategories
             // 
@@ -196,7 +198,7 @@
             lbxAllCategories.Name = "lbxAllCategories";
             lbxAllCategories.Size = new Size(251, 79);
             lbxAllCategories.TabIndex = 16;
-            lbxAllCategories.MouseDown += lbxAllCategories_MouseDown;
+            lbxAllCategories.MouseDown += (s, e) => ListBox_MouseDown<Category>(s, e);
             // 
             // lbxGenres
             // 
@@ -207,9 +209,9 @@
             lbxGenres.Name = "lbxGenres";
             lbxGenres.Size = new Size(251, 79);
             lbxGenres.TabIndex = 17;
-            lbxGenres.DragDrop += lbxGenres_DragDrop;
-            lbxGenres.DragEnter += lbxGenres_DragEnter;
-            lbxGenres.KeyDown += lbxGenres_KeyDown;
+            lbxGenres.DragDrop += (s, e) => ListBox_DragDrop(s, e, selectedGenres, "Name");
+            lbxGenres.DragEnter += (s, e) => ListBox_DragEnter<Genre>(s, e);
+            lbxGenres.KeyDown += (s, e) => ListBox_KeyDown(s, e, selectedGenres, "Name");
             // 
             // lbxAllGenres
             // 
@@ -220,7 +222,7 @@
             lbxAllGenres.Name = "lbxAllGenres";
             lbxAllGenres.Size = new Size(251, 79);
             lbxAllGenres.TabIndex = 18;
-            lbxAllGenres.MouseDown += lbxAllGenres_MouseDown;
+            lbxAllGenres.MouseDown += (s, e) => ListBox_MouseDown<Genre>(s, e);
             // 
             // btnAccept
             // 
@@ -260,7 +262,7 @@
             btnDeleteAuthor.TabIndex = 22;
             btnDeleteAuthor.Text = "Delete Author";
             btnDeleteAuthor.UseVisualStyleBackColor = true;
-            btnDeleteAuthor.Click += btnDeleteAuthor_Click;
+            btnDeleteAuthor.Click += (s, e) => btnDelete_Click(lbxAuthors, selectedAuthors, "DisplayName");
             // 
             // btnAddNewCategory
             // 
@@ -280,7 +282,7 @@
             btnDeleteCategory.TabIndex = 24;
             btnDeleteCategory.Text = "Delete Category";
             btnDeleteCategory.UseVisualStyleBackColor = true;
-            btnDeleteCategory.Click += btnDeleteCategory_Click;
+            btnDeleteCategory.Click += (s, e) => btnDelete_Click(lbxCategories, selectedCategories, "Name");
             // 
             // btnAddNewGenre
             // 
@@ -300,7 +302,7 @@
             btnDeleteGenre.TabIndex = 26;
             btnDeleteGenre.Text = "Delete Genre";
             btnDeleteGenre.UseVisualStyleBackColor = true;
-            btnDeleteGenre.Click += btnDeleteGenre_Click;
+            btnDeleteGenre.Click += (s, e) => btnDelete_Click(lbxGenres, selectedGenres, "Name");
             // 
             // BookForm
             // 
@@ -341,30 +343,30 @@
 
         #endregion
 
-        private Label lblBookId;
-        private Label lblBookTitle;
-        private Label lblBookAuthors;
-        private Label lblBookDescription;
-        private Label lblBookStatus;
-        private ListBox lbxAuthors;
-        private ListBox lbxAllAuthors;
-        private ComboBox cbxStatus;
-        private TextBox txtTitle;
-        private RichTextBox rtbDescription;
-        private GroupBox gbxReview;
-        private Label lblCategories;
-        private Label lblGenres;
-        private ListBox lbxCategories;
-        private ListBox lbxAllCategories;
-        private ListBox lbxGenres;
-        private ListBox lbxAllGenres;
-        private Button btnAccept;
-        private Button btnCancel;
-        private Button btnAddNewAuthor;
-        private Button btnDeleteAuthor;
-        private Button btnAddNewCategory;
-        private Button btnDeleteCategory;
-        private Button btnAddNewGenre;
-        private Button btnDeleteGenre;
+        protected Label lblBookId;
+        protected Label lblBookTitle;
+        protected Label lblBookAuthors;
+        protected Label lblBookDescription;
+        protected Label lblBookStatus;
+        protected ListBox lbxAuthors;
+        protected ListBox lbxAllAuthors;
+        protected ComboBox cbxStatus;
+        protected TextBox txtTitle;
+        protected RichTextBox rtbDescription;
+        protected GroupBox gbxReview;
+        protected Label lblCategories;
+        protected Label lblGenres;
+        protected ListBox lbxCategories;
+        protected ListBox lbxAllCategories;
+        protected ListBox lbxGenres;
+        protected ListBox lbxAllGenres;
+        protected Button btnAccept;
+        protected Button btnCancel;
+        protected Button btnAddNewAuthor;
+        protected Button btnDeleteAuthor;
+        protected Button btnAddNewCategory;
+        protected Button btnDeleteCategory;
+        protected Button btnAddNewGenre;
+        protected Button btnDeleteGenre;
     }
 }

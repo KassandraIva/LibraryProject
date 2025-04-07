@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryProject.entities;
 
 namespace LibraryProject.classes
 {
-    public class Category
+    public class Category : DataModel<Category>
     {
-        private static string filePath = "../../../categories.txt";
-        private static int counter = 0;
-        public int Id { get; set; }
+        public override int Id { get; }
         public string Name { get; set; }
         public string Color { get; set; }
         public string Description { get; set; }
         public int Priority { get; set; }
+        public override string DisplayName => $"{Name}";
 
         public Category(int id, string name, string color, string description, int priority)
         {
@@ -35,55 +35,9 @@ namespace LibraryProject.classes
             Id = ++counter;
         }
 
-        public static void SetCounter(int countFrom)
+        public static Category ParseFromString(string[] columns)
         {
-            counter = countFrom;
-        }
-
-        public static List<Category> LoadFromFile()
-        {
-            int maxId = 0;
-            List<Category> categories = new List<Category>();
-
-            FileStream fs = null;
-            try
-            {
-                fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read);
-                StreamReader textIn = new StreamReader(fs);
-
-                while (textIn.Peek() != -1)
-                {
-                    string row = textIn.ReadLine();
-                    string[] columns = row.Split('|');
-
-                    if (Convert.ToInt32(columns[0]) > maxId) maxId = Convert.ToInt32(columns[0]);
-
-                    Category category = new Category(Convert.ToInt32(columns[0]), columns[1], columns[2], columns[3], Convert.ToInt32(columns[4]));
-                    categories.Add(category);
-                }
-
-                textIn.Close();
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show(filePath + " not found.", "File Not Found");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message, "IOException");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Exception");
-            }
-            finally
-            {
-                if (fs != null) fs.Close();
-            }
-
-            SetCounter(maxId);
-
-            return categories;
+            return new Category(Convert.ToInt32(columns[0]), columns[1], columns[2], columns[3], Convert.ToInt32(columns[4]));
         }
     }
 }

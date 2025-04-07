@@ -9,38 +9,82 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using LibraryProject.classes;
+using LibraryProject.entities;
 
 namespace LibraryProject
 {
-    public partial class GenreForm : Form
+    public partial class GenreForm : EntityForm<Genre>
     {
-        public Genre Genre { get; set; }
-        public bool AddGenre { get; set; }
+        protected override Label LblId => lblId;
+        protected override Button BtnAccept => btnAccept;
+        protected override Button BtnCancel => btnCancel;
 
         public GenreForm()
         {
             InitializeComponent();
         }
 
-        private void GenreForm_Load(object sender, EventArgs e)
+        private void GenreForm_Load(object sender, EventArgs e) { }
+
+        protected override void DisplayEntity()
         {
-            if (AddGenre)
+            lblId.Text = $"Id: {Entity.Id}";
+            txtName.Text = Entity.Name;
+            txtColor.Text = Entity.Color;
+        }
+
+        protected override bool Validation()
+        {
+            bool isValid = true;
+
+            if (txtName.Text == "")
             {
-                this.Text = "Add Genre";
-                lblId.Visible = false;
+                MessageBox.Show("Name is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
             }
+            else if (txtColor.Text == "")
+            {
+                MessageBox.Show("Color is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        protected override void UpdateEntity()
+        {
+            if (IsNew)
+                Entity = new Genre(txtName.Text, txtColor.Text);
             else
             {
-                this.Text = "Edit Genre";
-                lblId.Visible = true;
-                this.DisplayGenre();
+                Entity.Name = txtName.Text;
+                Entity.Color = txtColor.Text;
             }
         }
 
-        private void DisplayGenre()
+        public static Color GetTextColorForBackground(Color bgColor)
         {
-            lblId.Text = $"Id: {Genre.Id}";
-            txtName.Text = Genre.Name;
+            double brightness = 0.299 * bgColor.R + 0.587 * bgColor.G + 0.114 * bgColor.B;
+            return brightness > 160 ? Color.Black : Color.White;
+        }
+
+        private void btnPickColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+
+            try
+            {
+                colorDialog.Color = ColorTranslator.FromHtml(txtColor.Text);
+            }
+            catch { }
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                Color selectedColor = colorDialog.Color;
+                txtColor.Text = ColorTranslator.ToHtml(selectedColor);
+                txtColor.BackColor = selectedColor;
+                txtColor.ForeColor = GetTextColorForBackground(selectedColor);
+            }
         }
     }
 }

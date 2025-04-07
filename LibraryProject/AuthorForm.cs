@@ -12,39 +12,27 @@ using LibraryProject.entities;
 
 namespace LibraryProject
 {
-    public partial class AuthorForm : Form
+    public partial class AuthorForm : EntityForm<Author>
     {
-        public Author Author { get; set; }
-        public bool AddAuthor { get; set; }
+        protected override Label LblId => lblId;
+        protected override Button BtnAccept => btnAccept;
+        protected override Button BtnCancel => btnCancel;
 
         public AuthorForm()
         {
             InitializeComponent();
         }
 
-        private void AuthorForm_Load(object sender, EventArgs e)
+        //private void AuthorForm_Load(object sender, EventArgs e) { }
+
+        protected override void DisplayEntity()
         {
-            if (AddAuthor)
-            {
-                this.Text = "Add Author";
-                lblId.Visible = false;
-            }
-            else
-            {
-                this.Text = "Edit Author";
-                lblId.Visible = true;
-                this.DisplayAuthor();
-            }
+            lblId.Text = $"Id: {Entity.Id}";
+            txtFirstName.Text = Entity.FirstName;
+            txtLastName.Text = Entity.LastName;
         }
 
-        private void DisplayAuthor()
-        {
-            lblId.Text = $"Id: {Author.Id}";
-            txtFirstName.Text = Author.FirstName;
-            txtLastName.Text = Author.LastName;
-        }
-
-        private bool Validation()
+        protected override bool Validation()
         {
             bool isValid = true;
 
@@ -62,27 +50,15 @@ namespace LibraryProject
             return isValid;
         }
 
-        private void btnAccept_Click(object sender, EventArgs e)
+        protected override void UpdateEntity()
         {
-            if (Validation())
+            if (IsNew)
+                Entity = new Author(txtFirstName.Text, txtLastName.Text);
+            else
             {
-                if (AddAuthor)
-                {
-                    this.Author = new Author(txtFirstName.Text, txtLastName.Text);
-                }
-                else
-                {
-                    Author.FirstName = txtFirstName.Text;
-                    Author.LastName = txtLastName.Text;
-                }
-
-                this.DialogResult = DialogResult.OK;
+                Entity.FirstName = txtFirstName.Text;
+                Entity.LastName = txtLastName.Text;
             }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
