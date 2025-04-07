@@ -105,39 +105,6 @@ namespace LibraryProject.classes
                 }
             }
 
-                    BookStatus status = BookStatus.Unknown;
-                    foreach (BookStatus s in Enum.GetValues(typeof(BookStatus)))
-                    {
-                        if ((int)s == Convert.ToInt32(columns[4]))
-                        {
-                            status = s;
-                            break;
-                        }
-                    }
-
-                    Book book = new Book(Convert.ToInt32(columns[0]), columns[1], bookAuthors, columns[3], status, bookCategories, bookGenres, Convert.ToBoolean(columns[7]));
-
-                    books.Add(book);
-
-                }
-
-                textIn.Close();
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show(filePath + " not found.", "File Not Found");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show(ex.Message, "IOException");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Exception");
-            }
-            finally
-            {
-                if (fs != null) fs.Close();
             BookStatus status = BookStatus.Unknown;
             foreach (BookStatus s in Enum.GetValues(typeof(BookStatus)))
             {
@@ -148,7 +115,7 @@ namespace LibraryProject.classes
                 }
             }
 
-            return new Book(Convert.ToInt32(columns[0]), columns[1], bookAuthors, columns[3], status, bookCategories, bookGenres);
+            return new Book(Convert.ToInt32(columns[0]), columns[1], bookAuthors, columns[3], status, bookCategories, bookGenres, Convert.ToBoolean(columns[7]));
         }
     }
 }
