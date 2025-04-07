@@ -41,6 +41,48 @@ namespace LibraryProject
         {
             lblId.Text = $"Id: {Genre.Id}";
             txtName.Text = Genre.Name;
+            txtColor.Text = Genre.Color;
+        }
+
+        private bool Validation()
+        {
+            bool isValid = true;
+
+            if (txtName.Text == "")
+            {
+                MessageBox.Show("Name is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
+            }
+            else if (txtColor.Text == "")
+            {
+                MessageBox.Show("Color is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            if (Validation())
+            {
+                if (AddGenre)
+                {
+                    this.Genre = new Genre(txtName.Text, txtColor.Text);
+                }
+                else
+                {
+                    Genre.Name = txtName.Text;
+                    Genre.Color = txtColor.Text;
+                }
+
+                this.DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

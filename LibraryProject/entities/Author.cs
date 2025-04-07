@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryProject.entities;
 
 namespace LibraryProject.classes
 {
@@ -81,6 +82,22 @@ namespace LibraryProject.classes
             SetCounter(maxId);
 
             return authors;
+        }
+
+        public static void SaveToFile(Author item)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    string line = $"{item.Id}|{item.FirstName}|{item.LastName}";
+                    writer.WriteLine(line);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
         }
     }
 }

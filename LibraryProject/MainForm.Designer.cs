@@ -39,6 +39,13 @@
             textBox1 = new TextBox();
             btnAddAuthor = new Button();
             dgvAllAuthors = new DataGridView();
+            tabCategoriesGenres = new TabPage();
+            lblGenres = new Label();
+            lblCategories = new Label();
+            btnAddGenre = new Button();
+            btnAddCategory = new Button();
+            dgvGenres = new DataGridView();
+            dgvCategories = new DataGridView();
             tabQuotes = new TabPage();
             btnAddQuote = new Button();
             dgvQuotes = new DataGridView();
@@ -55,6 +62,9 @@
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
             tabAllAuthors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).BeginInit();
+            tabCategoriesGenres.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvGenres).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
             tabQuotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvQuotes).BeginInit();
             tabBorrowedLent.SuspendLayout();
@@ -69,6 +79,7 @@
             // 
             tabReviews.Controls.Add(tabAllBooks);
             tabReviews.Controls.Add(tabAllAuthors);
+            tabReviews.Controls.Add(tabCategoriesGenres);
             tabReviews.Controls.Add(tabQuotes);
             tabReviews.Controls.Add(tabBorrowedLent);
             tabReviews.Controls.Add(tabPage1);
@@ -175,6 +186,7 @@
             btnAddAuthor.TabIndex = 1;
             btnAddAuthor.Text = "Add Author";
             btnAddAuthor.UseVisualStyleBackColor = true;
+            btnAddAuthor.Click += btnAddAuthor_Click;
             // 
             // dgvAllAuthors
             // 
@@ -184,6 +196,80 @@
             dgvAllAuthors.RowHeadersWidth = 51;
             dgvAllAuthors.Size = new Size(986, 469);
             dgvAllAuthors.TabIndex = 0;
+            dgvAllAuthors.CellClick += dgvAllAuthors_CellClick;
+            // 
+            // tabCategoriesGenres
+            // 
+            tabCategoriesGenres.Controls.Add(lblGenres);
+            tabCategoriesGenres.Controls.Add(lblCategories);
+            tabCategoriesGenres.Controls.Add(btnAddGenre);
+            tabCategoriesGenres.Controls.Add(btnAddCategory);
+            tabCategoriesGenres.Controls.Add(dgvGenres);
+            tabCategoriesGenres.Controls.Add(dgvCategories);
+            tabCategoriesGenres.Location = new Point(4, 24);
+            tabCategoriesGenres.Name = "tabCategoriesGenres";
+            tabCategoriesGenres.Size = new Size(998, 519);
+            tabCategoriesGenres.TabIndex = 6;
+            tabCategoriesGenres.Text = "Categories/Genres";
+            tabCategoriesGenres.UseVisualStyleBackColor = true;
+            // 
+            // lblGenres
+            // 
+            lblGenres.AutoSize = true;
+            lblGenres.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            lblGenres.Location = new Point(548, 16);
+            lblGenres.Name = "lblGenres";
+            lblGenres.Size = new Size(43, 15);
+            lblGenres.TabIndex = 5;
+            lblGenres.Text = "Genres";
+            // 
+            // lblCategories
+            // 
+            lblCategories.AutoSize = true;
+            lblCategories.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            lblCategories.Location = new Point(22, 16);
+            lblCategories.Name = "lblCategories";
+            lblCategories.Size = new Size(62, 15);
+            lblCategories.TabIndex = 4;
+            lblCategories.Text = "Categories";
+            // 
+            // btnAddGenre
+            // 
+            btnAddGenre.Location = new Point(848, 12);
+            btnAddGenre.Name = "btnAddGenre";
+            btnAddGenre.Size = new Size(124, 23);
+            btnAddGenre.TabIndex = 3;
+            btnAddGenre.Text = "Add Genre";
+            btnAddGenre.UseVisualStyleBackColor = true;
+            btnAddGenre.Click += btnAddGenre_Click;
+            // 
+            // btnAddCategory
+            // 
+            btnAddCategory.Location = new Point(344, 12);
+            btnAddCategory.Name = "btnAddCategory";
+            btnAddCategory.Size = new Size(124, 23);
+            btnAddCategory.TabIndex = 2;
+            btnAddCategory.Text = "Add Category";
+            btnAddCategory.UseVisualStyleBackColor = true;
+            btnAddCategory.Click += btnAddCategory_Click;
+            // 
+            // dgvGenres
+            // 
+            dgvGenres.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvGenres.Location = new Point(522, 45);
+            dgvGenres.Name = "dgvGenres";
+            dgvGenres.Size = new Size(473, 471);
+            dgvGenres.TabIndex = 1;
+            dgvGenres.CellClick += dgvGenres_CellClick;
+            // 
+            // dgvCategories
+            // 
+            dgvCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCategories.Location = new Point(3, 45);
+            dgvCategories.Name = "dgvCategories";
+            dgvCategories.Size = new Size(494, 471);
+            dgvCategories.TabIndex = 0;
+            dgvCategories.CellClick += dgvCategories_CellClick;
             // 
             // tabQuotes
             // 
@@ -191,7 +277,7 @@
             tabQuotes.Controls.Add(dgvQuotes);
             tabQuotes.Location = new Point(4, 24);
             tabQuotes.Name = "tabQuotes";
-            tabQuotes.Padding = new Padding(3, 3, 3, 3);
+            tabQuotes.Padding = new Padding(3);
             tabQuotes.Size = new Size(998, 519);
             tabQuotes.TabIndex = 2;
             tabQuotes.Text = "Quotes";
@@ -324,6 +410,10 @@
             tabAllAuthors.ResumeLayout(false);
             tabAllAuthors.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllAuthors).EndInit();
+            tabCategoriesGenres.ResumeLayout(false);
+            tabCategoriesGenres.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvGenres).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCategories).EndInit();
             tabQuotes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvQuotes).EndInit();
             tabBorrowedLent.ResumeLayout(false);
@@ -359,5 +449,12 @@
         private TabPage tabPage2;
         private DataGridView dgvReviews;
         private Button BtnAddReview;
+        private TabPage tabCategoriesGenres;
+        private DataGridView dgvCategories;
+        private Label lblGenres;
+        private Label lblCategories;
+        private Button btnAddGenre;
+        private Button btnAddCategory;
+        private DataGridView dgvGenres;
     }
 }

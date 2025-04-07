@@ -85,5 +85,21 @@ namespace LibraryProject.classes
 
             return categories;
         }
+
+        public static void SaveToFile(Category item)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    string line = $"{item.Id}|{item.Name}|{item.Color}|{item.Description}|{item.Priority}";
+                    writer.WriteLine(line);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
     }
 }

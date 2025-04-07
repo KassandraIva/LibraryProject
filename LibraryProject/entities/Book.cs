@@ -163,5 +163,21 @@ namespace LibraryProject.classes
 
             return books;
         }
+
+        public static void SaveToFile(Book item)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    string line = $"{item.Id}|{item.Title}";
+                    writer.WriteLine(line);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
     }
 }

@@ -18,6 +18,9 @@ namespace LibraryProject
         public List<Review> reviewList = new List<Review>();
 
         private Book selectedBook;
+        private Author selectedAuthor;
+        private Category selectedCategory;
+        private Genre selectedGenre;
         private MiscItems selectedItem;
         private Quotes selectedQuote;
 
@@ -37,6 +40,8 @@ namespace LibraryProject
         private void MainForm_Load(object sender, EventArgs e)
         {
             DisplayAuthors(authorList);
+            DisplayCategories(categoryList);
+            DisplayGenres(genreList);
             DisplayBooks(bookList);
             DisplayMiscItems(miscItems);
             DisplayQuotes(quoteList);
@@ -63,6 +68,7 @@ namespace LibraryProject
                 HeaderText = "",
                 Text = "Edit"
             };
+            editColumn.HeaderText = "EditColumn";
             dgvAllAuthors.Columns.Add(editColumn);
 
             var deleteColumn = new DataGridViewButtonColumn()
@@ -71,10 +77,107 @@ namespace LibraryProject
                 HeaderText = "",
                 Text = "Delete"
             };
+            deleteColumn.HeaderText = "DeleteColumn";
             dgvAllAuthors.Columns.Add(deleteColumn);
 
             dgvAllAuthors.Columns[1].Width = 200;
             dgvAllAuthors.Columns[2].Width = 200;
+        }
+
+        private void DisplayCategories(List<Category> categories)
+        {
+            dgvCategories.AutoGenerateColumns = false;
+            dgvCategories.Columns.Clear();
+            dgvCategories.DataSource = new BindingList<Category>(categories.ToList());
+
+            dgvCategories.EnableHeadersVisualStyles = false;
+            dgvCategories.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+            dgvCategories.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkMagenta;
+            dgvCategories.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCategories.AlternatingRowsDefaultCellStyle.BackColor = Color.Lavender;
+
+            dgvCategories.Columns.Add("Id", "Id");
+            dgvCategories.Columns["Id"].DataPropertyName = "Id";
+
+            dgvCategories.Columns.Add("Name", "Name");
+            dgvCategories.Columns["Name"].DataPropertyName = "Name";
+
+            dgvCategories.Columns.Add("Color", "Color");
+            dgvCategories.Columns["Color"].DataPropertyName = "Color";
+
+            dgvCategories.Columns.Add("Priority", "Priority");
+            dgvCategories.Columns["Priority"].DataPropertyName = "Priority";
+
+            var editColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Edit"
+            };
+            editColumn.HeaderText = "EditColumn";
+            dgvCategories.Columns.Add(editColumn);
+
+            var deleteColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete"
+            };
+            deleteColumn.HeaderText = "DeleteColumn";
+            dgvCategories.Columns.Add(deleteColumn);
+
+            dgvCategories.Columns[0].Width = 30;
+            dgvCategories.Columns[1].Width = 120;
+            dgvCategories.Columns[2].Width = 70;
+            dgvCategories.Columns[3].Width = 60;
+            dgvCategories.Columns[4].Width = 80;
+            dgvCategories.Columns[5].Width = 80;
+        }
+
+        private void DisplayGenres(List<Genre> genres)
+        {
+            dgvGenres.AutoGenerateColumns = false;
+            dgvGenres.Columns.Clear();
+            dgvGenres.DataSource = new BindingList<Genre>(genres.ToList());
+
+            dgvGenres.EnableHeadersVisualStyles = false;
+            dgvGenres.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 9, FontStyle.Bold);
+            dgvGenres.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkRed;
+            dgvGenres.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvGenres.AlternatingRowsDefaultCellStyle.BackColor = Color.MistyRose;
+
+            dgvGenres.Columns.Add("Id", "Id");
+            dgvGenres.Columns["Id"].DataPropertyName = "Id";
+
+            dgvGenres.Columns.Add("Name", "Name");
+            dgvGenres.Columns["Name"].DataPropertyName = "Name";
+
+            dgvGenres.Columns.Add("Color", "Color");
+            dgvGenres.Columns["Color"].DataPropertyName = "Color";
+
+            var editColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Edit"
+            };
+            editColumn.HeaderText = "EditColumn";
+            dgvGenres.Columns.Add(editColumn);
+
+            var deleteColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete"
+            };
+            deleteColumn.HeaderText = "DeleteColumn";
+            dgvGenres.Columns.Add(deleteColumn);
+
+            dgvGenres.Columns[0].Width = 30;
+            dgvGenres.Columns[1].Width = 140;
+            dgvGenres.Columns[2].Width = 90;
+            dgvGenres.Columns[3].Width = 80;
+            dgvGenres.Columns[4].Width = 80;
         }
 
         private void DisplayBooks(List<Book> books)
@@ -272,6 +375,33 @@ namespace LibraryProject
             }
         }
 
+        private Author GetAuthor(int id)
+        {
+            foreach (Author x in authorList)
+            {
+                if (x.Id == id) return x;
+            }
+            return null;
+        }
+
+        private Category GetCategory(int id)
+        {
+            foreach (Category x in categoryList)
+            {
+                if (x.Id == id) return x;
+            }
+            return null;
+        }
+
+        private Genre GetGenre(int id)
+        {
+            foreach (Genre x in genreList)
+            {
+                if (x.Id == id) return x;
+            }
+            return null;
+        }
+
         private Book GetBook(int bookId)
         {
             foreach (Book b in bookList)
@@ -316,6 +446,75 @@ namespace LibraryProject
                 {
                     this.bookList[indexOfOld] = selectedBook;
                     DisplayBooks(bookList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void EditAuthor(int indexOfOld)
+        {
+            var form = new AuthorForm()
+            {
+                AddAuthor = false,
+                Author = selectedAuthor
+            };
+            DialogResult result = form.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    this.authorList[indexOfOld] = selectedAuthor;
+                    DisplayAuthors(authorList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void EditCategory(int indexOfOld)
+        {
+            var form = new CategoryForm()
+            {
+                AddCategory = false,
+                Category = selectedCategory
+            };
+            DialogResult result = form.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    this.categoryList[indexOfOld] = selectedCategory;
+                    DisplayCategories(categoryList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void EditGenre(int indexOfOld)
+        {
+            var form = new GenreForm()
+            {
+                AddGenre = false,
+                Genre = selectedGenre
+            };
+            DialogResult result = form.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    this.genreList[indexOfOld] = selectedGenre;
+                    DisplayGenres(genreList);
                 }
                 catch (Exception ex)
                 {
@@ -397,6 +596,114 @@ namespace LibraryProject
             }
         }
 
+        private void DeleteAuthor()
+        {
+            DialogResult result =
+                MessageBox.Show($"Delete {selectedAuthor.FirstName} {selectedAuthor.LastName}?",
+                "Confirm Delete", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                List<string> booksByAuthor = bookList
+                    .Where(book => book.Authors.Any(a => a.Id == selectedAuthor.Id))
+                    .Select(book => book.Title)
+                    .ToList();
+
+                if (booksByAuthor.Count > 0)
+                {
+                    string strBooks = string.Join(", ", booksByAuthor);
+                    MessageBox.Show($"Unable delete {selectedAuthor.FirstName} {selectedAuthor.LastName}. This author has the following books: {strBooks}");
+                }
+                else
+                {
+                    try
+                    {
+                        if (authorList.Remove(selectedAuthor))
+                        {
+                            DisplayAuthors(authorList);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void DeleteCategory()
+        {
+            DialogResult result =
+                MessageBox.Show($"Delete {selectedCategory.Name}?",
+                "Confirm Delete", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                List<string> booksWithCategory = bookList
+                    .Where(book => book.Categories.Any(x => x.Id == selectedCategory.Id))
+                    .Select(book => book.Title)
+                    .ToList();
+
+                if (booksWithCategory.Count > 0)
+                {
+                    string strBooks = string.Join(", ", booksWithCategory);
+                    MessageBox.Show($"Unable delete {selectedCategory.Name}. This category is listed in the following books: {strBooks}");
+                }
+                else
+                {
+                    try
+                    {
+                        if (categoryList.Remove(selectedCategory))
+                        {
+                            DisplayCategories(categoryList);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void DeleteGenre()
+        {
+            DialogResult result =
+                MessageBox.Show($"Delete {selectedGenre.Name}?",
+                "Confirm Delete", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                List<string> booksWithGenre = bookList
+                    .Where(book => book.Genres.Any(x => x.Id == selectedGenre.Id))
+                    .Select(book => book.Title)
+                    .ToList();
+
+                if (booksWithGenre.Count > 0)
+                {
+                    string strBooks = string.Join(", ", booksWithGenre);
+                    MessageBox.Show($"Unable delete {selectedGenre.Name}. This genre is listed in the following books: {strBooks}");
+                }
+                else
+                {
+                    try
+                    {
+                        if (genreList.Remove(selectedGenre))
+                        {
+                            DisplayGenres(genreList);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
         private void DeleteItem()
         {
             DialogResult result =
@@ -448,11 +755,79 @@ namespace LibraryProject
                 }
             }
         }
+
+        private void dgvAllAuthors_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvAllAuthors.Columns[e.ColumnIndex].HeaderText;
+            //MessageBox.Show(dgvAllAuthors.Columns[e.ColumnIndex].ToString());
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int id = int.Parse(dgvAllAuthors.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                selectedAuthor = GetAuthor(id);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditAuthor(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteAuthor();
+            }
+        }
+
+        private void dgvCategories_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvCategories.Columns[e.ColumnIndex].HeaderText;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int id = int.Parse(dgvCategories.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                selectedCategory = GetCategory(id);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditCategory(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteCategory();
+            }
+        }
+
+        private void dgvGenres_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvGenres.Columns[e.ColumnIndex].HeaderText;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int id = int.Parse(dgvGenres.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                selectedGenre = GetGenre(id);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditGenre(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteGenre();
+            }
+        }
+
         private void dgvAllBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
 
-            string columnName = dgvAllBooks.Columns[e.ColumnIndex].Name;
+            string columnName = dgvAllBooks.Columns[e.ColumnIndex].HeaderText;
 
             if (columnName == "EditColumn" || columnName == "DeleteColumn")
             {
@@ -632,6 +1007,75 @@ namespace LibraryProject
             Form reviews = new ReviewForm(this, selectedBook);
 
             reviews.ShowDialog();
+        }
+
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            var form = new CategoryForm()
+            {
+                AddCategory = true
+            };
+
+            DialogResult result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    selectedCategory = form.Category;
+                    this.categoryList.Add(selectedCategory);
+                    DisplayCategories(categoryList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btnAddGenre_Click(object sender, EventArgs e)
+        {
+            var form = new GenreForm()
+            {
+                AddGenre = true
+            };
+
+            DialogResult result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    selectedGenre = form.Genre;
+                    this.genreList.Add(selectedGenre);
+                    DisplayGenres(genreList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btnAddAuthor_Click(object sender, EventArgs e)
+        {
+            var form = new AuthorForm()
+            {
+                AddAuthor = true
+            };
+
+            DialogResult result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    selectedAuthor = form.Author;
+                    this.authorList.Add(selectedAuthor);
+                    DisplayAuthors(authorList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

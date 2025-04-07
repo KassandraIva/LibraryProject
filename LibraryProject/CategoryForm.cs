@@ -40,6 +40,52 @@ namespace LibraryProject
         {
             lblId.Text = $"Id: {Category.Id}";
             txtName.Text = Category.Name;
+            txtColor.Text = Category.Color;
+            rtbDescription.Text = Category.Description;
+            nudPriority.Value = Category.Priority;
+        }
+
+        private bool Validation()
+        {
+            bool isValid = true;
+
+            if (txtName.Text == "")
+            {
+                MessageBox.Show("Name is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
+            }
+            else if (txtColor.Text == "")
+            {
+                MessageBox.Show("Color is a required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            if (Validation())
+            {
+                if (AddCategory)
+                {
+                    this.Category = new Category(txtName.Text, txtColor.Text, rtbDescription.Text, Convert.ToInt32(nudPriority.Value));
+                }
+                else
+                {
+                    Category.Name = txtName.Text;
+                    Category.Color = txtColor.Text;
+                    Category.Description = rtbDescription.Text;
+                    Category.Priority = Convert.ToInt32(nudPriority.Value);
+                }
+
+                this.DialogResult = DialogResult.OK;
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

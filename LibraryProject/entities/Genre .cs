@@ -79,5 +79,21 @@ namespace LibraryProject.classes
 
             return genres;
         }
+
+        public static void SaveToFile(Genre item)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    string line = $"{item.Id}|{item.Name}|{item.Color}";
+                    writer.WriteLine(line);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
     }
 }
