@@ -73,11 +73,10 @@
             tabReviews.Controls.Add(tabBorrowedLent);
             tabReviews.Controls.Add(tabPage1);
             tabReviews.Controls.Add(tabPage2);
-            tabReviews.Location = new Point(14, 16);
-            tabReviews.Margin = new Padding(3, 4, 3, 4);
+            tabReviews.Location = new Point(12, 12);
             tabReviews.Name = "tabReviews";
             tabReviews.SelectedIndex = 0;
-            tabReviews.Size = new Size(1150, 729);
+            tabReviews.Size = new Size(1006, 547);
             tabReviews.TabIndex = 0;
             // 
             // tabAllBooks
@@ -86,20 +85,20 @@
             tabAllBooks.Controls.Add(btnSearchBook);
             tabAllBooks.Controls.Add(dgvAllBooks);
             tabAllBooks.Controls.Add(txtSearch);
-            tabAllBooks.Location = new Point(4, 29);
-            tabAllBooks.Margin = new Padding(3, 4, 3, 4);
+            tabAllBooks.Location = new Point(4, 24);
             tabAllBooks.Name = "tabAllBooks";
-            tabAllBooks.Padding = new Padding(3);
-            tabAllBooks.Size = new Size(1142, 696);
+            tabAllBooks.Padding = new Padding(3, 2, 3, 2);
+            tabAllBooks.Size = new Size(998, 519);
             tabAllBooks.TabIndex = 0;
             tabAllBooks.Text = "All Books";
             tabAllBooks.UseVisualStyleBackColor = true;
             // 
             // btnAddBook
             // 
-            btnAddBook.Location = new Point(859, 15);
+            btnAddBook.Location = new Point(859, 11);
+            btnAddBook.Margin = new Padding(3, 2, 3, 2);
             btnAddBook.Name = "btnAddBook";
-            btnAddBook.Size = new Size(152, 31);
+            btnAddBook.Size = new Size(133, 23);
             btnAddBook.TabIndex = 3;
             btnAddBook.Text = "Add Book";
             btnAddBook.UseVisualStyleBackColor = true;
@@ -107,9 +106,10 @@
             // 
             // btnSearchBook
             // 
-            btnSearchBook.Location = new Point(538, 15);
+            btnSearchBook.Location = new Point(537, 11);
+            btnSearchBook.Margin = new Padding(3, 2, 3, 2);
             btnSearchBook.Name = "btnSearchBook";
-            btnSearchBook.Size = new Size(152, 31);
+            btnSearchBook.Size = new Size(133, 23);
             btnSearchBook.TabIndex = 2;
             btnSearchBook.Text = "Search";
             btnSearchBook.UseVisualStyleBackColor = true;
@@ -117,11 +117,10 @@
             // dgvAllBooks
             // 
             dgvAllBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAllBooks.Location = new Point(7, 59);
-            dgvAllBooks.Margin = new Padding(3, 4, 3, 4);
+            dgvAllBooks.Location = new Point(6, 44);
             dgvAllBooks.Name = "dgvAllBooks";
             dgvAllBooks.RowHeadersWidth = 51;
-            dgvAllBooks.Size = new Size(1127, 625);
+            dgvAllBooks.Size = new Size(986, 469);
             dgvAllBooks.TabIndex = 1;
             dgvAllBooks.CellClick += dgvAllBooks_CellClick;
             dgvAllBooks.CellPainting += dgvAllBooks_CellPainting;
@@ -129,9 +128,10 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(6, 15);
+            txtSearch.Location = new Point(5, 11);
+            txtSearch.Margin = new Padding(3, 2, 3, 2);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(601, 27);
+            txtSearch.Size = new Size(526, 23);
             txtSearch.TabIndex = 0;
             // 
             // tabAllAuthors
@@ -140,36 +140,38 @@
             tabAllAuthors.Controls.Add(textBox1);
             tabAllAuthors.Controls.Add(btnAddAuthor);
             tabAllAuthors.Controls.Add(dgvAllAuthors);
-            tabAllAuthors.Location = new Point(4, 29);
-            tabAllAuthors.Margin = new Padding(3, 4, 3, 4);
+            tabAllAuthors.Location = new Point(4, 24);
             tabAllAuthors.Name = "tabAllAuthors";
-            tabAllAuthors.Padding = new Padding(3);
-            tabAllAuthors.Size = new Size(1142, 696);
+            tabAllAuthors.Padding = new Padding(3, 2, 3, 2);
+            tabAllAuthors.Size = new Size(998, 519);
             tabAllAuthors.TabIndex = 1;
             tabAllAuthors.Text = "All Authors";
             tabAllAuthors.UseVisualStyleBackColor = true;
             // 
             // btnSearchAuthor
             // 
-            btnSearchAuthor.Location = new Point(538, 15);
+            btnSearchAuthor.Location = new Point(531, 10);
+            btnSearchAuthor.Margin = new Padding(3, 2, 3, 2);
             btnSearchAuthor.Name = "btnSearchAuthor";
-            btnSearchAuthor.Size = new Size(134, 23);
+            btnSearchAuthor.Size = new Size(131, 23);
             btnSearchAuthor.TabIndex = 3;
             btnSearchAuthor.Text = "Search";
             btnSearchAuthor.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(6, 15);
+            textBox1.Location = new Point(5, 11);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(526, 27);
+            textBox1.Size = new Size(520, 23);
             textBox1.TabIndex = 2;
             // 
             // btnAddAuthor
             // 
-            btnAddAuthor.Location = new Point(858, 15);
+            btnAddAuthor.Location = new Point(860, 11);
+            btnAddAuthor.Margin = new Padding(3, 2, 3, 2);
             btnAddAuthor.Name = "btnAddAuthor";
-            btnAddAuthor.Size = new Size(134, 23);
+            btnAddAuthor.Size = new Size(132, 23);
             btnAddAuthor.TabIndex = 1;
             btnAddAuthor.Text = "Add Author";
             btnAddAuthor.UseVisualStyleBackColor = true;
@@ -177,31 +179,30 @@
             // dgvAllAuthors
             // 
             dgvAllAuthors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAllAuthors.Location = new Point(7, 59);
-            dgvAllAuthors.Margin = new Padding(3, 4, 3, 4);
+            dgvAllAuthors.Location = new Point(6, 44);
             dgvAllAuthors.Name = "dgvAllAuthors";
             dgvAllAuthors.RowHeadersWidth = 51;
-            dgvAllAuthors.Size = new Size(1127, 625);
+            dgvAllAuthors.Size = new Size(986, 469);
             dgvAllAuthors.TabIndex = 0;
             // 
             // tabQuotes
             // 
             tabQuotes.Controls.Add(btnAddQuote);
             tabQuotes.Controls.Add(dgvQuotes);
-            tabQuotes.Location = new Point(4, 29);
-            tabQuotes.Margin = new Padding(3, 4, 3, 4);
+            tabQuotes.Location = new Point(4, 24);
             tabQuotes.Name = "tabQuotes";
-            tabQuotes.Padding = new Padding(3, 4, 3, 4);
-            tabQuotes.Size = new Size(1142, 696);
+            tabQuotes.Padding = new Padding(3, 3, 3, 3);
+            tabQuotes.Size = new Size(998, 519);
             tabQuotes.TabIndex = 2;
             tabQuotes.Text = "Quotes";
             tabQuotes.UseVisualStyleBackColor = true;
             // 
             // btnAddQuote
             // 
-            btnAddQuote.Location = new Point(1002, 31);
+            btnAddQuote.Location = new Point(877, 23);
+            btnAddQuote.Margin = new Padding(3, 2, 3, 2);
             btnAddQuote.Name = "btnAddQuote";
-            btnAddQuote.Size = new Size(94, 29);
+            btnAddQuote.Size = new Size(82, 22);
             btnAddQuote.TabIndex = 1;
             btnAddQuote.Text = "Add Quote";
             btnAddQuote.UseVisualStyleBackColor = true;
@@ -210,20 +211,20 @@
             // dgvQuotes
             // 
             dgvQuotes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvQuotes.Location = new Point(6, 79);
+            dgvQuotes.Location = new Point(5, 59);
+            dgvQuotes.Margin = new Padding(3, 2, 3, 2);
             dgvQuotes.Name = "dgvQuotes";
             dgvQuotes.RowHeadersWidth = 51;
-            dgvQuotes.Size = new Size(1118, 582);
+            dgvQuotes.Size = new Size(978, 436);
             dgvQuotes.TabIndex = 0;
             dgvQuotes.CellClick += dgvQuotes_CellClick;
             // 
             // tabBorrowedLent
             // 
             tabBorrowedLent.Controls.Add(dgvBorrowed);
-            tabBorrowedLent.Location = new Point(4, 29);
-            tabBorrowedLent.Margin = new Padding(3, 4, 3, 4);
+            tabBorrowedLent.Location = new Point(4, 24);
             tabBorrowedLent.Name = "tabBorrowedLent";
-            tabBorrowedLent.Size = new Size(1142, 696);
+            tabBorrowedLent.Size = new Size(998, 519);
             tabBorrowedLent.TabIndex = 3;
             tabBorrowedLent.Text = "Borrowed/Lent";
             tabBorrowedLent.UseVisualStyleBackColor = true;
@@ -231,29 +232,32 @@
             // dgvBorrowed
             // 
             dgvBorrowed.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBorrowed.Location = new Point(25, 47);
+            dgvBorrowed.Location = new Point(22, 35);
+            dgvBorrowed.Margin = new Padding(3, 2, 3, 2);
             dgvBorrowed.Name = "dgvBorrowed";
             dgvBorrowed.RowHeadersWidth = 51;
-            dgvBorrowed.Size = new Size(696, 611);
+            dgvBorrowed.Size = new Size(609, 458);
             dgvBorrowed.TabIndex = 0;
             // 
             // tabPage1
             // 
             tabPage1.Controls.Add(btnAddMisc);
             tabPage1.Controls.Add(dgvMiscItems);
-            tabPage1.Location = new Point(4, 29);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Margin = new Padding(3, 2, 3, 2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1142, 696);
+            tabPage1.Padding = new Padding(3, 2, 3, 2);
+            tabPage1.Size = new Size(998, 519);
             tabPage1.TabIndex = 4;
             tabPage1.Text = "Misc. Items";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnAddMisc
             // 
-            btnAddMisc.Location = new Point(959, 35);
+            btnAddMisc.Location = new Point(839, 26);
+            btnAddMisc.Margin = new Padding(3, 2, 3, 2);
             btnAddMisc.Name = "btnAddMisc";
-            btnAddMisc.Size = new Size(123, 35);
+            btnAddMisc.Size = new Size(108, 26);
             btnAddMisc.TabIndex = 1;
             btnAddMisc.Text = "Add New Item";
             btnAddMisc.UseVisualStyleBackColor = true;
@@ -262,10 +266,11 @@
             // dgvMiscItems
             // 
             dgvMiscItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMiscItems.Location = new Point(20, 103);
+            dgvMiscItems.Location = new Point(18, 77);
+            dgvMiscItems.Margin = new Padding(3, 2, 3, 2);
             dgvMiscItems.Name = "dgvMiscItems";
             dgvMiscItems.RowHeadersWidth = 51;
-            dgvMiscItems.Size = new Size(1085, 559);
+            dgvMiscItems.Size = new Size(949, 419);
             dgvMiscItems.TabIndex = 0;
             dgvMiscItems.CellClick += dgvMiscItems_CellClick;
             // 
@@ -273,19 +278,21 @@
             // 
             tabPage2.Controls.Add(BtnAddReview);
             tabPage2.Controls.Add(dgvReviews);
-            tabPage2.Location = new Point(4, 29);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Margin = new Padding(3, 2, 3, 2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1142, 696);
+            tabPage2.Padding = new Padding(3, 2, 3, 2);
+            tabPage2.Size = new Size(998, 519);
             tabPage2.TabIndex = 5;
             tabPage2.Text = "Review";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // BtnAddReview
             // 
-            BtnAddReview.Location = new Point(769, 55);
+            BtnAddReview.Location = new Point(673, 41);
+            BtnAddReview.Margin = new Padding(3, 2, 3, 2);
             BtnAddReview.Name = "BtnAddReview";
-            BtnAddReview.Size = new Size(200, 31);
+            BtnAddReview.Size = new Size(175, 23);
             BtnAddReview.TabIndex = 1;
             BtnAddReview.Text = "Add review";
             BtnAddReview.UseVisualStyleBackColor = true;
@@ -294,19 +301,19 @@
             // dgvReviews
             // 
             dgvReviews.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReviews.Location = new Point(35, 109);
+            dgvReviews.Location = new Point(31, 82);
+            dgvReviews.Margin = new Padding(3, 2, 3, 2);
             dgvReviews.Name = "dgvReviews";
             dgvReviews.RowHeadersWidth = 51;
-            dgvReviews.Size = new Size(1101, 546);
+            dgvReviews.Size = new Size(963, 410);
             dgvReviews.TabIndex = 0;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1177, 761);
+            ClientSize = new Size(1030, 571);
             Controls.Add(tabReviews);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "MainForm";
             Text = "Library";
             Load += MainForm_Load;
