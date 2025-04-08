@@ -80,17 +80,34 @@ namespace LibraryProject.classes
             return genres;
         }
 
-        public static void SaveToFile(Genre item)
+        public static void SaveNewItem(Genre item)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Append, FileAccess.Write)))
                 {
-                    string line = $"{item.Id}|{item.Name}|{item.Color}";
-                    writer.WriteLine(line);
+                    textOut.WriteLine($"{item.Id}|{item.Name}|{item.Color}");
                 }
             }
-            catch (IOException ex)
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
+
+        public static void SaveToFile(List<Genre> list)
+        {
+            try
+            {
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Create, FileAccess.Write)))
+                {
+                    foreach (Genre item in list)
+                    {
+                        textOut.WriteLine($"{item.Id}|{item.Name}|{item.Color}");
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "File Write Error");
             }

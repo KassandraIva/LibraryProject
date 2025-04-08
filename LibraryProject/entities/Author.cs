@@ -84,17 +84,34 @@ namespace LibraryProject.classes
             return authors;
         }
 
-        public static void SaveToFile(Author item)
+        public static void SaveNewItem(Author item)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Append, FileAccess.Write)))
                 {
-                    string line = $"{item.Id}|{item.FirstName}|{item.LastName}";
-                    writer.WriteLine(line);
+                    textOut.WriteLine($"{item.Id}|{item.FirstName}|{item.LastName}");
                 }
             }
-            catch (IOException ex)
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
+
+        public static void SaveToFile(List<Author> list)
+        {
+            try
+            {
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Create, FileAccess.Write)))
+                {
+                    foreach (Author item in list)
+                    {
+                        textOut.WriteLine($"{item.Id}|{item.FirstName}|{item.LastName}");
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "File Write Error");
             }

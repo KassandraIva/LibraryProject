@@ -372,6 +372,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Book.SaveNewItem(selectedBook);
             }
         }
 
@@ -451,6 +453,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Book.SaveToFile(bookList);
             }
         }
 
@@ -474,6 +478,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Author.SaveToFile(authorList);
             }
         }
 
@@ -486,13 +492,6 @@ namespace LibraryProject
             };
             DialogResult result = form.ShowDialog();
 
-            //var form = new AuthorForm()
-            //{
-            //    AddAuthor = false,
-            //    Author = selectedAuthor
-            //};
-            //DialogResult result = form.ShowDialog();
-
             if (result == DialogResult.OK)
             {
                 try
@@ -504,6 +503,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Category.SaveToFile(categoryList);
             }
         }
 
@@ -527,6 +528,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Genre.SaveToFile(genreList);
             }
         }
 
@@ -600,6 +603,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Book.SaveToFile(bookList);
             }
         }
 
@@ -635,6 +640,8 @@ namespace LibraryProject
                     {
                         MessageBox.Show(ex.Message);
                     }
+
+                    Author.SaveToFile(authorList);
                 }
             }
         }
@@ -671,6 +678,8 @@ namespace LibraryProject
                     {
                         MessageBox.Show(ex.Message);
                     }
+
+                    Category.SaveToFile(categoryList);
                 }
             }
         }
@@ -707,6 +716,8 @@ namespace LibraryProject
                     {
                         MessageBox.Show(ex.Message);
                     }
+
+                    Genre.SaveToFile(genreList);
                 }
             }
         }
@@ -1036,6 +1047,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Category.SaveNewItem(selectedCategory);
             }
         }
 
@@ -1059,6 +1072,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Genre.SaveNewItem(selectedGenre);
             }
         }
 
@@ -1082,6 +1097,8 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                Author.SaveNewItem(selectedAuthor);
             }
         }
 

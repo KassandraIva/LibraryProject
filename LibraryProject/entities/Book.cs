@@ -164,17 +164,42 @@ namespace LibraryProject.classes
             return books;
         }
 
-        public static void SaveToFile(Book item)
+        public static void SaveNewItem(Book item)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Append, FileAccess.Write)))
                 {
-                    string line = $"{item.Id}|{item.Title}";
-                    writer.WriteLine(line);
+                    string authorsId = string.Join(",", item.Authors.Select(a => a.Id));
+                    string categoriesId = string.Join(",", item.Categories.Select(c => c.Id));
+                    string genresId = string.Join(",", item.Genres.Select(g => g.Id));
+
+                    textOut.WriteLine($"{item.Id}|{item.Title}|{authorsId}|{item.Description}|{(int)item.Status}|{categoriesId}|{genresId}|{item.IsBorrowed}");
                 }
             }
-            catch (IOException ex)
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
+
+        public static void SaveToFile(List<Book> list)
+        {
+            try
+            {
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Create, FileAccess.Write)))
+                {
+                    foreach (Book item in list)
+                    {
+                        string authorsId = string.Join(",", item.Authors.Select(a => a.Id));
+                        string categoriesId = string.Join(",", item.Categories.Select(c => c.Id));
+                        string genresId = string.Join(",", item.Genres.Select(g => g.Id));
+
+                        textOut.WriteLine($"{item.Id}|{item.Title}|{authorsId}|{item.Description}|{(int)item.Status}|{categoriesId}|{genresId}|{item.IsBorrowed}");
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "File Write Error");
             }

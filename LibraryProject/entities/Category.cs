@@ -86,17 +86,34 @@ namespace LibraryProject.classes
             return categories;
         }
 
-        public static void SaveToFile(Category item)
+        public static void SaveNewItem(Category item)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Append, FileAccess.Write)))
                 {
-                    string line = $"{item.Id}|{item.Name}|{item.Color}|{item.Description}|{item.Priority}";
-                    writer.WriteLine(line);
+                    textOut.WriteLine($"{item.Id}|{item.Name}|{item.Color}|{item.Description}|{item.Priority}");
                 }
             }
-            catch (IOException ex)
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "File Write Error");
+            }
+        }
+
+        public static void SaveToFile(List<Category> list)
+        {
+            try
+            {
+                using (StreamWriter textOut = new StreamWriter(new FileStream((filePath), FileMode.Create, FileAccess.Write)))
+                {
+                    foreach (Category item in list)
+                    {
+                        textOut.WriteLine($"{item.Id}|{item.Name}|{item.Color}|{item.Description}|{item.Priority}");
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "File Write Error");
             }
