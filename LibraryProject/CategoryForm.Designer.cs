@@ -40,6 +40,7 @@
             rtbDescription = new RichTextBox();
             btnCancel = new Button();
             btnAccept = new Button();
+            colorDialog1 = new ColorDialog();
             ((System.ComponentModel.ISupportInitialize)nudPriority).BeginInit();
             SuspendLayout();
             // 
@@ -103,11 +104,13 @@
             btnPickColor.TabIndex = 6;
             btnPickColor.Text = "Pick Color";
             btnPickColor.UseVisualStyleBackColor = true;
+            btnPickColor.Click += btnPickColor_Click;
             // 
             // txtColor
             // 
             txtColor.Location = new Point(118, 65);
             txtColor.Name = "txtColor";
+            txtColor.ReadOnly = true;
             txtColor.Size = new Size(148, 23);
             txtColor.TabIndex = 7;
             // 
@@ -134,6 +137,7 @@
             btnCancel.TabIndex = 10;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnAccept
             // 
@@ -143,6 +147,7 @@
             btnAccept.TabIndex = 11;
             btnAccept.Text = "Accept";
             btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += btnAccept_Click;
             // 
             // CategoryForm
             // 
@@ -163,6 +168,7 @@
             Controls.Add(lblId);
             Name = "CategoryForm";
             Text = "CategoryForm";
+            Load += CategoryForm_Load;
             ((System.ComponentModel.ISupportInitialize)nudPriority).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -182,5 +188,6 @@
         private RichTextBox rtbDescription;
         private Button btnCancel;
         private Button btnAccept;
+        private ColorDialog colorDialog1;
     }
 }

@@ -19,6 +19,7 @@ namespace LibraryProject
         public CategoryForm()
         {
             InitializeComponent();
+
         }
 
         private void CategoryForm_Load(object sender, EventArgs e)
@@ -43,6 +44,11 @@ namespace LibraryProject
             txtColor.Text = Category.Color;
             rtbDescription.Text = Category.Description;
             nudPriority.Value = Category.Priority;
+
+            Color color = ColorTranslator.FromHtml(Category.Color);
+            txtColor.BackColor = color;
+            txtColor.ForeColor = GetTextColorForBackground(color);
+
         }
 
         private bool Validation()
@@ -86,6 +92,31 @@ namespace LibraryProject
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public static Color GetTextColorForBackground(Color bgColor)
+        {
+            double brightness = 0.299 * bgColor.R + 0.587 * bgColor.G + 0.114 * bgColor.B;
+            return brightness > 160 ? Color.Black : Color.White;
+        }
+
+        private void btnPickColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+
+            try
+            {
+                colorDialog.Color = ColorTranslator.FromHtml(txtColor.Text);
+            }
+            catch { }
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                Color selectedColor = colorDialog.Color;
+                txtColor.Text = ColorTranslator.ToHtml(selectedColor);
+                txtColor.BackColor = selectedColor;
+                txtColor.ForeColor = GetTextColorForBackground(selectedColor);
+            }
         }
     }
 }

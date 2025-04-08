@@ -479,12 +479,19 @@ namespace LibraryProject
 
         private void EditCategory(int indexOfOld)
         {
-            var form = new CategoryForm()
+            CategoryForm form = new CategoryForm()
             {
                 AddCategory = false,
                 Category = selectedCategory
             };
             DialogResult result = form.ShowDialog();
+
+            //var form = new AuthorForm()
+            //{
+            //    AddAuthor = false,
+            //    Author = selectedAuthor
+            //};
+            //DialogResult result = form.ShowDialog();
 
             if (result == DialogResult.OK)
             {
@@ -831,7 +838,7 @@ namespace LibraryProject
 
             if (columnName == "EditColumn" || columnName == "DeleteColumn")
             {
-                int bookId = int.Parse(dgvQuotes.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                int bookId = int.Parse(dgvAllBooks.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
                 selectedBook = GetBook(bookId);
             }
 
@@ -1075,6 +1082,42 @@ namespace LibraryProject
                 {
                     MessageBox.Show(ex.Message);
                 }
+            }
+        }
+
+        private void btnSearchBook_Click(object sender, EventArgs e)
+        {
+            string search = txtSearchBook.Text.ToLower();
+
+            if (search == "")
+            {
+                DisplayBooks(bookList);
+            } 
+            else
+            {
+                List<Book> books = bookList
+                    .Where(book => book.Title.ToLower().Contains(search) || book.AuthorNames.ToLower().Contains(search))
+                    .ToList();
+
+                DisplayBooks(books);
+            }
+        }
+
+        private void btnSearchAuthor_Click(object sender, EventArgs e)
+        {
+            string search = txtSearchAuthor.Text.ToLower();
+
+            if (search == "")
+            {
+                DisplayAuthors(authorList);
+            }
+            else
+            {
+                List<Author> authors = authorList
+                    .Where(book => book.FirstName.ToLower().Contains(search) || book.LastName.ToLower().Contains(search))
+                    .ToList();
+
+                DisplayAuthors(authors);
             }
         }
     }
