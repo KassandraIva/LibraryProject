@@ -107,6 +107,7 @@
             btnCancelReview.TabIndex = 7;
             btnCancelReview.Text = "Cancel";
             btnCancelReview.UseVisualStyleBackColor = true;
+            btnCancelReview.Click += btnCancelReview_Click;
             // 
             // ReviewForm
             // 

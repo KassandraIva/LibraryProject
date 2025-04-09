@@ -32,34 +32,57 @@ namespace LibraryProject
             nudRating.Minimum = 1;
             nudRating.Maximum = 5;
             nudRating.Value = 1;
-            
-                foreach (var book in mainForm.bookList)
+            foreach (var book in mainForm.bookList)
+            {
+                cmbBook.Items.Add(book.Title);
+            }
+
+            if (IsEditMode && ItemToEdit != null)
+            {
+                Book book = mainForm.bookList.FirstOrDefault(b => b.Id == ItemToEdit.mediaId);
+                if (book != null)
                 {
-                    cmbBook.Items.Add(book.Title);
+                    cmbBook.SelectedItem = book.Title;
                 }
+                nudRating.Value = ItemToEdit.Rating;
+                rtbReview.Text = ItemToEdit.Text;
+            }
         }
 
         private void btnAddReview_Click(object sender, EventArgs e)
         {
-            string selectedTitle = cmbBook.SelectedItem.ToString();
+            if (cmbBook.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a book.", "Error");
+                return;
+            }
 
+            string selectedTitle = cmbBook.SelectedItem.ToString();
             Book selectedBook = mainForm.bookList.FirstOrDefault(b => b.Title == selectedTitle);
 
-            if (selectedBook != null) 
+            string reviewText = rtbReview.Text;
+            int rating = (int)nudRating.Value;
+            DateTime createdAt = DateTime.Now.Date;
+
+            if (IsEditMode && ItemToEdit != null)
             {
-                
-                    string reviewText = rtbReview.Text;
-                    int rating = (int)nudRating.Value;
-                    DateTime createdAt = DateTime.Now;
+                ItemToEdit.mediaId = selectedBook.Id;
+                ItemToEdit.Text = reviewText;
+                ItemToEdit.Rating = rating;
+                ItemToEdit.CreatedAt = DateTime.Now.Date;
+            }
+            else
+            {
+                Review newReview = new Review(Review.GetNextId(), selectedBook.Id, reviewText, rating, createdAt);
 
-                    Review newReview = new Review(Review.GetNextId(), selectedBook.Id, reviewText, rating, createdAt);
+                mainForm.reviewList.Add(newReview);
+            }
+            mainForm.DisplayReviews(mainForm.reviewList);
+            this.Close();
+        }
 
-                    mainForm.reviewList.Add(newReview);
-                }
-                mainForm.DisplayReviews(mainForm.reviewList);
-            
-                MessageBox.Show("Selected book not found.", "Error");
-           
+        private void btnCancelReview_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

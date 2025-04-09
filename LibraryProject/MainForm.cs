@@ -23,6 +23,7 @@ namespace LibraryProject
         private Genre selectedGenre;
         private MiscItems selectedItem;
         private Quotes selectedQuote;
+        private Review selectedReview;
 
         public MainForm()
         {
@@ -307,6 +308,24 @@ namespace LibraryProject
                 dgvReviews.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
                 dgvReviews.AlternatingRowsDefaultCellStyle.BackColor = Color.LightPink;
 
+                var editColumn = new DataGridViewButtonColumn()
+                {
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "",
+                    Text = "Edit"
+                };
+                editColumn.Name = "EditColumn";
+                dgvReviews.Columns.Add(editColumn);
+
+                var deleteColumn = new DataGridViewButtonColumn()
+                {
+                    UseColumnTextForButtonValue = true,
+                    HeaderText = "",
+                    Text = "Delete"
+                };
+                deleteColumn.Name = "DeleteColumn";
+                dgvReviews.Columns.Add(deleteColumn);
+
 
                 dgvReviews.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             }
@@ -426,6 +445,15 @@ namespace LibraryProject
             foreach (Quotes q in quoteList)
             {
                 if (q.id == quoteId) return q;
+            }
+            return null;
+        }
+
+        private Review GetReview(int reviewID)
+        {
+            foreach (Review r in reviewList)
+            {
+                if (r.reviewId == reviewID) return r;
             }
             return null;
         }
@@ -574,7 +602,32 @@ namespace LibraryProject
             {
                 try
                 {
-                    DisplayMiscItems(miscItems);
+                    DisplayQuotes(quoteList);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void EditReview(int index)
+        {
+            Review selectedReview = reviewList[index];
+
+            var reviewForm = new ReviewForm(this, selectedBook)
+            {
+                IsEditMode = true,
+                ItemToEdit = selectedReview
+            };
+
+            DialogResult result = reviewForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    DisplayReviews(reviewList);
                 }
                 catch (Exception ex)
                 {
@@ -765,6 +818,36 @@ namespace LibraryProject
                     else
                     {
                         MessageBox.Show("Error: Quote could not be deleted.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
+        }
+
+        private void DeleteReview()
+        {
+            if (selectedReview == null)
+            {
+                MessageBox.Show("No review selected.");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show($"Delete review with ID {selectedReview.reviewId}?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (reviewList.Remove(selectedReview))
+                    {
+                        DisplayReviews(reviewList);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: Review could not be deleted.");
                     }
                 }
                 catch (Exception ex)
@@ -1109,7 +1192,7 @@ namespace LibraryProject
             if (search == "")
             {
                 DisplayBooks(bookList);
-            } 
+            }
             else
             {
                 List<Book> books = bookList
@@ -1135,6 +1218,28 @@ namespace LibraryProject
                     .ToList();
 
                 DisplayAuthors(authors);
+            }
+        }
+
+        private void dgvReviews_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvReviews.Columns[e.ColumnIndex].Name;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int reviewId = int.Parse(dgvReviews.Rows[e.RowIndex].Cells["reviewId"].Value.ToString().Trim());
+                selectedReview = GetReview(reviewId);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditReview(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteReview();
             }
         }
     }

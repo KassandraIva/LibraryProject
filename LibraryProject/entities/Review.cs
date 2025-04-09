@@ -15,8 +15,8 @@ namespace LibraryProject.entities
         private static int counter = 0;
         public int reviewId { get; set; }
         public int mediaId { get; set; }
-        public string Text { get; private set; }
-        public int Rating { get; private set; }
+        public string Text { get;  set; }
+        public int Rating { get;  set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public Review(int ReviewId, int MediaId, string text, int rating, DateTime createdAt)
