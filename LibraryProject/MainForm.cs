@@ -16,6 +16,8 @@ namespace LibraryProject
         public List<MiscItems> miscItems = new List<MiscItems>();
         public List<Quotes> quoteList = new List<Quotes>();
         public List<Review> reviewList = new List<Review>();
+        public List<BookLists> bookLists = new List<BookLists>();
+
 
         private Book selectedBook;
         private Author selectedAuthor;
@@ -24,6 +26,7 @@ namespace LibraryProject
         private MiscItems selectedItem;
         private Quotes selectedQuote;
         private Review selectedReview;
+        private BookLists selectedBookList;
 
         public MainForm()
         {
@@ -36,6 +39,7 @@ namespace LibraryProject
             miscItems = MiscItems.LoadFromFile();
             quoteList = Quotes.LoadFromFile();
             reviewList = Review.LoadFromFile();
+            bookLists = BookLists.LoadFromFile();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -48,6 +52,7 @@ namespace LibraryProject
             DisplayQuotes(quoteList);
             DisplayBorrowedBooks(bookList);
             DisplayReviews(reviewList);
+            DisplayBookLists(bookLists);
         }
 
         private void DisplayAuthors(List<Author> authors)
@@ -368,6 +373,62 @@ namespace LibraryProject
             dgvBorrowed.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
+        public void DisplayBookLists(List<BookLists> bookLists)
+        {
+            dgvLists.Columns.Clear();
+            dgvLists.AutoGenerateColumns = false;
+
+            var displayList = bookLists.Select(bl => new
+            {
+                bl.Id,
+                bl.Name,
+                BookCount = bl.BookIds.Count
+            }).ToList();
+
+            dgvLists.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Id",
+                HeaderText = "List ID",
+                Name = "Id"
+            });
+
+            dgvLists.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "Name",
+                HeaderText = "List Name",
+                Name = "Name"
+            });
+
+            dgvLists.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "BookCount",
+                HeaderText = "Number of Books",
+                Name = "BookCount"
+            });
+
+            var editColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Edit",
+                Name = "EditColumn"
+            };
+            dgvLists.Columns.Add(editColumn);
+
+            var deleteColumn = new DataGridViewButtonColumn()
+            {
+                UseColumnTextForButtonValue = true,
+                HeaderText = "",
+                Text = "Delete",
+                Name = "DeleteColumn"
+            };
+            dgvLists.Columns.Add(deleteColumn);
+
+            dgvLists.DataSource = displayList;
+
+        }
+
+
         private void btnAddBook_Click(object sender, EventArgs e)
         {
             var bookForm = new BookForm()
@@ -394,6 +455,15 @@ namespace LibraryProject
 
                 Book.SaveNewItem(selectedBook);
             }
+        }
+
+        private BookLists GetBookList(int id)
+        {
+            foreach (BookLists x in bookLists)
+            {
+                if (x.Id == id) return x;
+            }
+            return null;
         }
 
         private Author GetAuthor(int id)
@@ -508,6 +578,31 @@ namespace LibraryProject
                 }
 
                 Author.SaveToFile(authorList);
+            }
+        }
+
+        private void EditBookList(int index)
+        {
+            BookLists selectedBookList = bookLists[index];
+
+            var bookListForm = new BookListsForm(this, selectedBook)
+            {
+                IsEditMode = true,
+                ListToEdit = selectedBookList
+            };
+
+            DialogResult result = bookListForm.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    DisplayBookLists(bookLists);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -814,6 +909,36 @@ namespace LibraryProject
                     if (quoteList.Remove(selectedQuote))
                     {
                         DisplayQuotes(quoteList);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: Quote could not be deleted.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
+        }
+
+        private void DeleteBookList()
+        {
+            if (selectedBookList == null)
+            {
+                MessageBox.Show("No quote selected.");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show($"Delete book list with ID {selectedBookList.Id}?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    if (bookLists.Remove(selectedBookList))
+                    {
+                        DisplayBookLists(bookLists);
                     }
                     else
                     {
@@ -1240,6 +1365,35 @@ namespace LibraryProject
             else if (columnName == "DeleteColumn")
             {
                 DeleteReview();
+            }
+        }
+
+        private void btnAddList_Click(object sender, EventArgs e)
+        {
+            Form booklists = new BookListsForm(this, selectedBook);
+
+            booklists.ShowDialog();
+        }
+
+        private void dgvLists_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            string columnName = dgvLists.Columns[e.ColumnIndex].Name;
+
+            if (columnName == "EditColumn" || columnName == "DeleteColumn")
+            {
+                int listId = int.Parse(dgvLists.Rows[e.RowIndex].Cells["Id"].Value.ToString().Trim());
+                selectedBookList = GetBookList(listId);
+            }
+
+            if (columnName == "EditColumn")
+            {
+                EditBookList(e.RowIndex);
+            }
+            else if (columnName == "DeleteColumn")
+            {
+                DeleteBookList();
             }
         }
     }

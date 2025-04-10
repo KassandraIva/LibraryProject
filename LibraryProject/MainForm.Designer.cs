@@ -57,6 +57,9 @@
             tabPage2 = new TabPage();
             BtnAddReview = new Button();
             dgvReviews = new DataGridView();
+            tabPage3 = new TabPage();
+            btnAddList = new Button();
+            dgvLists = new DataGridView();
             tabReviews.SuspendLayout();
             tabAllBooks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAllBooks).BeginInit();
@@ -73,6 +76,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReviews).BeginInit();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvLists).BeginInit();
             SuspendLayout();
             // 
             // tabReviews
@@ -84,6 +89,7 @@
             tabReviews.Controls.Add(tabBorrowedLent);
             tabReviews.Controls.Add(tabPage1);
             tabReviews.Controls.Add(tabPage2);
+            tabReviews.Controls.Add(tabPage3);
             tabReviews.Location = new Point(14, 16);
             tabReviews.Margin = new Padding(3, 4, 3, 4);
             tabReviews.Name = "tabReviews";
@@ -100,7 +106,7 @@
             tabAllBooks.Location = new Point(4, 29);
             tabAllBooks.Margin = new Padding(3, 4, 3, 4);
             tabAllBooks.Name = "tabAllBooks";
-            tabAllBooks.Padding = new Padding(3, 3, 3, 3);
+            tabAllBooks.Padding = new Padding(3);
             tabAllBooks.Size = new Size(1142, 696);
             tabAllBooks.TabIndex = 0;
             tabAllBooks.Text = "All Books";
@@ -155,7 +161,7 @@
             tabAllAuthors.Location = new Point(4, 29);
             tabAllAuthors.Margin = new Padding(3, 4, 3, 4);
             tabAllAuthors.Name = "tabAllAuthors";
-            tabAllAuthors.Padding = new Padding(3, 3, 3, 3);
+            tabAllAuthors.Padding = new Padding(3);
             tabAllAuthors.Size = new Size(1142, 696);
             tabAllAuthors.TabIndex = 1;
             tabAllAuthors.Text = "All Authors";
@@ -338,7 +344,7 @@
             tabPage1.Controls.Add(dgvMiscItems);
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 3, 3, 3);
+            tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(1142, 696);
             tabPage1.TabIndex = 4;
             tabPage1.Text = "Misc. Items";
@@ -370,7 +376,7 @@
             tabPage2.Controls.Add(dgvReviews);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 3, 3, 3);
+            tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(1142, 696);
             tabPage2.TabIndex = 5;
             tabPage2.Text = "Review";
@@ -395,6 +401,38 @@
             dgvReviews.Size = new Size(1101, 547);
             dgvReviews.TabIndex = 0;
             dgvReviews.CellClick += dgvReviews_CellClick;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(btnAddList);
+            tabPage3.Controls.Add(dgvLists);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(1142, 696);
+            tabPage3.TabIndex = 7;
+            tabPage3.Text = "Book Lists";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnAddList
+            // 
+            btnAddList.Location = new Point(657, 17);
+            btnAddList.Name = "btnAddList";
+            btnAddList.Size = new Size(94, 29);
+            btnAddList.TabIndex = 1;
+            btnAddList.Text = "Add List";
+            btnAddList.UseVisualStyleBackColor = true;
+            btnAddList.Click += btnAddList_Click;
+            // 
+            // dgvLists
+            // 
+            dgvLists.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvLists.Location = new Point(35, 84);
+            dgvLists.Name = "dgvLists";
+            dgvLists.RowHeadersWidth = 51;
+            dgvLists.Size = new Size(716, 367);
+            dgvLists.TabIndex = 0;
+            dgvLists.CellClick += dgvLists_CellClick;
             // 
             // MainForm
             // 
@@ -425,6 +463,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvMiscItems).EndInit();
             tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvReviews).EndInit();
+            tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvLists).EndInit();
             ResumeLayout(false);
         }
 
@@ -459,5 +499,8 @@
         private Button btnAddGenre;
         private Button btnAddCategory;
         private DataGridView dgvGenres;
+        private TabPage tabPage3;
+        private Button btnAddList;
+        private DataGridView dgvLists;
     }
 }
